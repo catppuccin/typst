@@ -1,6 +1,6 @@
 #import "../src/lib.typ": catppuccin, themes, get_palette, get_palette
 
-#let theme = themes.mocha
+#let theme = sys.inputs.at("flavor", default: themes.mocha)
 #let palette = get_palette(theme)
 
 #set document(
