@@ -11,9 +11,3 @@ license = "MIT"
 description = "✨ Soothing pastel theme for Typst"
 keywords = ["catppuccin", "themes"]
 categories = ["fun", "text"]
-disciplines = ["mathematics"]
-
-# [template]
-# path = "template"
-# entrypoint = "main.typ"
-# thumbnail = "thumbnail.png"
