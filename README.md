@@ -48,6 +48,15 @@ As of Typst v1.0.0, code block themes use the old sublime tmTheme format [(sourc
 
 If you know of a way to reliably build these file as Catppuccin updates, or if you are willing to write a Whiskers template `.tera` file, please feel free to open an issue or pull request!
 
+## TODO
+
+- [ ] Investigate theming around plotting and visualisation
+- [ ] Look into how to properly provide font(s) for the Jellee for headings. What should the body font be?
+- [ ] Configure pretty math!
+- [ ] Set up styles for numbers in the main text body (non-math). Requires regex testing ([see here](https://stackoverflow.com/a/12643073/10691106)).
+- [ ] Make links more colourful
+- [ ] Make references more colourful
+
 ## 💝 Thanks to
 
 - [Human](https://github.com/catppuccin)
