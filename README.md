@@ -1,4 +1,4 @@
-<h1 align="center">🚧🚧🚧 THIS REPO IS CURRENTLY UNDER DEVELOPMENT 🚧🚧🚧</h1>
+<h2 align="center">🚧🚧🚧 THIS REPO IS CURRENTLY UNDER DEVELOPMENT 🚧🚧🚧</h2>
 
 <h3 align="center">
 	<img src="https://raw.githubusercontent.com/catppuccin/catppuccin/main/assets/logos/exports/1544x1544_circle.png" width="100" alt="Logo"/><br/>
