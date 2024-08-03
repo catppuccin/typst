@@ -1,7 +1,7 @@
 <h3 align="center">
 	<img src="https://raw.githubusercontent.com/catppuccin/catppuccin/main/assets/logos/exports/1544x1544_circle.png" width="100" alt="Logo"/><br/>
 	<img src="https://raw.githubusercontent.com/catppuccin/catppuccin/main/assets/misc/transparent.png" height="30" width="0px"/>
-	Catppuccin for <a href="https://github.com/catppuccin/template">App</a>
+	Catppuccin for <a href="https://github.com/catppuccin/typst">Typst</a>
 	<img src="https://raw.githubusercontent.com/catppuccin/catppuccin/main/assets/misc/transparent.png" height="30" width="0px"/>
 </h3>
 
@@ -12,35 +12,36 @@
 </p>
 
 <p align="center">
-	<img src="https://raw.githubusercontent.com/catppuccin/catppuccin/main/assets/previews/preview.webp"/>
+	<img src="https://raw.githubusercontent.com/timetravelpenguin/typst/main/assets/previews/catwalk_composite.webp"/>
 </p>
 
 ## Previews
 
 <details>
 <summary>🌻 Latte</summary>
-<img src="https://raw.githubusercontent.com/catppuccin/catppuccin/main/assets/previews/latte.webp"/>
+<img src="https://raw.githubusercontent.com/timetravelpenguin/typst/main/assets/previews/latte.png"/>
 </details>
 <details>
 <summary>🪴 Frappé</summary>
-<img src="https://raw.githubusercontent.com/catppuccin/catppuccin/main/assets/previews/frappe.webp"/>
+<img src="https://raw.githubusercontent.com/timetravelpenguin/typst/main/assets/previews/frappe.png"/>
 </details>
 <details>
 <summary>🌺 Macchiato</summary>
-<img src="https://raw.githubusercontent.com/catppuccin/catppuccin/main/assets/previews/macchiato.webp"/>
+<img src="https://raw.githubusercontent.com/timetravelpenguin/typst/main/assets/previews/macchiato.png"/>
 </details>
 <details>
 <summary>🌿 Mocha</summary>
-<img src="https://raw.githubusercontent.com/catppuccin/catppuccin/main/assets/previews/mocha.webp"/>
+<img src="https://raw.githubusercontent.com/timetravelpenguin/typst/main/assets/previews/mocha.png"/>
 </details>
 
 ## Usage
 
-1. Download the flavor of your choice.
-2. Open the app and go to **Preferences** > **Appearance** > **Import theme**.
-3. Select the downloaded flavor file.
+1. ~~Download the flavor of your choice.~~
+2. ~~Open the app and go to **Preferences** > **Appearance** > **Import theme**.~~
+3. ~~Select the downloaded flavor file.~~
 
 <!-- The FAQ section is optional. Remove if needed.-->
+
 ## 🙋 FAQ
 
 - Q: **_"How can I do X?"_**\
