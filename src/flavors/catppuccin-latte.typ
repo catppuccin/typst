@@ -1,6 +1,6 @@
 // Catppuccin Latte for Typst
 // Author: TimeTravelPenguin
-// Last build: 2024-08-03T21:45:58.085733+10:00
+// Last build: 2024-08-03T22:52:17.170090+10:00
 
 #let latte = (
   name: "Latte",

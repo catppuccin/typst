@@ -1,6 +1,6 @@
 // Catppuccin Macchiato for Typst
 // Author: TimeTravelPenguin
-// Last build: 2024-08-03T21:45:58.088071+10:00
+// Last build: 2024-08-03T22:52:17.172222+10:00
 
 #let macchiato = (
   name: "Macchiato",

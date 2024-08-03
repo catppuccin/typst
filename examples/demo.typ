@@ -13,7 +13,10 @@
 #show: catppuccin.with(theme: theme, code_block: true)
 
 #align(center, heading(text(size: 2em, font: "Jellee Roman", "Catppuccin")))
-#align(center, text(palette.emoji + " Soothing pastel theme for Typst", size: 1.4em))
+#align(
+  center,
+  text(palette.emoji + " Soothing pastel theme for Typst", size: 1.4em),
+)
 
 #let accents = palette.colors.pairs().filter(pair => pair.at(1).accent)
 #let bases = palette.colors.pairs().filter(pair => not pair.at(1).accent)
@@ -45,7 +48,10 @@
   box(L + h(-0.3em) + A + h(-0.1em) + TeX)
 })
 
-Typst makes it very easy to customise the look of your documents. Inspiration for this project came from Catppuccin for #LaTeX [#link("https://github.com/catppuccin/latex")[#text(fill: palette.colors.blue.rgb, "link")]].
+Typst makes it very easy to customise the look of your documents. Inspiration
+for this project came from Catppuccin for #LaTeX [#link(
+  "https://github.com/catppuccin/latex",
+)[#text(fill: palette.colors.blue.rgb, "link")]].
 
 This doument uses the flavor #text(fill: palette.colors.mauve.rgb, style: "italic", theme).
 

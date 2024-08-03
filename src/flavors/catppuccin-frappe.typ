@@ -1,6 +1,6 @@
 // Catppuccin Frappé for Typst
 // Author: TimeTravelPenguin
-// Last build: 2024-08-03T21:45:58.087234+10:00
+// Last build: 2024-08-03T22:52:17.171264+10:00
 
 #let frappe = (
   name: "Frappé",
