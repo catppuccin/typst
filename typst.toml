@@ -8,6 +8,6 @@ authors = [
   "TimeTravelPenguin <35803538+TimeTravelPenguin@users.noreply.github.com>",
 ]
 license = "MIT"
-description = "✨ Soothing pastel theme for Typst"
+description = "🪶 Soothing pastel theme for Typst"
 keywords = ["catppuccin", "themes"]
-categories = ["fun", "text"]
+categories = ["fun", "components"]
