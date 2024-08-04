@@ -68,7 +68,7 @@ If you know of a way to reliably build these file as Catppuccin updates, or if y
 
 ## 💝 Thanks to
 
-- [Human](https://github.com/catppuccin)
+- [TimeTravelPenguin](https://github.com/TimeTravelPenguin)
 
 &nbsp;
 
