@@ -1,4 +1,5 @@
 #import "../src/lib.typ": catppuccin, themes, get_palette, get_palette
+#import "@preview/cetz:0.2.2": canvas, plot
 
 #let theme = sys.inputs.at("flavor", default: themes.mocha)
 #let palette = get_palette(theme)
@@ -79,3 +80,56 @@ using ```typ #let``` in Typst:
 = Catppuccin
 ✨ Soothing pastel theme for Typst
 ```
+
+=== Plotting (via CeTZ)
+
+Plots and other figures can be made to look even better when using the current
+flavor's palette!
+
+#let styles = (
+  palette.colors.red.rgb,
+  palette.colors.green.rgb,
+  palette.colors.blue.rgb,
+).map(c =>
+(stroke: palette.colors.crust.rgb, fill: c.transparentize(25%)))
+
+#align(center, {
+  canvas(length: 1cm, {
+    plot.plot(
+      size: (8, 6),
+      x-tick-step: none,
+      x-ticks: ((-calc.pi, $-pi$), (0, $0$), (calc.pi, $pi$)),
+      y-tick-step: 1,
+      {
+        plot.add(
+          hypograph: true,
+          style: styles.at(0),
+          domain: (-calc.pi, calc.pi),
+          calc.sin,
+        )
+        plot.add(
+          hypograph: true,
+          style: styles.at(1),
+          domain: (-calc.pi, calc.pi),
+          x => calc.cos(x - calc.pi) + calc.sin(2 * x),
+        )
+        plot.add(
+          hypograph: true,
+          style: styles.at(2),
+          domain: (-calc.pi, calc.pi),
+          x => calc.cos(x + calc.pi) + calc.sin(x / 2),
+        )
+      },
+    )
+  })
+})
+
+This demo plots several functions using the current flavor's palette. These
+functions are:
+#align(center, grid(
+  columns: 3,
+  column-gutter: 1.5cm,
+  $sin(x)$,
+  $cos(x - pi) + sin(2x)$,
+  $cos(x + pi) + sin(x / 2)$,
+))
