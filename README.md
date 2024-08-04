@@ -46,7 +46,7 @@
 
 Syntax highlighting utilised the `.tmTheme` files located in `./src/tmThemes`. Currently, these are generated using [colorSchemeTool](https://github.com/JetBrains/colorSchemeTool) by JetBrains.
 
-As of Typst v1.0.0, code block themes use the old sublime tmTheme format [(source)](https://typst.app/docs/reference/text/raw/#parameters-theme). I have not found a modern Catppuccin project for this format.
+At time of writing, Typst code block themes use the old sublime tmTheme format [(source)](https://typst.app/docs/reference/text/raw/#parameters-theme). I have not found a modern Catppuccin project for this format.
 
 If you know of a way to reliably build these file as Catppuccin updates, or if you are willing to write a Whiskers template `.tera` file, please feel free to open an issue or pull request!
 
