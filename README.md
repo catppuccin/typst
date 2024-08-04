@@ -38,9 +38,16 @@
 
 ## Usage
 
-1. ~~Download the flavor of your choice.~~
-2. ~~Open the app and go to **Preferences** > **Appearance** > **Import theme**.~~
-3. ~~Select the downloaded flavor file.~~
+Eventually, this package will be made available through typist's built-in package manager. For now, you can follow these steps:
+
+1. Clone or download this repository.
+2. Copy the `src` directory into the root of your Typst project. You may optionally rename the directory.
+3. In your project, call
+   ```typst
+   #import "../src/lib.typ": catppuccin, themes
+   #show: catppuccin.with(theme: themes.mocha)
+   ```
+   replacing `mocha` with the theme you want to use. You can also use the `catppuccin.with` function to customise the theme. See the documentation (todo!) for more information.
 
 ## Developer Notes
 
