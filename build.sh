@@ -9,7 +9,8 @@ touch assets/.gitkeep
 flavors=("latte" "frappe" "macchiato" "mocha")
 for flavor in "${flavors[@]}"; do
   echo "Compiling demo for '$flavor'..."
-  typst compile --font-path ./font --root . --input flavor="$flavor" ./examples/demo.typ ./assets/previews/"$flavor".png || exit
+  typst compile --font-path ./font --root . --input flavor="$flavor" \
+    ./examples/demo.typ ./assets/previews/"$flavor".png || exit
 done
 
 layouts=("composite" "stacked" "grid" "row")
