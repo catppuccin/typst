@@ -3,7 +3,7 @@ name = "catppuccin"
 version = "0.1.0"
 compiler = "0.10.0"
 entrypoint = "src/lib.typ"
-repository = "https://github.com/TimeTravelPenguin/catppuccin-typst"
+repository = "https://github.com/TimeTravelPenguin/typst"
 authors = [
   "TimeTravelPenguin <35803538+TimeTravelPenguin@users.noreply.github.com>",
 ]
@@ -11,3 +11,4 @@ license = "MIT"
 description = "🪶 Soothing pastel theme for Typst"
 keywords = ["catppuccin", "themes"]
 categories = ["fun", "components"]
+exclude = ["/examples/*", "/docs/*"]
