@@ -30,7 +30,7 @@
   }
 }
 
-#let config_code_blocks(theme: themes.mocha, code_block: true, code_syntax: true, body) = [
+#let config_code_blocks(theme, code_block: true, code_syntax: true, body) = [
   #let tmTheme = "tmThemes/" + theme + ".tmTheme"
   #let palette = get_palette(theme)
 
@@ -58,13 +58,13 @@
 /// - code_syntax (bool): Whether to use Catppuccin syntax highlighting in code blocks.
 /// - body (content): The content to apply the flavor to.
 /// -> content
-#let catppuccin(theme: themes.mocha, code_block: true, code_syntax: true, body) = [
+#let catppuccin(theme, code_block: true, code_syntax: true, body) = [
   #let palette = get_palette(theme)
 
   #set page(fill: palette.colors.base.rgb)
   #set text(fill: palette.colors.text.rgb)
 
-  #show: config_code_blocks.with(theme: theme, code_block: code_block, code_syntax: code_syntax)
+  #show: config_code_blocks.with(theme, code_block: code_block, code_syntax: code_syntax)
 
   #body
 ]

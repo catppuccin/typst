@@ -11,7 +11,7 @@
   date: datetime.today(),
 )
 
-#show: catppuccin.with(theme: theme, code_block: true)
+#show: catppuccin.with(theme, code_block: true)
 
 #align(center, heading(text(size: 2em, font: "Jellee Roman", "Catppuccin")))
 #align(
