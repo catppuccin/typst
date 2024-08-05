@@ -5,10 +5,12 @@
   mkdir -p tmThemes
 
   echo "Downloading Catppuccin tmThemes..."
-  wget https://github.com/catppuccin/bat/raw/main/themes/Catppuccin%20Latte.tmTheme -O tmThemes/latte.tmTheme
-  wget https://github.com/catppuccin/bat/raw/main/themes/Catppuccin%20Frappe.tmTheme -O tmThemes/frappe.tmTheme
-  wget https://github.com/catppuccin/bat/raw/main/themes/Catppuccin%20Macchiato.tmTheme -O tmThemes/macchiato.tmTheme
-  wget https://github.com/catppuccin/bat/raw/main/themes/Catppuccin%20Mocha.tmTheme -O tmThemes/mocha.tmTheme
+  wget -q https://github.com/catppuccin/bat/raw/main/themes/Catppuccin%20Latte.tmTheme -O tmThemes/latte.tmTheme &
+  wget -q https://github.com/catppuccin/bat/raw/main/themes/Catppuccin%20Frappe.tmTheme -O tmThemes/frappe.tmTheme &
+  wget -q https://github.com/catppuccin/bat/raw/main/themes/Catppuccin%20Macchiato.tmTheme -O tmThemes/macchiato.tmTheme &
+  wget -q https://github.com/catppuccin/bat/raw/main/themes/Catppuccin%20Mocha.tmTheme -O tmThemes/mocha.tmTheme &
+
+  wait
 )
 
 echo "Building Catppuccin pallets for Typst..."
