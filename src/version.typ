@@ -1,1 +1,1 @@
-#let version = version(0, 1, 0, 0)
+#let version = toml("/typst.toml").package.version
