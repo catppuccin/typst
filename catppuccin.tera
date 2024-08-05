@@ -9,7 +9,6 @@ author: "TimeTravelPenguin"
 ---
 // Catppuccin {{flavor.name}} for {{app}}
 // Author: {{author}}
-// Last build: {{now()}}
 
 #let {{flavor.identifier}} = (
   name: "{{flavor.name}}",
