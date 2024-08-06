@@ -1,6 +1,3 @@
-// Catppuccin Macchiato for Typst
-// Author: TimeTravelPenguin
-
 #let macchiato = (
   name: "Macchiato",
   emoji: "🌺",

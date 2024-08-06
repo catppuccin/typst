@@ -1,6 +1,3 @@
-// Catppuccin Frappé for Typst
-// Author: TimeTravelPenguin
-
 #let frappe = (
   name: "Frappé",
   emoji: "🪴",

@@ -4,12 +4,7 @@ whiskers:
   matrix:
     - flavor
   filename: "src/flavors/catppuccin-{{flavor.identifier}}.typ"
-app: "Typst"
-author: "TimeTravelPenguin"
 ---
-// Catppuccin {{flavor.name}} for {{app}}
-// Author: {{author}}
-
 #let {{flavor.identifier}} = (
   name: "{{flavor.name}}",
   emoji: "{{flavor.emoji}}",

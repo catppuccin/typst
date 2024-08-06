@@ -1,6 +1,3 @@
-// Catppuccin Mocha for Typst
-// Author: TimeTravelPenguin
-
 #let mocha = (
   name: "Mocha",
   emoji: "🌿",

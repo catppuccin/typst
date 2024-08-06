@@ -16,7 +16,7 @@ tmThemes:
 
 whiskers:
   @echo "Building Catppuccin pallets for Typst..."
-  @whiskers catppuccin.tera
+  @whiskers typst.tera
 
 assets:
   #!/usr/bin/env python3

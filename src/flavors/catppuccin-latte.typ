@@ -1,6 +1,3 @@
-// Catppuccin Latte for Typst
-// Author: TimeTravelPenguin
-
 #let latte = (
   name: "Latte",
   emoji: "🌻",
