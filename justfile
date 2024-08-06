@@ -1,4 +1,6 @@
-build: tmThemes whiskers assets
+import "justfiles/build_assets.just"
+
+build: tmThemes whiskers build_assets
 
 tmThemes:
   #!/usr/bin/env sh
@@ -14,49 +16,10 @@ tmThemes:
 
   wait
 
-whiskers:
-  @echo "Building Catppuccin pallets for Typst..."
-  @whiskers typst.tera
+@whiskers:
+  echo "Building Catppuccin pallets for Typst..."
+  whiskers typst.tera
 
-assets:
-  #!/usr/bin/env python3
-  import subprocess
-  from pathlib import Path
-
-  import typst
-
-  previews = Path("assets/previews")
-  previews.mkdir(exist_ok=True, parents=True)
-  Path("assets/.gitkeep").touch()
-
-  flavors = ["latte", "frappe", "macchiato", "mocha"]
-  for flavor in flavors:
-      print(f"Compiling {flavor} demo asset preview...")
-      typst.compile(
-          "./examples/demo.typ",
-          output=previews / f"{flavor}.png",
-          format="png",
-          root=".",
-          font_paths=["./font"],
-          sys_inputs={"flavor": flavor},
-      )
-
-  asset_pngs = [f"{flavor}.png" for flavor in flavors]
-  print(f"Generating composite layout with catwalk...")
-  subprocess.run(
-      [
-        "catwalk",
-        *asset_pngs,
-        "--layout",
-        "composite",
-        "--directory",
-        str(previews),
-        "--output",
-        f"preview.webp",
-    ],
-    check=True,
-  )
-
-
-clean:
+@clean:
+  echo "Removing tmThemes and assets..."
   rm -rf tmThemes assets
