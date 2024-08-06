@@ -1,0 +1,43 @@
+name: Bug Report
+description: Report your bugs with the theme here!
+labels: [bug]
+body:
+  - type: checkboxes
+    attributes:
+      label: Is there an existing issue outlining your problem?
+      description: Please search to see if an issue already exists for your problem.
+      options:
+        - label: I have searched the existing issues and they do not solve my problem.
+          required: true
+  - type: input
+    attributes:
+      label: What version(s) of the Typst compiler are you using?
+    validations:
+      required: true
+  - type: input
+    attributes:
+      label: What version(s) of the Catppuccin package for Typst are you using?
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Describe your problem.
+      description: Also, what were you doing when the issue happened?
+      placeholder: The tree background colour has suddenly changed to black...
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Attach screenshots.
+      description: If applicable, attach screenshots that clearly highlight the issue.
+  - type: input
+    attributes:
+      label: What platform(s) are you seeing the problem on?
+      description: "Typst Website, VS Code, Vim, etc."
+      placeholder: Typst Website
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Any additional comments?
+      description: Add any information that hasn't been covered in the previous sections!
