@@ -14,7 +14,7 @@
 </p>
 
 <p align="center">
-	<img src="https://raw.githubusercontent.com/timetravelpenguin/typst/main/assets/previews/catwalk_composite.webp"/>
+	<img src="https://raw.githubusercontent.com/timetravelpenguin/typst/main/assets/previews/preview.webp"/>
 </p>
 
 ## Previews

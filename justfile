@@ -42,22 +42,20 @@ assets:
       )
 
   asset_pngs = [f"{flavor}.png" for flavor in flavors]
-  layouts = ["composite", "stacked", "grid", "row"]
-  for layout in layouts:
-      print(f"Generating catwalk asset with {layout} layout...")
-      subprocess.run(
-          [
-            "catwalk",
-            *asset_pngs,
-            "--layout",
-            layout,
-            "--directory",
-            str(previews),
-            "--output",
-            f"catwalk_{layout}.webp",
-        ],
-        check=True,
-    )
+  print(f"Generating composite layout with catwalk...")
+  subprocess.run(
+      [
+        "catwalk",
+        *asset_pngs,
+        "--layout",
+        "composite",
+        "--directory",
+        str(previews),
+        "--output",
+        f"preview.webp",
+    ],
+    check=True,
+  )
 
 
 clean:
