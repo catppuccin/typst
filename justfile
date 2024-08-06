@@ -21,6 +21,8 @@ tmThemes:
   echo "Building Catppuccin pallets for Typst..."
   whiskers typst.tera
 
+install: build install_local
+
 @clean:
   echo "Removing tmThemes and assets..."
   rm -rf tmThemes assets
