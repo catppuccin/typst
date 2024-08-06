@@ -1,5 +1,3 @@
-<h2 align="center">🚧🚧🚧 THIS REPO IS CURRENTLY UNDER DEVELOPMENT 🚧🚧🚧</h2>
-
 <h3 align="center">
 	<img src="https://raw.githubusercontent.com/catppuccin/catppuccin/main/assets/logos/exports/1544x1544_circle.png" width="100" alt="Logo"/><br/>
 	<img src="https://raw.githubusercontent.com/catppuccin/catppuccin/main/assets/misc/transparent.png" height="30" width="0px"/>
@@ -38,7 +36,7 @@
 
 ## Usage
 
-Eventually, this package will be made available through typist's built-in package manager. For now, you can follow these steps:
+Eventually, this package will be made available through Typst's built-in package manager. For now, you can follow these steps:
 
 1. Clone or download this repository.
 2. Copy the `src` directory into the root of your Typst project. You may optionally rename the directory.
@@ -47,16 +45,7 @@ Eventually, this package will be made available through typist's built-in packag
    #import "../src/lib.typ": catppuccin, themes
    #show: catppuccin.with(theme: themes.mocha)
    ```
-   replacing `mocha` with the theme you want to use. You can also use the `catppuccin.with` function to customise the theme. See the documentation (todo!) for more information.
-
-## TODO
-
-- [ ] Investigate theming around plotting and visualisation
-- [ ] Look into how to properly provide font(s) for the Jellee for headings. What should the body font be?
-- [ ] Configure pretty math!
-- [ ] Set up styles for numbers in the main text body (non-math). Requires regex testing ([see here](https://stackoverflow.com/a/12643073/10691106)).
-- [ ] Make links more colourful
-- [ ] Make references more colourful
+   replacing `mocha` with the theme you want to use. You can also use the `catppuccin.with` function to customise the theme.
 
 ## 💝 Thanks to
 
