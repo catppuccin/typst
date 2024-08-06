@@ -6,32 +6,32 @@
 </h3>
 
 <p align="center">
-	<a href="https://github.com/timetravelpenguin/typst/stargazers"><img src="https://img.shields.io/github/stars/timetravelpenguin/typst?colorA=363a4f&colorB=b7bdf8&style=for-the-badge"></a>
-	<a href="https://github.com/timetravelpenguin/typst/issues"><img src="https://img.shields.io/github/issues/timetravelpenguin/typst?colorA=363a4f&colorB=f5a97f&style=for-the-badge"></a>
-	<a href="https://github.com/timetravelpenguin/typst/contributors"><img src="https://img.shields.io/github/contributors/timetravelpenguin/typst?colorA=363a4f&colorB=a6da95&style=for-the-badge"></a>
+	<a href="https://github.com/catppuccin/typst/stargazers"><img src="https://img.shields.io/github/stars/catppuccin/typst?colorA=363a4f&colorB=b7bdf8&style=for-the-badge"></a>
+	<a href="https://github.com/catppuccin/typst/issues"><img src="https://img.shields.io/github/issues/catppuccin/typst?colorA=363a4f&colorB=f5a97f&style=for-the-badge"></a>
+	<a href="https://github.com/catppuccin/typst/contributors"><img src="https://img.shields.io/github/contributors/catppuccin/typst?colorA=363a4f&colorB=a6da95&style=for-the-badge"></a>
 </p>
 
 <p align="center">
-	<img src="https://raw.githubusercontent.com/timetravelpenguin/typst/main/assets/previews/preview.webp"/>
+	<img src="https://raw.githubusercontent.com/catppuccin/typst/main/assets/previews/preview.webp"/>
 </p>
 
 ## Previews
 
 <details>
 <summary>🌻 Latte</summary>
-<img src="https://raw.githubusercontent.com/timetravelpenguin/typst/main/assets/previews/latte.png"/>
+<img src="https://raw.githubusercontent.com/catppuccin/typst/main/assets/previews/latte.png"/>
 </details>
 <details>
 <summary>🪴 Frappé</summary>
-<img src="https://raw.githubusercontent.com/timetravelpenguin/typst/main/assets/previews/frappe.png"/>
+<img src="https://raw.githubusercontent.com/catppuccin/typst/main/assets/previews/frappe.png"/>
 </details>
 <details>
 <summary>🌺 Macchiato</summary>
-<img src="https://raw.githubusercontent.com/timetravelpenguin/typst/main/assets/previews/macchiato.png"/>
+<img src="https://raw.githubusercontent.com/catppuccin/typst/main/assets/previews/macchiato.png"/>
 </details>
 <details>
 <summary>🌿 Mocha</summary>
-<img src="https://raw.githubusercontent.com/timetravelpenguin/typst/main/assets/previews/mocha.png"/>
+<img src="https://raw.githubusercontent.com/catppuccin/typst/main/assets/previews/mocha.png"/>
 </details>
 
 ## Usage
