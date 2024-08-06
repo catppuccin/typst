@@ -14,7 +14,7 @@
 /// -> dict
 #let get_palette(theme) = {
   if theme not in themes.values() {
-    panic("Invalid theme: " + theme)
+    panic("Invalid theme: " + repr(theme))
   }
 
   if theme == themes.latte {
