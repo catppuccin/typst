@@ -38,14 +38,27 @@
 
 Eventually, this package will be made available through Typst's built-in package manager. For now, you can follow these steps:
 
-1. Clone or download this repository.
-2. Copy the `src` directory into the root of your Typst project. You may optionally rename the directory.
-3. In your project, call
+1. Clone or download this repository into `{data-dir}/typst/packages/local/catppuccin/{version}` to make them available locally on your system. Here, `{data-dir}` is
+
+   - `$XDG_DATA_HOME` or `~/.local/share` on Linux
+   - `~/Library/Application Support` on macOS
+   - `%APPDATA%` on Windows
+
+   Further instruction can be found on Tpyst's [package](https://github.com/typst/packages?tab=readme-ov-file#local-packages) repository. As an example, using v0.1.0, you path may look like `~/.local/share/typst/packages/local/catppuccin/0.1.0`.
+
+2. In your project, import the package (ensure you have the correct version number) with
+
    ```typst
-   #import "../src/lib.typ": catppuccin, themes
-   #show: catppuccin.with(theme: themes.mocha)
+   #import "@local/catppuccin:0.1.0": catppuccin, themes
    ```
-   replacing `mocha` with the theme you want to use. You can also use the `catppuccin.with` function to customise the theme.
+
+   Lastly, you can configure your document by calling:
+
+   ```typst
+   #show: catppuccin.with(themes.mocha, code_block: true, code_syntax: true)
+   ```
+
+   replacing `mocha` with the theme you want to use. This can also be passed as a string literal `"mocha"`. You can further adjust the arguments to `catppuccin.with` to customise the theme look of your document.
 
 ## 💝 Thanks to
 
