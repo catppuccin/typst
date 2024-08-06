@@ -1,4 +1,5 @@
 import "justfiles/build_assets.just"
+import "justfiles/install.just"
 
 build: tmThemes whiskers build_assets
 
