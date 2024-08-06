@@ -44,7 +44,7 @@ Eventually, this package will be made available through Typst's built-in package
    - `~/Library/Application Support` on macOS
    - `%APPDATA%` on Windows
 
-   Further instruction can be found on Tpyst's [package](https://github.com/typst/packages?tab=readme-ov-file#local-packages) repository. As an example, using v0.1.0, you path may look like `~/.local/share/typst/packages/local/catppuccin/0.1.0`.
+   Further instruction can be found on Typst's [package](https://github.com/typst/packages?tab=readme-ov-file#local-packages) repository. As an example, using v0.1.0, you path may look like `~/.local/share/typst/packages/local/catppuccin/0.1.0`.
 
 2. In your project, import the package (ensure you have the correct version number) with
 
