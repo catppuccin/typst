@@ -40,6 +40,8 @@ Eventually, this package will be made available through Typst's built-in package
 
 ### Method 1: Using the install script
 
+This method requires that you have Python installed on your system and available in your PATH.
+
 1. Clone or download this repository into a directory on your system.
 2. Ensure you have [Just](https://github.com/casey/just) installed on your system.
 3. Open the directory containing the repository in a commandline terminal and run the following command:
@@ -48,7 +50,7 @@ Eventually, this package will be made available through Typst's built-in package
    just install
    ```
 
-   Or, to first build the package and then install it, run:
+   Or, to first build the package and then install it (this may not work on all systems), run:
 
    ```sh
    just tmThemes whiskers install
