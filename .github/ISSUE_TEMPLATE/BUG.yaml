@@ -23,7 +23,7 @@ body:
     attributes:
       label: Describe your problem.
       description: Also, what were you doing when the issue happened?
-      placeholder: The tree background colour has suddenly changed to black...
+      placeholder: Catppuccin won't work
     validations:
       required: true
   - type: textarea
