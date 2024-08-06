@@ -9,13 +9,11 @@
   mocha: "mocha",
 )
 
-/// Get the color palette for the given `theme`.
+/// Get the color palette for the given theme.
 /// - theme (str): The theme to get the palette for.
 /// -> dict
 #let get_palette(theme) = {
-  if theme not in themes.values() {
-    panic("Invalid theme: " + repr(theme))
-  }
+  assert(theme in themes.values(), message: "Invalid theme: " + repr(theme))
 
   if theme == themes.latte {
     latte
@@ -31,9 +29,9 @@
 }
 
 #let config_code_blocks(theme, code_block: true, code_syntax: true, body) = [
-  #let tmTheme = "tmThemes/" + theme + ".tmTheme"
   #let palette = get_palette(theme)
 
+  #let tmTheme = "tmThemes/" + theme + ".tmTheme"
   #set raw(theme: tmTheme) if code_syntax
 
   #show raw.where(block: false): box.with(inset: (x: 3pt, y: 0pt), outset: (y: 3pt), radius: 2pt)
