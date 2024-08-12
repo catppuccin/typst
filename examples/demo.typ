@@ -22,16 +22,14 @@
 #let accents = palette.colors.pairs().filter(pair => pair.at(1).accent)
 #let bases = palette.colors.pairs().filter(pair => not pair.at(1).accent)
 
-#let color_swatches(pairs) = pairs.map(
-  pair => {
-    stack(
-      dir: ltr,
-      spacing: 4pt,
-      rect(fill: pair.at(1).rgb, stroke: 0.5pt + white, width: 15pt, height: 7pt),
-      text(pair.at(1).name),
-    )
-  },
-)
+#let color_swatches(pairs) = pairs.map(pair => {
+  stack(
+    dir: ltr,
+    spacing: 4pt,
+    rect(fill: pair.at(1).rgb, stroke: 0.5pt + white, width: 15pt, height: 7pt),
+    text(pair.at(1).name),
+  )
+})
 
 #let TeX = style(styles => {
   let e = measure(text(1em, "E"), styles)
@@ -72,16 +70,16 @@ Unlike #LaTeX, Typst make code highlighting a breeze! The following is a code
 demo show how to use this package by using ```typ #show``` in Typst:
 
 #text(size: 8pt)[
-```typ
-#import "catppuccin": catppuccin, themes, get_palette
-#show: catppuccin.with(theme: themes.mocha, code_block: true)
+  ```typ
+  #import "catppuccin": catppuccin, themes, get_palette
+  #show: catppuccin.with(theme: themes.mocha, code_block: true)
 
-#let palette = get_palette(theme)
-#let mauve = palette.colors.mauve.rgb
+  #let palette = get_palette(theme)
+  #let mauve = palette.colors.mauve.rgb
 
-= Catppuccin
-🪶 Soothing pastel theme for #text(fill: mauve, Typst)
-```
+  = Catppuccin
+  🪶 Soothing pastel theme for #text(fill: mauve, Typst)
+  ```
 ]
 
 === Plotting (via CeTZ)
@@ -129,6 +127,5 @@ flavor's palette!
 #let plot = eval(scope: scope, "[" + plot_str + "]")
 #grid(
   columns: 2,
-  text(size: 7.3pt, raw(lang: "typ", plot_str)),
-  [#v(1fr) #plot #v(1fr)],
+  text(size: 7.3pt, raw(lang: "typ", plot_str)), [#v(1fr) #plot #v(1fr)],
 )
