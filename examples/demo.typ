@@ -1,4 +1,4 @@
-#import "../src/lib.typ": catppuccin, themes, get_palette, get_palette
+#import "../src/lib.typ": catppuccin, themes, get_palette
 #import "@preview/cetz:0.2.2": canvas, plot
 
 #let theme = sys.inputs.at("flavor", default: themes.mocha)
