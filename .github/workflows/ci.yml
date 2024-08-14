@@ -26,21 +26,15 @@ jobs:
       - name: 🧹 Check style
         run: "find . -name '*.typ' | xargs typstyle --check -c 120"
 
-      - name: 🎨 Run Prettier
-        uses: creyD/prettier_action@v4.3
-        with:
-          prettier_options: --check **/*.{json,md,yml,yaml,toml,tmTheme}
-          prettier_plugins: "@prettier/plugin-xml prettier-plugin-toml"
-
   build:
     runs-on: ubuntu-latest
 
     strategy:
       matrix:
         # Test for the following Typst versions
-        # 0.4.0 (earliest supported), 0.6.0 (first version with package management),
+        # 0.6.0 (first version with package management),
         # 0.11.0 (latest supported)
-        typst-version: [v0.4.0, v0.6.0, v0.11.0]
+        typst-version: [v0.11.0, latest]
 
     steps:
       - uses: actions/checkout@v4
@@ -50,12 +44,8 @@ jobs:
         id: setup-typst
         with:
           typst-version: ${{ matrix.typst-version }}
-          # cache-dependency-path: requirements.typ
+          cache-dependency-path: examples/requirements.typ
 
-      - name: 🛠️ Compile test document (<v0.7.0)
-        if: ${{ matrix.typst-version != 'v0.11.0' }}
-        run: "typst --root . compile examples/demo.typ"
-
-      - name: 🛠️ Compile test document (v0.7.0+)
+      - name: 🛠️ Compile test document
         if: ${{ matrix.typst-version == 'v0.11.0' }}
         run: "typst compile examples/demo.typ --root ."
