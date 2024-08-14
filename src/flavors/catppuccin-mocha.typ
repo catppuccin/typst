@@ -187,5 +187,5 @@
       rgb: rgb(17, 17, 27),
       accent: false,
     ),
-  )
+  ),
 )
