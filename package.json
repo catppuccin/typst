@@ -1,7 +1,21 @@
 {
   "devDependencies": {
+    "@commitlint/cli": "^19.4.0",
+    "@commitlint/config-conventional": "^19.2.2",
+    "@commitlint/prompt-cli": "^19.4.0",
     "@prettier/plugin-xml": "^3.4.1",
+    "husky": "^9.1.4",
+    "pinst": "^3.0.0",
     "prettier": "^3.3.3",
     "prettier-plugin-toml": "^2.0.1"
+  },
+  "scripts": {
+    "prepare": "husky",
+    "commitcli": "commit"
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
   }
 }
