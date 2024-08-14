@@ -26,15 +26,6 @@ jobs:
       - name: 🧹 Check style
         run: "find . -name '*.typ' | xargs typstyle --check -c 120"
 
-      - name: 🎨 Run Prettier
-        uses: creyD/prettier_action@v4.3
-        with:
-          dry: true,
-          prettier_options: --check **/*.{json,md,yml,yaml,toml}
-          prettier_plugins: "prettier-plugin-toml"
-          # prettier_options: --check **/*.{json,md,yml,yaml,toml,tmTheme}
-          # prettier_plugins: "@prettier/plugin-xml prettier-plugin-toml"
-
   build:
     runs-on: ubuntu-latest
 
