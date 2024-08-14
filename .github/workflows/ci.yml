@@ -30,8 +30,10 @@ jobs:
         uses: creyD/prettier_action@v4.3
         with:
           dry: true,
-          prettier_options: --check **/*.{json,md,yml,yaml,toml,tmTheme}
-          prettier_plugins: "@prettier/plugin-xml prettier-plugin-toml"
+          prettier_options: --check **/*.{json,md,yml,yaml,toml}
+          prettier_plugins: "prettier-plugin-toml"
+          # prettier_options: --check **/*.{json,md,yml,yaml,toml,tmTheme}
+          # prettier_plugins: "@prettier/plugin-xml prettier-plugin-toml"
 
   build:
     runs-on: ubuntu-latest
