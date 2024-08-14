@@ -1,0 +1,58 @@
+name: Tests CI
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+
+  # Allows one to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  style:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: 🍺 Set up Homebrew
+        id: set-up-homebrew
+        uses: Homebrew/actions/setup-homebrew@master
+
+      - name: 🍺 Install typstyle
+        run: "brew install typstyle"
+
+      - name: 🧹 Check style
+        run: "find . -name '*.typ' | xargs typstyle --check -c 120"
+
+      - name: 🎨 Run Prettier
+        uses: creyD/prettier_action@v4.3
+        with:
+          dry: true,
+          prettier_options: --check **/*.{json,md,yml,yaml,toml,tmTheme}
+          prettier_plugins: "@prettier/plugin-xml prettier-plugin-toml"
+
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        # Test for the following Typst versions
+        # 0.6.0 (first version with package management),
+        # 0.11.0 (latest supported)
+        typst-version: [v0.11.0, latest]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: ⚙️ Setup Typst
+        uses: typst-community/setup-typst@v3
+        id: setup-typst
+        with:
+          typst-version: ${{ matrix.typst-version }}
+          cache-dependency-path: examples/requirements.typ
+
+      - name: 🛠️ Compile test document
+        if: ${{ matrix.typst-version == 'v0.11.0' }}
+        run: "typst compile examples/demo.typ --root ."
