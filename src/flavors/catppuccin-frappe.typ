@@ -1,3 +1,14 @@
+/// The Frappé color palette.
+///
+/// ==== Example
+/// #example(
+/// ```typ
+///   #let theme = themes.frappe
+///   #let palette = get_palette(theme)
+///   Selected theme: #palette.name #palette.emoji
+/// ```, ratio: 1.5)
+///
+/// -> dictionary
 #let frappe = (
   name: "Frappé",
   emoji: "🪴",
