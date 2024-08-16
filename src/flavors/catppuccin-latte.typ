@@ -1,3 +1,14 @@
+/// The Latte color palette.
+///
+/// ==== Example
+/// #example(
+/// ```typ
+///   #let theme = themes.latte
+///   #let palette = get_palette(theme)
+///   Selected theme: #palette.name #palette.emoji
+/// ```, ratio: 1.5)
+///
+/// -> dictionary
 #let latte = (
   name: "Latte",
   emoji: "🌻",

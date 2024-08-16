@@ -1,3 +1,14 @@
+/// The Mocha color palette.
+///
+/// ==== Example
+/// #example(
+/// ```typ
+///   #let theme = themes.mocha
+///   #let palette = get_palette(theme)
+///   Selected theme: #palette.name #palette.emoji
+/// ```, ratio: 1.5)
+///
+/// -> dictionary
 #let mocha = (
   name: "Mocha",
   emoji: "🌿",
