@@ -1,4 +1,6 @@
 #import "flavors.typ": latte, frappe, macchiato, mocha
+#import "valkyrie/typst-schema.typ": *
+#import "@preview/valkyrie:0.2.1" as z
 
 /// The available flavors for Catppuccin. Given simply by the dictionary
 /// ```typ
@@ -9,7 +11,7 @@
 ///    mocha: "mocha",
 ///  )
 ///```
-/// These names are used to set the theme of the document. To access the accented names, you can use @@get_palette() and access the `name` key. See @@get_palette()'s section @schema[Schema].
+/// These names are used to set the theme of the document. To access the accented names, you can use @@get_palette() and access the `name` key.
 ///
 /// -> dictionary
 #let themes = (
@@ -19,19 +21,7 @@
   mocha: "mocha",
 )
 
-/// Get the color palette for the given theme.
-/// ==== Schema <schema>
-/// - name (```typ string```): The name of the flavor (e.g. Frappé)
-/// - emoji (```typ string```): The emoji associated with the flavor.
-/// - order (```typ integer```): The order of the flavor in the Catppuccin lineup.
-/// - dark (```typ boolean```): Whether the flavor is a dark theme.
-/// - light (```typ boolean```): Whether the flavor is a light theme.
-/// - colors (```typ dictionary```): A dictionary of colors used in the flavor. Keys are the color names as a ```typ string``` and values are dictionaries with the following keys:
-///   - name (```typ string```): The name of the color.
-///   - order (```typ integer```): The order of the color in the palette.
-///   - hex (```typ string```): The hex value of the color.
-///   - rgb (```typ string```): The RGB value of the color.
-///   - accent (```typ boolean```): Whether the color is an accent color.
+/// Get the color palette for the given theme. The returned dictionary has keys as defined in @flavor-schema[Flavor Schemas].
 ///
 /// ==== Example
 /// #example(
@@ -82,23 +72,39 @@
   }
 }
 
-#let config_code_blocks(theme, code_block: true, code_syntax: true, body) = [
+#let code-block-config-schema = z.dictionary((
+  inset: inset-schema(default: 10pt),
+  outset: outset-schema(default: (y: 3pt)),
+  radius: radius-schema(default: 3pt),
+  width: z.either(rel-or-length(), sides-schema, z.function(), default: it => measure(it).width + 1cm),
+))
+
+#let code-box-config-schema = z.dictionary((
+  inset: inset-schema(default: (x: 3pt, y: 0pt)),
+  outset: outset-schema(default: (y: 3pt)),
+  radius: radius-schema(default: 3pt),
+))
+
+#let config_code_blocks(theme, code_block: true, code_syntax: true, block-config: (:), inline-config: (:), body) = [
   #let palette = get_palette(theme)
 
   #let tmTheme = "tmThemes/" + theme + ".tmTheme"
   #set raw(theme: tmTheme) if code_syntax
 
-  #show raw.where(block: false): box.with(inset: (x: 3pt, y: 0pt), outset: (y: 3pt), radius: 2pt)
+  #show raw.where(block: false): it => [
+    #let config = z.parse(inline-config, code-box-config-schema)
+    #box(..config, it)
+  ]
 
   #show raw.where(block: true): it => [
+    #let config = z.parse(block-config, code-block-config-schema) + (fill: palette.colors.crust.rgb)
+
+    #if type(config.at("width")) == function {
+      config.insert("width", config.at("width")(it))
+    }
+
     #set align(center)
-    #set block(
-      fill: palette.colors.crust.rgb,
-      inset: 10pt,
-      outset: (y: 3pt),
-      radius: 4pt,
-    )
-    #it
+    #block(..block-config, it)
   ]
 
   #body

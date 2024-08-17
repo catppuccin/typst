@@ -1,14 +1,3 @@
-/// The Macchiato color palette.
-///
-/// ==== Example
-/// #example(
-/// ```typ
-///   #let theme = themes.macchiato
-///   #let palette = get_palette(theme)
-///   Selected theme: #palette.name #palette.emoji
-/// ```, ratio: 1.5)
-///
-/// -> dictionary
 #let macchiato = (
   name: "Macchiato",
   emoji: "🌺",
