@@ -1,8 +1,4 @@
 {
-  "*.{json,md,yaml,toml,tmTheme}": [
-    "prettier --check"
-  ],
-  "*.typ": [
-    "typstyle --check -c 120"
-  ]
+  "*.{json,md,yaml,toml,tmTheme}": ["prettier --check"],
+  "*.typ": ["typstyle --check -c 120"]
 }
