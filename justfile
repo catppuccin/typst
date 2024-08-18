@@ -1,7 +1,4 @@
-import "justfiles/build_assets.just"
-import "justfiles/install.just"
-
-build: tmThemes whiskers build_assets
+build: tmThemes whiskers format build_assets
 
 tmThemes:
   #!/usr/bin/env sh
@@ -22,7 +19,46 @@ tmThemes:
   echo "Building Catppuccin pallets for Typst..."
   whiskers typst.tera
 
-install: build install_local
+install: build
+  #!/usr/bin/env sh
+  python3 ./justscripts/install.py
+
+manual +flavors="mocha": build
+  #!/usr/bin/env sh
+
+  flavors="{{flavors}}"
+
+  case "$flavors" in
+    *all*)
+      flavors="latte frappe macchiato mocha"
+      ;;
+  esac
+
+  for flavor in $flavors; do
+    echo "Building manual for $flavor..."
+    typst compile --root . --font-path ./font --input flavor="$flavor" manual/manual.typ "manual/manual_$flavor.pdf"
+  done
+
+build_assets:
+  #!/usr/bin/env sh
+  python3 ./justscripts/build_assets.py
+
+format:
+  #!/usr/bin/env sh
+
+  if ! command -v yarn &> /dev/null; then
+    echo "yarn not found, skipping prettier..."
+  else
+    echo "Running prettier on tmThemes."
+    yarn prettier **/*.tmTheme -w
+  fi
+
+  if ! command -v typstyle &> /dev/null; then
+    echo "typstyle not found, skipping typstyle..."
+  else
+    echo "Running typstyle on typst files."
+    typstyle -c 120 format-all
+  fi
 
 @clean:
   echo "Removing tmThemes and assets..."
