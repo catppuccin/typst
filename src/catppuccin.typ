@@ -76,7 +76,19 @@
   inset: inset-schema(default: 10pt),
   outset: outset-schema(default: (y: 3pt)),
   radius: radius-schema(default: 3pt),
-  width: z.either(rel-or-length(), sides-schema, z.function(), default: it => measure(it).width + 1cm),
+  breakable: z.boolean(default: false),
+  width: z.either(
+    rel-or-length(),
+    z.function(),
+    sides-schema,
+    post-transform: (self, it) => if type(it) == dictionary and it == (:) {
+      0pt
+    } else {
+      it
+    },
+
+    default: it => measure(it).width + 1cm,
+  ),
 ))
 
 #let code-box-config-schema = z.dictionary((
@@ -100,11 +112,11 @@
     #let config = z.parse(block-config, code-block-config-schema) + (fill: palette.colors.crust.rgb)
 
     #if type(config.at("width")) == function {
-      config.insert("width", config.at("width")(it))
+      config.insert("width", (config.at("width"))(it))
     }
 
     #set align(center)
-    #block(..block-config, it)
+    #block(..config, it)
   ]
 
   #body
@@ -112,7 +124,7 @@
 
 /// Configure your document to use a Catppuccin flavor.
 ///
-/// *Example:*
+/// ==== Example:
 /// ```typ
 ///   #import "@preview/catppuccin": catppuccin, themes
 ///
