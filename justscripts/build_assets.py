@@ -40,12 +40,12 @@ def convert_preview_to_webp(previews: Path, flavor: str) -> CompletedProcess[byt
 
 
 def build_combined_preview(previews: Path) -> None:
-    asset_pngs = [f"{flavor}.webp" for flavor in FLAVORS]
+    assets = [f"{flavor}.webp" for flavor in FLAVORS]
     print("Generating composite layout with catwalk...")
     subprocess.run(
         [
             "catwalk",
-            *asset_pngs,
+            *assets,
             "--layout",
             "composite",
             "--directory",
