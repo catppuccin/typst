@@ -48,6 +48,7 @@
     "selector": palette.colors.red.rgb,
     "module": palette.colors.yellow.rgb,
     "stroke": default-type-color,
+    "version": palette.colors.blue.rgb,
     "function": palette.colors.blue.rgb,
     "color": gradient-for-color-types,
     "gradient": gradient-for-color-types,
@@ -194,7 +195,7 @@
       default: info.at("default", default: none),
     )
   }
-  v(4.8em, weak: true)
+  v(2em, weak: true)
 }
 
 #let show-variable(
@@ -223,7 +224,7 @@
   )
 
   utilities.eval-docstring(var.description, style-args)
-  v(4.8em, weak: true)
+  v(2em, weak: true)
 }
 
 #let show-reference(label, name, style-args: none) = {

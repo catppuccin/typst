@@ -135,5 +135,5 @@ Here we describe the schema for the #show-type("flavor") dictionary. Use ```typc
   show-module-name: false,
 )
 
-#show-mod(make_namespace(name: "Tidy Styles", "tidy/styles.typ"))
-#show-mod(make_namespace(name: "Version", "version.typ"))
+#show-mod(make_namespace(name: "Tidy Styles", "tidy/styles.typ", scope: ("themes": themes, "show-type": show-type)))
+#show-mod(make_namespace(name: "Version", "version.typ", scope: ("version": version)))
