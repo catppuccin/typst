@@ -4,6 +4,10 @@
 #import "@preview/tidy:0.3.0"
 #import "@preview/tidy:0.3.0": utilities
 
+/// A style thst can be used to generate documentation using #link("https://typst.app/universe/package/tidy")[Tidy] for the Catppuccino theme. The returned dictionary is a tidy styles dictionary with some additional keys, most importantly `ctp_palette` whose value is the associated #show-type("flavor").
+///
+/// - theme (string): The name of the theme to use.
+/// -> dictionary
 #let get_tidy_colors(theme: themes.mocha) = {
   let palette = get_palette(theme)
 
