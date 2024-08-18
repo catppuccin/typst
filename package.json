@@ -4,18 +4,22 @@
     "@commitlint/config-conventional": "^19.2.2",
     "@commitlint/prompt-cli": "^19.4.0",
     "@prettier/plugin-xml": "^3.4.1",
+    "commitlint": "^19.4.0",
+    "conventional-changelog-cli": "^5.0.0",
+    "git-cz": "^4.9.0",
     "husky": "^9.1.4",
-    "pinst": "^3.0.0",
+    "lint-staged": "^15.2.9",
     "prettier": "^3.3.3",
     "prettier-plugin-toml": "^2.0.1"
   },
   "scripts": {
     "prepare": "husky",
-    "commitcli": "commit"
+    "log": "conventional-changelog --config ./node_modules/commitlint-cli/lib/log -i CHANGELOG.md -s -r 0",
+    "commit": "npm run log && git add . && git-cz"
   },
-  "commitlint": {
-    "extends": [
-      "@commitlint/config-conventional"
-    ]
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
   }
 }
