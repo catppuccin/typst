@@ -1,15 +1,15 @@
-#import "../catppuccin.typ": themes, get_palette
+#import "../catppuccin.typ": themes, get-palette
 #import "../utils.typ": dict-at
 
 #import "@preview/tidy:0.3.0"
 #import "@preview/tidy:0.3.0": utilities
 
-/// A style that can be used to generate documentation using #link("https://typst.app/universe/package/tidy")[Tidy] for the Catppuccino theme. The returned dictionary is a tidy styles dictionary with some additional keys, most importantly `ctp_palette` whose value is the associated #show-type("flavor").
+/// A style that can be used to generate documentation using #link("https://typst.app/universe/package/tidy")[Tidy] for the Catppuccino theme. The returned dictionary is a tidy styles dictionary with some additional keys, most importantly `ctp-palette` whose value is the associated #show-type("flavor").
 ///
 /// - theme (string): The name of the theme to use.
 /// -> dictionary
-#let get_tidy_colors(theme: themes.mocha) = {
-  let palette = get_palette(theme)
+#let get-tidy-colors(theme: themes.mocha) = {
+  let palette = get-palette(theme)
 
   let function-name-color = palette.colors.blue.rgb
   let rainbow-map = (
@@ -23,7 +23,7 @@
   let default-type-color = palette.colors.overlay2.rgb
 
   let colors = (
-    "ctp_palette": palette,
+    "ctp-palette": palette,
     "flavor": palette.colors.pink.rgb,
     "default": default-type-color,
     "content": palette.colors.teal.rgb,
@@ -80,8 +80,8 @@
 #let show-type(type, style-args: (:)) = {
   h(2pt)
   let clr = style-args.colors.at(type, default: style-args.colors.at("default"))
-  let text_fill = dict-at(style-args.colors, "ctp_palette", "colors", "base", "rgb")
-  box(outset: 2pt, fill: clr, radius: 2pt, text(fill: text_fill, raw(type, lang: none)))
+  let text-fill = dict-at(style-args.colors, "ctp-palette", "colors", "base", "rgb")
+  box(outset: 2pt, fill: clr, radius: 2pt, text(fill: text-fill, raw(type, lang: none)))
   h(2pt)
 }
 
@@ -137,7 +137,7 @@
 ) = block(
   inset: 10pt,
   radius: 3pt,
-  fill: style-args.colors.ctp_palette.colors.mantle.rgb,
+  fill: style-args.colors.ctp-palette.colors.mantle.rgb,
   width: 100%,
   breakable: style-args.break-param-descriptions,
   [

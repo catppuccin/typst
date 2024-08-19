@@ -9,7 +9,7 @@
 /// #example(
 /// ```typ
 ///   #let theme = themes.latte
-///   #let palette = get_palette(theme)
+///   #let palette = get-palette(theme)
 ///   Selected theme: #palette.name #palette.emoji
 /// ```, ratio: 1.6)
 ///
@@ -22,7 +22,7 @@
 /// #example(
 /// ```typ
 ///   #let theme = themes.frappe
-///   #let palette = get_palette(theme)
+///   #let palette = get-palette(theme)
 ///   Selected theme: #palette.name #palette.emoji
 /// ```, ratio: 1.6)
 ///
@@ -35,7 +35,7 @@
 /// #example(
 /// ```typ
 ///   #let theme = themes.macchiato
-///   #let palette = get_palette(theme)
+///   #let palette = get-palette(theme)
 ///   Selected theme: #palette.name #palette.emoji
 /// ```, ratio: 1.6)
 ///
@@ -48,7 +48,7 @@
 /// #example(
 /// ```typ
 ///   #let theme = themes.mocha
-///   #let palette = get_palette(theme)
+///   #let palette = get-palette(theme)
 ///   Selected theme: #palette.name #palette.emoji
 /// ```, ratio: 1.6)
 ///

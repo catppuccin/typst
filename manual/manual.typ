@@ -1,5 +1,5 @@
-#import "../src/catppuccin.typ": themes, get_palette, config_code_blocks
-#import "../src/tidy/styles.typ": get_tidy_colors, show-type as sh_type
+#import "../src/catppuccin.typ": themes, get-palette, config-code-blocks
+#import "../src/tidy/styles.typ": get-tidy-colors, show-type as sh-type
 #import "../src/tidy/show-module.typ": show-module
 #import "template.typ": *
 #import "@preview/tidy:0.3.0"
@@ -8,11 +8,11 @@
 #let version = toml("../typst.toml").package.version
 
 #let theme = sys.inputs.at("flavor", default: themes.mocha)
-#let palette = get_palette(theme)
+#let palette = get-palette(theme)
 
 #let show-type(type) = {
-  let style = (colors: get_tidy_colors(theme: theme))
-  sh_type(type, style-args: style)
+  let style = (colors: get-tidy-colors(theme: theme))
+  sh-type(type, style-args: style)
 }
 
 #show: project.with(
@@ -55,8 +55,8 @@ Using this package is simple. See @usage for an example of how to use the packag
 
   #show: catppuccin.with(
     flavor: themes.mocha,
-    code_block: true,
-    code_syntax: true,
+    code-block: true,
+    code-syntax: true,
   )
 
   // The rest of your document
@@ -75,8 +75,8 @@ You can disable the theme by commenting out or deleting the show block. Just not
   let doc = tidy.parse-module(
     namespace.contents,
     name: namespace.name,
-    scope: namespace.scope + ("config_code_blocks": config_code_blocks),
-    preamble: strfmt("#show: config_code_blocks.with(\"{}\")\n", theme),
+    scope: namespace.scope + ("config-code-blocks": config-code-blocks),
+    preamble: strfmt("#show: config-code-blocks.with(\"{}\")\n", theme),
   )
 
   show-module(
@@ -89,11 +89,11 @@ You can disable the theme by commenting out or deleting the show block. Just not
 = Modules
 
 #show-mod(
-  make_namespace(
+  make-namespace(
     name: "Catppuccin",
     scope: (
       "themes": themes,
-      "get_palette": get_palette,
+      "get-palette": get-palette,
       "show-type": show-type,
     ),
     "catppuccin.typ",
@@ -124,16 +124,16 @@ Here we describe the schema for the #show-type("flavor") dictionary. Use ```typc
   - *accent* #show-type("boolean") --- Whether the color is an accent color.
 
 #show-mod(
-  make_namespace(
+  make-namespace(
     name: "Flavors",
     scope: (
       "themes": themes,
-      "get_palette": get_palette,
+      "get-palette": get-palette,
     ),
     "flavors.typ",
   ),
   show-module-name: false,
 )
 
-#show-mod(make_namespace(name: "Tidy Styles", "tidy/styles.typ", scope: ("themes": themes, "show-type": show-type)))
-#show-mod(make_namespace(name: "Version", "version.typ", scope: ("version": version)))
+#show-mod(make-namespace(name: "Tidy Styles", "tidy/styles.typ", scope: ("themes": themes, "show-type": show-type)))
+#show-mod(make-namespace(name: "Version", "version.typ", scope: ("version": version)))
