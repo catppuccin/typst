@@ -2,6 +2,11 @@
 check-filename = true
 check-file = true
 
+[type.webp]
+extend-glob = ["*.webp"]
+check-filename = true
+check-file = false
+
 [type.pdf]
 extend-glob = ["*.pdf"]
 check-filename = true

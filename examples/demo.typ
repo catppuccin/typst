@@ -1,8 +1,8 @@
-#import "../src/lib.typ": catppuccin, themes, get_palette
+#import "../src/lib.typ": catppuccin, themes, get-palette
 #import "@preview/cetz:0.2.2": canvas, plot
 
 #let theme = sys.inputs.at("flavor", default: themes.mocha)
-#let palette = get_palette(theme)
+#let palette = get-palette(theme)
 
 #set document(
   title: "Catppuccin",
@@ -11,7 +11,7 @@
   date: datetime.today(),
 )
 
-#show: catppuccin.with(theme, code_block: true)
+#show: catppuccin.with(theme, code-block: true)
 
 #align(center, heading(text(size: 2em, font: "Jellee Roman", "Catppuccin")))
 #align(
@@ -22,7 +22,7 @@
 #let accents = palette.colors.pairs().filter(pair => pair.at(1).accent)
 #let bases = palette.colors.pairs().filter(pair => not pair.at(1).accent)
 
-#let color_swatches(pairs) = pairs.map(pair => {
+#let color-swatches(pairs) = pairs.map(pair => {
   stack(
     dir: ltr,
     spacing: 4pt,
@@ -56,13 +56,13 @@ using the flavor #text(fill: palette.colors.mauve.rgb, style: "italic", theme).
 === Accents
 #align(
   center,
-  grid(columns: 7, align: left, gutter: 1em, ..color_swatches(accents)),
+  grid(columns: 7, align: left, gutter: 1em, ..color-swatches(accents)),
 )
 
 === Base Colors
 #align(
   center,
-  grid(columns: 6, align: left, gutter: 1em, ..color_swatches(bases)),
+  grid(columns: 6, align: left, gutter: 1em, ..color-swatches(bases)),
 )
 
 === Code Blocks
@@ -71,10 +71,10 @@ demo show how to use this package by using ```typ #show``` in Typst:
 
 #text(size: 8pt)[
   ```typ
-  #import "catppuccin": catppuccin, themes, get_palette
-  #show: catppuccin.with(theme: themes.mocha, code_block: true)
+  #import "catppuccin": catppuccin, themes, get-palette
+  #show: catppuccin.with(theme: themes.mocha, code-block: true)
 
-  #let palette = get_palette(theme)
+  #let palette = get-palette(theme)
   #let mauve = palette.colors.mauve.rgb
 
   = Catppuccin
@@ -87,7 +87,7 @@ demo show how to use this package by using ```typ #show``` in Typst:
 Plots and other figures can be made to look even better when using the current
 flavor's palette!
 
-#let plot_str = "#let styles = (
+#let plot-str = "#let styles = (
   palette.colors.red.rgb,
   palette.colors.green.rgb,
   palette.colors.blue.rgb,
@@ -124,8 +124,8 @@ flavor's palette!
 })"
 
 #let scope = (palette: palette, canvas: canvas, plot: plot)
-#let plot = eval(scope: scope, "[" + plot_str + "]")
+#let plot = eval(scope: scope, "[" + plot-str + "]")
 #grid(
   columns: 2,
-  text(size: 7.3pt, raw(lang: "typ", plot_str)), [#v(1fr) #plot #v(1fr)],
+  text(size: 7.3pt, raw(lang: "typ", plot-str)), [#v(1fr) #plot #v(1fr)],
 )

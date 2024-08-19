@@ -1,8 +1,8 @@
-#import "/src/lib.typ": catppuccin, themes, get_palette
+#import "/src/lib.typ": catppuccin, themes, get-palette
 
 #set page(width: auto, height: auto)
 
-#let color_swatches(palette) = {
+#let color-swatches(palette) = {
   let swatches = ()
   for (_, color) in palette.colors {
     let swatch = stack(
@@ -28,7 +28,7 @@
   #pagebreak(weak: true)
   #show: catppuccin.with(theme)
 
-  #let palette = get_palette(theme)
-  #color_swatches(palette)
+  #let palette = get-palette(theme)
+  #color-swatches(palette)
 ]
 

@@ -1,4 +1,4 @@
-#import "../src/lib.typ": catppuccin, themes, get_palette
+#import "../src/lib.typ": catppuccin, themes, get-palette
 #import "@preview/codly:0.1.0": *
 
 // The project function defines how your document looks.
@@ -15,7 +15,7 @@
   flavor: themes.mocha,
   body,
 ) = {
-  let palette = get_palette(flavor)
+  let palette = get-palette(flavor)
 
   // Set the document's basic properties.
   set document(author: authors, title: title)
@@ -23,7 +23,7 @@
   // set text(font: "Linux Libertine", lang: "en")
   set text(font: "Nunito", hyphenate: false, lang: "en")
 
-  show: catppuccin.with(flavor, code_block: true, code_syntax: true)
+  show: catppuccin.with(flavor, code-block: true, code-syntax: true)
 
   show heading.where(level: 1): set text(font: "Jellee Roman")
   show heading.where(level: 2): set text(font: "Jellee Roman")
@@ -36,14 +36,14 @@
 
   show list: pad.with(x: 5%)
 
-  let ctp_blue = palette.colors.blue.rgb
-  show link: set text(fill: ctp_blue)
+  let ctp-blue = palette.colors.blue.rgb
+  show link: set text(fill: ctp-blue)
   // show link: it => if type(it.element) != ref {
   //   underline
   // }
 
   // show ref: it => {
-  // set text(fill: ctp_blue)
+  // set text(fill: ctp-blue)
   // underline[#it]
   // }
 
@@ -123,7 +123,7 @@
   return upper(string.at(0)) + string.slice(1)
 }
 
-#let make_namespace(name: none, scope: (:), ..modules) = {
+#let make-namespace(name: none, scope: (:), ..modules) = {
   let contents = ""
 
   for module in modules.pos() {
