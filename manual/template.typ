@@ -47,14 +47,18 @@
   // underline[#it]
   // }
 
-
-  v(4em)
+  v(1fr)
 
   // Title row.
   align(center)[
     #block(text(weight: 700, 1.75em, title, font: "Jellee Roman"))
     #block(text(1.0em, subtitle))
-    #v(4em, weak: true)
+
+    #v(1em, weak: true)
+    #let logo = sys.inputs.at("logo")
+    #image(logo, width: 4cm)
+    #v(1em, weak: true)
+
     v#version #h(1.2cm) #date
     #block(link(url))
     #v(1.5em, weak: true)
@@ -71,7 +75,7 @@
     ),
   )
 
-  v(3cm, weak: true)
+  v(1fr, weak: true)
 
   // Abstract.
   pad(
