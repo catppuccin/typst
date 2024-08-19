@@ -12,3 +12,6 @@ description = "🪶 Soothing pastel theme for Typst"
 keywords = ["catppuccin", "themes"]
 categories = ["fun", "components"]
 exclude = ["/examples/*", "/docs/*"]
+
+[tool.typst-test]
+vcs = "git"

@@ -20,7 +20,7 @@
   subtitle: "🪶 Soothing pastel theme for Typst",
   authors: ("TimeTravelPenguin",),
   abstract: [
-    The *catppuccin* package provides colourful #link("https://catppuccin.com/", [Catppuccin]) asthetics
+    The *catppuccin* package provides colourful #link("https://catppuccin.com/", [Catppuccin]) aesthetics
     for #link("https://typst.app/", [Typst]) documents. It provides four soothing
     pastel themes that is easy on the eyes. This manual provides a detailed
     documentation of the package.
@@ -40,7 +40,7 @@
 
 This document provides a detailed documentation of the *catppuccin* package for Typst. Inspired by the #LaTeX #link("https://github.com/catppuccin/latex")[Catppuccin package], this package hopes to make writing in Typst more pleasurable and easy to use.
 
-As someone who has done a lot of #LaTeX, I found myself spending a lot of time writing in dark themes (usually by inverting the document colors). Eventually I found the Catppuccin package for #LaTeX, and I incorperated it into my custom preable to allow me to enable, disable, or configure the enabled theme. When I finished, I would submit my work with the theme disabled, without explicitly removing code!
+As someone who has done a lot of #LaTeX, I found myself spending a lot of time writing in dark themes (usually by inverting the document colors). Eventually I found the Catppuccin package for #LaTeX, and I incorporated it into my custom preable to allow me to enable, disable, or configure the enabled theme. When I finished, I would submit my work with the theme disabled, without explicitly removing code!
 
 I have plans for the future of this package, such as added styling and perhaps integration with other packages (if that ever becomes easier to do without making a new package).
 
