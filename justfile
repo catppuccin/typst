@@ -1,3 +1,5 @@
+import "justscripts/manual_build.just"
+
 build: update format assets
 
 install: build
@@ -6,26 +8,14 @@ install: build
 
 update: tmThemes whiskers format
 
-manual +flavors="mocha": build
-  #!/usr/bin/env sh
-
-  flavors="{{flavors}}"
-
-  case "$flavors" in
-    *all*)
-      flavors="latte frappe macchiato mocha"
-      ;;
-  esac
-
-  for flavor in $flavors; do
-    echo "Building manual for $flavor..."
-    typst compile --root . --font-path ./font --input flavor="$flavor" manual/manual.typ "manual/manual_$flavor.pdf"
-  done
+manual +flavors="mocha": build (build_manual flavors)
 
 assets:
   #!/usr/bin/env sh
   python3 ./justscripts/build_assets.py
 
+[linux, macos]
+[confirm("Homebrew and Cargo are about to install some dependencies. Continue? (y/N)")]
 dev-tools:
   #!/usr/bin/env sh
   if [[ ! -x "$(command -v brew)" ]]; then
@@ -62,7 +52,7 @@ update-test *filter:
 
 @clean:
   echo "Removing tmThemes and assets..."
-  rm -rf src/tmThemes assets
+  rm -rf src/tmThemes assets manual/.temp
 
 [private]
 tmThemes:
