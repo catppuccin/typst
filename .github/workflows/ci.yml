@@ -20,8 +20,14 @@ jobs:
         id: set-up-homebrew
         uses: Homebrew/actions/setup-homebrew@master
 
+      - name: 🍺 Install typos-cli
+        run: "brew install typos-cli"
+
       - name: 🍺 Install typstyle
         run: "brew install typstyle"
+
+      - name: 🧹 Check for typos
+        run: "typos"
 
       - name: 🧹 Check style
         run: "find . -name '*.typ' | xargs typstyle --check -c 120"
