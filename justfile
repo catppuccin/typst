@@ -35,13 +35,13 @@ dev-tools:
 
   brew update
   brew upgrade
-  brew install python typstyle catppuccin/tap/catwalk catppuccin/tap/whiskers yarn
+  brew install python typstyle typos-cli catppuccin/tap/catwalk catppuccin/tap/whiskers yarn
   yarn install
   yarn upgrade
 
   if [[ ! -x "$(command -v cargo)" ]]; then
     echo "Cargo is not installed. Cannot install typst-test."
-    echo "Vist https://www.rust-lang.org to install Rust."
+    echo "Visit https://www.rust-lang.org to install Rust."
     exit 1
   fi
 
