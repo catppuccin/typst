@@ -27,11 +27,31 @@ assets:
   python3 ./justscripts/build_assets.py
 
 dev-tools:
+  #!/usr/bin/env sh
+  if [[ ! -x "$(command -v brew)" ]]; then
+    echo "Homebrew is not installed. Please install Homebrew first."
+    exit 1
+  fi
+
   brew update
   brew upgrade
   brew install python typstyle catppuccin/tap/catwalk catppuccin/tap/whiskers yarn
   yarn install
   yarn upgrade
+
+  if [[ ! -x "$(command -v cargo)" ]]; then
+    echo "Cargo is not installed. Cannot install typst-test."
+    echo "Vist https://www.rust-lang.org to install Rust."
+    exit 1
+  fi
+
+  cargo install --locked --git https://github.com/tingerrr/typst-test
+
+test *filter:
+  typst-test run {{filter}}
+
+update-test *filter:
+  typst-test update {{filter}}
 
 @format:
   echo "Running prettier on tmThemes."
