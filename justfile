@@ -110,8 +110,8 @@ new-publishing-branch:
 
   cd catppuccin
 
-  if [[ -d "$version" ]]; then
-    err "Version $version already exists. Aborting."
+  if [[ ! mkdir "$version" ]]; then
+    err("Version $version already exists. Aborting.")
     exit 1
   fi
 
