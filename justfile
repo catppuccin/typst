@@ -79,4 +79,5 @@ update-test *filter:
 [group("Development")]
 @oxipng:
   echo "Optimizing .png files..."
-  oxipng -o max --strip safe `find . -type f -iname "*.png"`
+  oxipng -o max --strip safe `find . -type f -iname "*.png" \
+    -not -path "./tests/**/diff/*" -not -path "./tests/**/out/*"`
