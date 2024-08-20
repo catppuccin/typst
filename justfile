@@ -1,20 +1,43 @@
-import "justscripts/manual_build.just"
+import "justscripts/build/assets.just"
+import "justscripts/build/manual.just"
+import "justscripts/build/modules.just"
 
-build: update format assets
+[private]
+@err message:
+  echo "\033[30;41;1m Error: \033[0m\033[31m\033[1m {{message}}\033[0m"
 
+[private]
+[no-exit-message]
+ensure_root:
+  #!/usr/bin/env sh
+  if [[ ! -f ./typst.toml ]]; then
+    just err "Please run this script from the root of the Typst repository."
+    exit 1
+  fi
+
+[group("Build")]
+[doc("Builds package modules, formats files, and builds assets.")]
+build: ensure_root build_modules format build_assets
+
+[group("Build")]
+[doc("Builds the manual using the provided flavor(s).")]
+manual +flavors="mocha": build (build_manual flavors)
+
+[group("Build")]
+[doc("Removes the compiled modules, assets, temporary files, and any manuals.")]
+@clean:
+  echo "Removing tmThemes and assets..."
+  rm -rf src/tmThemes assets manual/{.temp,*.pdf} tests/**/{out,diff}
+
+[group("Installation")]
+[doc("Installs the package to the system under @local.")]
 install: build
   mkdir -p gallery
   ./common/scripts/package "@local"
 
-update: tmThemes whiskers format
-
-manual +flavors="mocha": build (build_manual flavors)
-
-assets:
-  #!/usr/bin/env sh
-  python3 ./justscripts/build_assets.py
-
+[group("Development")]
 [linux, macos]
+[doc("Installs development tools and dependencies.")]
 [confirm("Homebrew and Cargo are about to install some dependencies. Continue? (y/N)")]
 dev-tools:
   #!/usr/bin/env sh
@@ -37,12 +60,15 @@ dev-tools:
 
   cargo install --locked --git https://github.com/tingerrr/typst-test
 
+[group("Development")]
 test *filter:
   typst-test run {{filter}}
 
+[group("Development")]
 update-test *filter:
   typst-test update {{filter}}
 
+[group("Development")]
 @format:
   echo "Running prettier on tmThemes."
   yarn prettier **/*.tmTheme -w
@@ -50,27 +76,3 @@ update-test *filter:
   echo "Running typstyle on typst files."
   typstyle -c 120 format-all
 
-@clean:
-  echo "Removing tmThemes and assets..."
-  rm -rf src/tmThemes assets manual/.temp
-
-[private]
-tmThemes:
-  #!/usr/bin/env sh
-
-  cd src || exit
-  mkdir -p tmThemes
-
-  echo "Downloading Catppuccin tmThemes..."
-  COMMIT_HASH="d3feec47b16a8e99eabb34cdfbaa115541d374fc"
-  wget -q "https://github.com/catppuccin/bat/raw/$COMMIT_HASH/themes/Catppuccin%20Latte.tmTheme" -O tmThemes/latte.tmTheme &
-  wget -q "https://github.com/catppuccin/bat/raw/$COMMIT_HASH/themes/Catppuccin%20Frappe.tmTheme" -O tmThemes/frappe.tmTheme &
-  wget -q "https://github.com/catppuccin/bat/raw/$COMMIT_HASH/themes/Catppuccin%20Macchiato.tmTheme" -O tmThemes/macchiato.tmTheme &
-  wget -q "https://github.com/catppuccin/bat/raw/$COMMIT_HASH/themes/Catppuccin%20Mocha.tmTheme" -O tmThemes/mocha.tmTheme &
-
-  wait
-
-[private]
-@whiskers:
-  echo "Building Catppuccin pallets for Typst..."
-  whiskers typst.tera

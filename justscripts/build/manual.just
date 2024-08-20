@@ -2,7 +2,7 @@ logo_commit := "08946855002032919592a7c8d49204a7a59c30f9"
 logo_light_sha256 := "6913f28d404575178b764dad6fc5f017b746e2e60c74a3ccac970ef26789ee62"
 logo_dark_sha256 := "03ce7005d2764ad9203839b1b4d19f6cdabc3d4dc6de4aa7040c16bd05d5b6aa"
 
-[no-cd]
+[private]
 build_manual flavors: download_logos
   #!/usr/bin/env sh
 
