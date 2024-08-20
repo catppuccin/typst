@@ -48,7 +48,7 @@ dev-tools:
 
   brew update
   brew upgrade
-  brew install python typstyle typos-cli catppuccin/tap/catwalk catppuccin/tap/whiskers yarn
+  brew install typstyle typos-cli oxipng catppuccin/tap/catwalk catppuccin/tap/whiskers yarn
   yarn install
   yarn upgrade
 
@@ -76,3 +76,5 @@ update-test *filter:
   echo "Running typstyle on typst files."
   typstyle -c 120 format-all
 
+  echo "Optimizing .png files..."
+  oxipng -o max --strip safe `find . -type f -iname "*.png"`
