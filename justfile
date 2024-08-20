@@ -118,5 +118,5 @@ new-publishing-branch:
   mkdir "$version"
   cd "$version"
 
-  git checkout origin/main -- fonts manual src template/main.typ LICENSE README.md typst.toml
-  mv fonts template/fonts
+  git checkout origin/main -- fonts/**/* manual/* src/**/* template/main.typ LICENSE README.md typst.toml
+  mv fonts template
