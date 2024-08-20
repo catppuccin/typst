@@ -66,7 +66,7 @@ download_logos:
 
     if [[ ! -f "$logo_path" ]]; then
       echo "Downloading the image 'logo_$opt.png'..."
-      wget -qO "$logo_path" "$logo_url"
+      wget -qO- "$logo_url" | oxipng -o max --out "$logo_path" -
     fi
   done
 
