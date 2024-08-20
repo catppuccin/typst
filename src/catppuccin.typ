@@ -73,7 +73,7 @@
 }
 
 #let code-block-config-schema = z.dictionary((
-  inset: inset-schema(default: 10pt),
+  inset: inset-schema(default: 7pt),
   outset: outset-schema(default: (y: 3pt)),
   radius: radius-schema(default: 3pt),
   breakable: z.boolean(default: false),
@@ -92,8 +92,8 @@
 ))
 
 #let code-box-config-schema = z.dictionary((
-  inset: inset-schema(default: (x: 3pt, y: 0pt)),
-  outset: outset-schema(default: (y: 3pt)),
+  inset: inset-schema(default: (x: 2pt, y: 0pt)),
+  outset: outset-schema(default: (y: 2pt)),
   radius: radius-schema(default: 3pt),
 ))
 
