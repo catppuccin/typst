@@ -14,7 +14,7 @@
 #set text(font: "Nunito", size: 0.9em)
 #show: catppuccin.with(theme, code-block: true)
 
-#align(center, heading(text(size: 2em, font: "Jellee Roman", "Catppuccin")))
+#align(center, heading(text(size: 2em, font: "Jellee", "Catppuccin")))
 #align(
   center,
   text(palette.emoji + " Soothing pastel theme for Typst", size: 1.4em),
