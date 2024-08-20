@@ -81,3 +81,12 @@ update-test *filter:
   echo "Optimizing .png files..."
   oxipng -o max --strip safe `find . -type f -iname "*.png" \
     -not -path "./tests/**/diff/*" -not -path "./tests/**/out/*"`
+
+[private]
+[confirm("Have you bumped the version in typst.toml? (y/N)")]
+new-publishing-branch:
+  #!/usr/bin/env sh
+  version="$(grep -m 1 version typst.toml | grep -e '\d.\d.\d' -o)"
+  git checkout --orphan "catppuccin-publish-v${version}"
+  git reset --hard
+  git pull https://github.com/typst/packages.git main
