@@ -1,5 +1,6 @@
 {
   "*.{json,md,yaml,toml,tmTheme}": ["prettier --check"],
   "*.typ": ["typstyle --check -c 120"],
-  "*": ["typos -w -c typos.toml"]
+  "*.png": ["oxipng -o max --strip safe"],
+  "*": ["typos -w -c typos.toml"],
 }

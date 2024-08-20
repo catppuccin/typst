@@ -11,6 +11,7 @@
   date: datetime.today(),
 )
 
+#set text(font: "Nunito", size: 0.9em)
 #show: catppuccin.with(theme, code-block: true)
 
 #align(center, heading(text(size: 2em, font: "Jellee Roman", "Catppuccin")))
@@ -32,6 +33,7 @@
 })
 
 #let TeX = style(styles => {
+  set text(font: "Linux Libertine")
   let e = measure(text(1em, "E"), styles)
   let T = "T"
   let E = text(1em, baseline: e.height / 4, "E")
@@ -40,12 +42,14 @@
 })
 
 #let LaTeX = style(styles => {
+  set text(font: "Linux Libertine")
   let l = measure(text(1em, "L"), styles)
   let a = measure(text(0.7em, "A"), styles)
   let L = "L"
   let A = text(0.7em, baseline: a.height - l.height, "A")
   box(L + h(-0.3em) + A + h(-0.1em) + TeX)
 })
+
 
 Typst makes it very easy to customise the look of your documents. Inspiration
 for this project came from Catppuccin for #LaTeX [#link(
@@ -94,7 +98,7 @@ flavor's palette!
 ).map(c =>
 (stroke: palette.colors.crust.rgb, fill: c.transparentize(25%)))
 
-#canvas(length: 1cm, {
+#canvas(length: 8mm, {
   plot.plot(
     size: (8, 6),
     x-tick-step: none,
@@ -127,5 +131,5 @@ flavor's palette!
 #let plot = eval(scope: scope, "[" + plot-str + "]")
 #grid(
   columns: 2,
-  text(size: 7.3pt, raw(lang: "typ", plot-str)), [#v(1fr) #plot #v(1fr)],
+  text(size: 7.5pt, raw(lang: "typ", plot-str)), [#v(1fr) #plot #v(1fr)],
 )
