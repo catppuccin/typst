@@ -17,11 +17,11 @@ ensure_root:
 
 [group("Build")]
 [doc("Builds package modules, formats files, and builds assets.")]
-build: ensure_root build_modules format build_assets
+build: ensure_root build_modules test build_assets format oxipng
 
 [group("Build")]
 [doc("Builds the manual using the provided flavor(s).")]
-manual +flavors="mocha": build (build_manual flavors)
+manual +flavors="mocha": ensure_root build_modules test (build_manual flavors)
 
 [group("Build")]
 [doc("Removes the compiled modules, assets, temporary files, and any manuals.")]
@@ -76,5 +76,7 @@ update-test *filter:
   echo "Running typstyle on typst files."
   typstyle -c 120 format-all
 
+[group("Development")]
+@oxipng:
   echo "Optimizing .png files..."
   oxipng -o max --strip safe `find . -type f -iname "*.png"`
