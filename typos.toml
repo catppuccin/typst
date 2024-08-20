@@ -2,6 +2,11 @@
 check-filename = true
 check-file = true
 
+[type.png]
+extend-glob = ["*.png"]
+check-filename = true
+check-file = false
+
 [type.webp]
 extend-glob = ["*.webp"]
 check-filename = true
