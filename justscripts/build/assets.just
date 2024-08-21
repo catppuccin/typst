@@ -6,6 +6,8 @@ PREVIEWS := "assets/previews/"
 [no-cd]
 build-assets:
   #!/usr/bin/env sh
+  mkdir -p {{PREVIEWS}}
+  touch ./assets/.gitkeep
 
   echo "\nBuilding repository assets..."
   mkdir -p {{PREVIEWS}}
