@@ -4,15 +4,20 @@ check-file = true
 
 [type.png]
 extend-glob = ["*.png"]
-check-filename = true
 check-file = false
 
 [type.webp]
 extend-glob = ["*.webp"]
-check-filename = true
 check-file = false
 
 [type.pdf]
 extend-glob = ["*.pdf"]
-check-filename = true
+check-file = false
+
+[type.otf]
+extend-glob = ["*.otf"]
+check-file = false
+
+[type.ttf]
+extend-glob = ["*.ttf"]
 check-file = false

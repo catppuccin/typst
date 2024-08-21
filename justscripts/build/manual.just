@@ -25,7 +25,7 @@ build_manual flavors: download_logos
     fi
 
     echo "Building manual for $flavor..."
-    typst compile --root . --font-path ./font \
+    typst compile --root . --font-path ./fonts \
       --input flavor="$flavor" --input logo="$logo" \
       manual/manual.typ "manual/manual_$flavor.pdf"
   done

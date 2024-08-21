@@ -25,8 +25,8 @@
 
   show: catppuccin.with(flavor, code-block: true, code-syntax: true)
 
-  show heading.where(level: 1): set text(font: "Jellee Roman")
-  show heading.where(level: 2): set text(font: "Jellee Roman")
+  show heading.where(level: 1): set text(font: "Jellee")
+  show heading.where(level: 2): set text(font: "Jellee")
   show heading.where(level: 1): it => block(smallcaps(it), below: 1em)
   set heading(numbering: (..args) => if args.pos().len() <= 3 {
     numbering("1.1.", ..args)
@@ -51,7 +51,7 @@
 
   // Title row.
   align(center)[
-    #block(text(weight: 700, 1.75em, title, font: "Jellee Roman"))
+    #block(text(weight: 700, 1.75em, title, font: "Jellee"))
     #block(text(1.0em, subtitle))
 
     #v(1em, weak: true)
