@@ -120,8 +120,19 @@ new-publishing-branch:
     exit 1
   fi
 
-  mkdir "$version"
+  git clone https://github.com/catppuccin/typst.git main
+
+  mv main "$version"
   cd "$version"
 
-  git checkout origin/main -- fonts/**/* manual/* src/**/* template/main.typ LICENSE README.md typst.toml
-  mv fonts template
+  git clean -Xdf
+  rm -rf assets common examples justscripts tests gallery
+  rm -f *.lock *.js *.json *.tera typos.toml justfile
+  find . -name ".*" -depth 1 | xargs rm -rf
+
+  mkdir template
+  mv fonts template/fonts
+
+  @echo Directory is ready to be verified and published.
+  @echo Directory at: "$(pwd)"
+
