@@ -8,7 +8,7 @@ logo_dark_sha256 := "03ce7005d2764ad9203839b1b4d19f6cdabc3d4dc6de4aa7040c16bd05d
 build-manual +flavors="mocha": download-logos
   #!/usr/bin/env sh
 
-  echo "Building the package manual..."
+  echo "\nBuilding the package manual..."
 
   flavors="{{flavors}}"
 
@@ -39,7 +39,7 @@ build-manual +flavors="mocha": download-logos
 download-logos:
   #!/usr/bin/env sh
 
-  echo "Checking for Catppuccin logos in the manual subdirectory '.temp'..."
+  echo "\nChecking for Catppuccin logos in the manual subdirectory '.temp'..."
 
   light_logo_url="https://raw.githubusercontent.com/catppuccin/catppuccin/{{logo_commit}}/assets/logos/exports/latte_circle.png"
   dark_logo_url="https://raw.githubusercontent.com/catppuccin/catppuccin/{{logo_commit}}/assets/logos/exports/1544x1544_circle.png"
@@ -70,8 +70,8 @@ download-logos:
     fi
 
     if [[ ! -f "$logo_path" ]]; then
-      echo "Downloading the image 'logo_$opt.png'..."
-      wget -qO- "$logo_url" | oxipng -o max --out "$logo_path" -
+      echo "- Downloading and optimizing 'logo_$opt.png'..."
+      wget -qO- "$logo_url" | oxipng -q -o max --out "$logo_path" -
     fi
   done
 

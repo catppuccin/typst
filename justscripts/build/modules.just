@@ -4,7 +4,7 @@
 build-lib:
   #!/usr/bin/env sh
 
-  echo "Building Catppuccin pallets for Typst..."
+  echo "\nBuilding Catppuccin pallets for Typst..."
   whiskers typst.tera
 
   cd src || exit
