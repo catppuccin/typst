@@ -69,6 +69,12 @@ You can set up your project using this template via the following command:
 typst init @preview/catppuccin:0.1.0
 ```
 
+If you use the included fonts, be sure to compile with
+
+```sh
+typst compile --font-path fonts main.typ
+```
+
 ## 💝 Thanks to
 
 - [TimeTravelPenguin](https://github.com/TimeTravelPenguin)
