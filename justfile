@@ -98,6 +98,11 @@ new-publishing-branch:
   echo "Stashing any changes..."
   git stash push -m "Stashing changes before creating a new publishing package."
 
+  if [[ -d packages ]]; then
+    echo "Removing existing packages directory..."
+    rm -rf packages
+  fi
+
   git checkout --orphan "catppuccin-publish-v${version}"
   git reset --hard
   git pull https://github.com/typst/packages.git main
@@ -110,8 +115,8 @@ new-publishing-branch:
 
   cd catppuccin
 
-  if [[ ! mkdir "$version" ]]; then
-    err("Version $version already exists. Aborting.")
+  if [[ -d "$version" ]]; then
+    echo "Version $version already exists. Aborting."
     exit 1
   fi
 
