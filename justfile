@@ -130,8 +130,8 @@ new-publishing-branch:
   rm -f *.lock *.js *.json *.tera typos.toml justfile
   find . -name ".*" -depth 1 | xargs rm -rf
 
-  mkdir template
   mv fonts template/fonts
+  mv template/thumbnail.png .
 
   @echo Directory is ready to be verified and published.
   @echo Directory at: "$(pwd)"
