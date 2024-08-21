@@ -14,8 +14,14 @@ default:
 [group("Installation")]
 [doc("Installs the package to the system under @local/@preview.")]
 install namespace="@local":
-  mkdir -p gallery # required for the following script
-  ./common/scripts/package "@local"
+  #!/usr/bin/env sh
+  if [[ {{namespace}} == "@local" ]] || [[ {{namespace}} == "@preview" ]]; then
+    mkdir -p gallery # required for the following script
+    ./common/scripts/package {{namespace}}
+    echo "\nNote that you currently need to manually copy the template directory."
+  else
+    echo "Invalid namespace. Please use either @local or @preview."
+  fi
 
 [group("Development")]
 [unix]
