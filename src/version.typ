@@ -7,4 +7,4 @@
 /// ```)
 ///
 /// -> version
-#let version = version(..toml("/typst.toml").package.version.split(".").map(x => int(x)))
+#let version = version(..toml("../typst.toml").package.version.split(".").map(x => int(x)))
