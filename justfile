@@ -11,14 +11,31 @@ default:
   rm -rf src/tmThemes assets manual/{.temp,*.pdf} \
     tests/**/{out,diff} template/main.typ template/*.webp
 
+[private]
+[no-cd]
+fetch_scripts:
+  #!/usr/bin/env sh
+  cp -r ./typst-package-template/scripts .
+
 [group("Installation")]
 [doc("Installs the package to the system under @local/@preview.")]
-install namespace="@local":
+[no-cd]
+install namespace="@local": fetch_scripts
   #!/usr/bin/env sh
   if [[ {{namespace}} == "@local" ]] || [[ {{namespace}} == "@preview" ]]; then
     mkdir -p gallery # required for the following script
-    ./common/scripts/package {{namespace}}
-    echo "\nNote that you currently need to manually copy the template directory."
+    ./scripts/package {{namespace}}
+  else
+    echo "Invalid namespace. Please use either @local or @preview."
+  fi
+
+[group("Installation")]
+[doc("Uninstalls the package from the system under @local/@preview.")]
+[no-cd]
+uninstall namespace="@local": fetch_scripts
+  #!/usr/bin/env sh
+  if [[ {{namespace}} == "@local" ]] || [[ {{namespace}} == "@preview" ]]; then
+    ./scripts/uninstall {{namespace}}
   else
     echo "Invalid namespace. Please use either @local or @preview."
   fi
