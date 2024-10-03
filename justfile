@@ -1,49 +1,47 @@
-import "justscripts/build/assets.just"
-import "justscripts/build/manual.just"
-import "justscripts/build/modules.just"
-import "justscripts/build/template.just"
+mod build "./justscripts/build"
 
-[private]
-@err message:
-  echo "\033[30;41;1m Error: \033[0m\033[31m\033[1m {{message}}\033[0m"
-
-[private]
-[no-exit-message]
-ensure_root:
-  #!/usr/bin/env sh
-  if [[ ! -f ./typst.toml ]]; then
-    just err "Please run this script from the root of the Typst repository."
-    exit 1
-  fi
-
-[group("Build")]
-[doc("Builds package modules, formats files, and builds assets.")]
-build: ensure_root build_modules test compile_template (build_manual "latte mocha") build_assets format oxipng
-
-[group("Build")]
-[doc("Builds the manual using the provided flavor(s).")]
-manual +flavors="mocha": ensure_root build_modules test (build_manual flavors)
+default:
+  @just --list --justfile {{justfile()}}
 
 [group("Build")]
 [doc("Removes the compiled modules, assets, temporary files, and any manuals.")]
+[no-cd]
 @clean:
-  echo "Removing tmThemes and assets..."
+  echo "Cleaning up all built files..."
   rm -rf src/tmThemes assets manual/{.temp,*.pdf} \
-    tests/**/{out,diff} template/main.{typ,png}
-
-[group("Installation")]
-[doc("Installs the package to the system under @local.")]
-install: build
-  mkdir -p gallery
-  ./common/scripts/package "@local"
+    tests/**/{out,diff} template/main.typ template/*.webp
 
 [private]
-install-preview: build
-  mkdir -p gallery
-  ./common/scripts/package "@preview"
+[no-cd]
+fetch_scripts:
+  #!/usr/bin/env sh
+  cp -r ./typst-package-template/scripts .
+
+[group("Installation")]
+[doc("Installs the package to the system under @local/@preview.")]
+[no-cd]
+install namespace="@local": fetch_scripts
+  #!/usr/bin/env sh
+  if [[ {{namespace}} == "@local" ]] || [[ {{namespace}} == "@preview" ]]; then
+    mkdir -p gallery # required for the following script
+    ./scripts/package {{namespace}}
+  else
+    echo "Invalid namespace. Please use either @local or @preview."
+  fi
+
+[group("Installation")]
+[doc("Uninstalls the package from the system under @local/@preview.")]
+[no-cd]
+uninstall namespace="@local": fetch_scripts
+  #!/usr/bin/env sh
+  if [[ {{namespace}} == "@local" ]] || [[ {{namespace}} == "@preview" ]]; then
+    ./scripts/uninstall {{namespace}}
+  else
+    echo "Invalid namespace. Please use either @local or @preview."
+  fi
 
 [group("Development")]
-[linux, macos]
+[unix]
 [doc("Installs development tools and dependencies.")]
 [confirm("Homebrew and Cargo are about to install some dependencies. Continue? (y/N)")]
 dev-tools:
@@ -67,29 +65,15 @@ dev-tools:
 
   cargo install --locked --git https://github.com/tingerrr/typst-test
 
-[group("Development")]
+[group("Testing")]
 test *filter:
   typst-test run {{filter}}
 
-[group("Development")]
+[group("Testing")]
 update-test *filter:
   typst-test update {{filter}}
 
 [group("Development")]
-@format:
-  echo "Running prettier on tmThemes."
-  yarn prettier **/*.tmTheme -w
-
-  echo "Running typstyle on typst files."
-  typstyle -c 120 format-all
-
-[group("Development")]
-@oxipng:
-  echo "Optimizing .png files..."
-  oxipng -o max --strip safe `find . -type f -iname "*.png" \
-    -not -path "./tests/**/diff/*" -not -path "./tests/**/out/*"`
-
-[private]
 [confirm("Have you bumped the version in typst.toml? (y/N)")]
 new-publishing-branch:
   #!/usr/bin/env sh

@@ -1,14 +1,11 @@
-[private]
-build_modules: tmThemes whiskers format
-
-[private]
-@whiskers:
-  echo "Building Catppuccin pallets for Typst..."
-  whiskers typst.tera
-
-[private]
-tmThemes:
+[group("Build")]
+[doc("Builds the package Typst files provided by this package.")]
+[no-cd]
+build-lib:
   #!/usr/bin/env sh
+
+  echo "\nBuilding Catppuccin pallets for Typst..."
+  whiskers typst.tera
 
   cd src || exit
   mkdir -p tmThemes

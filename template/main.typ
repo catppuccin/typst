@@ -1,6 +1,6 @@
 #import "@preview/catppuccin:0.1.0": catppuccin, themes, get-palette
 
-#let theme = themes.mocha
+#let theme = sys.inputs.at("flavor", default: themes.mocha)
 #show: catppuccin.with(theme)
 #let palette = get-palette(theme)
 #let colors = palette.colors
