@@ -93,7 +93,7 @@ update-test *filter:
 [confirm("Have you bumped the version in typst.toml? (y/N)")]
 new-publishing-branch:
   #!/usr/bin/env sh
-  version="$(grep -m 1 version typst.toml | grep -e '\d.\d.\d' -o)"
+  version="$(grep -m 1 version typst.toml | grep -e '[0-9]\.[0-9]\.[0-9]' -o)"
 
   echo "Stashing any changes..."
   git stash push -m "Stashing changes before creating a new publishing package."

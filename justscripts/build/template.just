@@ -1,4 +1,4 @@
-version := `grep -m 1 version typst.toml | grep -e '\d.\d.\d' -o`
+version := `grep -m 1 version typst.toml | grep -e '[0-9]\.[0-9]\.[0-9]' -o`
 
 [private]
 compile_template: build_template
