@@ -269,62 +269,63 @@
   let preview-outer-padding = 5pt
   let preview-inner-padding = 5pt
 
-  layout(size => style(styles => {
-    let code-width
-    let preview-width
+  layout(size => (
+    context {
+      let code-width
+      let preview-width
 
-    if dir.axis() == "vertical" {
-      code-width = size.width
-      preview-width = size.width
-    } else {
-      code-width = ratio / (ratio + 1) * size.width - 0.5 * col-spacing
-      preview-width = size.width - code-width - col-spacing
-    }
+      if dir.axis() == "vertical" {
+        code-width = size.width
+        preview-width = size.width
+      } else {
+        code-width = ratio / (ratio + 1) * size.width - 0.5 * col-spacing
+        preview-width = size.width - code-width - col-spacing
+      }
 
-    let available-preview-width = preview-width - 2 * (preview-outer-padding + preview-inner-padding)
+      let available-preview-width = preview-width - 2 * (preview-outer-padding + preview-inner-padding)
 
-    let preview-size
-    let scale-preview = scale-preview
+      let preview-size
+      let scale-preview = scale-preview
 
-    if scale-preview == auto {
-      preview-size = measure(preview, styles)
-      assert(
-        preview-size.width != 0pt,
-        message: "The code example has a relative width. Please set `scale-preview` to a fixed ratio, e.g., `100%`",
-      )
-      scale-preview = calc.min(1, available-preview-width / preview-size.width) * 100%
-    } else {
-      preview-size = measure(block(preview, width: available-preview-width / (scale-preview / 100%)), styles)
-    }
+      if scale-preview == auto {
+        preview-size = measure(preview)
+        assert(
+          preview-size.width != 0pt,
+          message: "The code example has a relative width. Please set `scale-preview` to a fixed ratio, e.g., `100%`",
+        )
+        scale-preview = calc.min(1, available-preview-width / preview-size.width) * 100%
+      } else {
+        preview-size = measure(block(preview, width: available-preview-width / (scale-preview / 100%)))
+      }
 
-    set par(hanging-indent: 0pt) // this messes up some stuff in case someone sets it
+      set par(hanging-indent: 0pt) // this messes up some stuff in case someone sets it
 
-    // We first measure this thing (code + preview) to find out which of the two has
-    // the larger height. Then we can just set the height for both boxes.
-    let arrangement(
-      width: 100%,
-      height: auto,
-    ) = block(
-      width: width,
-      inset: 0pt,
-      outset: 0pt,
-      stack(
-        dir: dir,
-        spacing: col-spacing,
-        code-block(
-          width: code-width,
-          height: height,
-          inset: 5pt,
-          {
-            // set text(size: .9em)
-            align(left, code)
-          },
-        ),
-        preview-block(
-          height: height,
-          width: preview-width,
-          inset: preview-outer-padding,
-          box(
+      // We first measure this thing (code + preview) to find out which of the two has
+      // the larger height. Then we can just set the height for both boxes.
+      let arrangement(
+        width: 100%,
+        height: auto,
+      ) = block(
+        width: width,
+        inset: 0pt,
+        outset: 0pt,
+        stack(
+          dir: dir,
+          spacing: col-spacing,
+          code-block(
+            width: code-width,
+            height: height,
+            inset: 5pt,
+            {
+              // set text(size: .9em)
+              align(left, code)
+            },
+          ),
+          preview-block(
+            height: height,
+            width: preview-width,
+            inset: preview-outer-padding,
+            box(
             width: 100%,
             height: if height == auto {
               auto
@@ -345,16 +346,17 @@
                 ),
               ),
             )),
+          ),
         ),
-      ),
-    )
-    let height = if dir.axis() == "vertical" {
-      auto
-    } else {
-      measure(arrangement(width: size.width), styles).height
+      )
+      let height = if dir.axis() == "vertical" {
+        auto
+      } else {
+        measure(arrangement(width: size.width)).height
+      }
+      arrangement(height: height)
     }
-    arrangement(height: height)
-  }))
+  ))
 }
 
 #let show-example(
