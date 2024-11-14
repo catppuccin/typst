@@ -86,7 +86,6 @@
     } else {
       it
     },
-
     default: it => measure(it).width + 1cm,
   ),
 ))
@@ -108,16 +107,18 @@
     #box(..config, it)
   ]
 
-  #show raw.where(block: true): it => [
-    #let config = z.parse(block-config, code-block-config-schema) + (fill: palette.colors.crust.rgb)
+  #show raw.where(block: true): it => (
+    context [
+      #let config = z.parse(block-config, code-block-config-schema) + (fill: palette.colors.crust.rgb)
 
-    #if type(config.at("width")) == function {
-      config.insert("width", (config.at("width"))(it))
-    }
+      #if type(config.at("width")) == function {
+        config.insert("width", (config.at("width"))(it))
+      }
 
-    #set align(center)
-    #block(..config, it)
-  ]
+      #set align(center)
+      #block(..config, it)
+    ]
+  )
 
   #body
 ]
