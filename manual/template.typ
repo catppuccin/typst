@@ -1,5 +1,5 @@
 #import "../src/lib.typ": catppuccin, themes, get-palette
-#import "@preview/codly:0.1.0": *
+#import "@preview/codly:0.2.1": *
 
 // The project function defines how your document looks.
 // It takes your content and some metadata and formats it.
@@ -100,23 +100,23 @@
   body
 }
 
-#let TeX = style(styles => {
-  set text(font: "Linux Libertine")
-  let e = measure(text(1em, "E"), styles)
+#let TeX = context {
+  set text(font: "Libertinus Serif")
+  let e = measure(text(1em, "E"))
   let T = "T"
   let E = text(1em, baseline: e.height / 4, "E")
   let X = "X"
   box(T + h(-0.1em) + E + h(-0.125em) + X)
-})
+}
 
-#let LaTeX = style(styles => {
-  set text(font: "Linux Libertine")
-  let l = measure(text(1em, "L"), styles)
-  let a = measure(text(0.7em, "A"), styles)
+#let LaTeX = context {
+  set text(font: "Libertinus Serif")
+  let l = measure(text(1em, "L"))
+  let a = measure(text(0.7em, "A"))
   let L = "L"
   let A = text(0.7em, baseline: a.height - l.height, "A")
   box(L + h(-0.3em) + A + h(-0.1em) + TeX)
-})
+}
 
 #let to-title(string) = {
   assert(string.len() > 0, message: "String is empty")
