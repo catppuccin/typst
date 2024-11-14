@@ -1,5 +1,6 @@
 #import "../src/lib.typ": catppuccin, themes, get-palette
-#import "@preview/cetz:0.2.2": canvas, plot
+#import "@preview/cetz:0.3.1": canvas
+#import "@preview/cetz-plot:0.1.0": plot
 
 #let theme = sys.inputs.at("flavor", default: themes.mocha)
 #let palette = get-palette(theme)
@@ -32,23 +33,23 @@
   )
 })
 
-#let TeX = style(styles => {
-  set text(font: "Linux Libertine")
-  let e = measure(text(1em, "E"), styles)
+#let TeX = context {
+  set text(font: "Libertinus Serif")
+  let e = measure(text(1em, "E"))
   let T = "T"
   let E = text(1em, baseline: e.height / 4, "E")
   let X = "X"
   box(T + h(-0.1em) + E + h(-0.125em) + X)
-})
+}
 
-#let LaTeX = style(styles => {
-  set text(font: "Linux Libertine")
-  let l = measure(text(1em, "L"), styles)
-  let a = measure(text(0.7em, "A"), styles)
+#let LaTeX = context {
+  set text(font: "Libertinus Serif")
+  let l = measure(text(1em, "L"))
+  let a = measure(text(0.7em, "A"))
   let L = "L"
   let A = text(0.7em, baseline: a.height - l.height, "A")
   box(L + h(-0.3em) + A + h(-0.1em) + TeX)
-})
+}
 
 
 Typst makes it very easy to customise the look of your documents. Inspiration

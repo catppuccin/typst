@@ -13,8 +13,8 @@
 #show link: it => underline(text(fill: colors.blue.rgb, it))
 
 /*
-  Everything beyond this point is the document body!
-  Delete the text below and start enjoying the soothing pastel colors!
+Everything beyond this point is the document body!
+Delete the text below and start enjoying the soothing pastel colors!
 */
 
 = #palette.emoji Catppuccin
