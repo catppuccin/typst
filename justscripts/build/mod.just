@@ -1,12 +1,11 @@
 import "assets.just"
 import "manual.just"
 import "modules.just"
-import "template.just"
 
 [group("Build")]
 [doc("Builds package modules, formats files, and builds assets.")]
 [no-cd]
-@all: build-lib compile-template build-assets (build-manual "latte mocha")
+@all: build-lib build-assets (build-manual "latte mocha")
   echo "\nPerforming post-build tasks..."
 
   echo "Formatting files..."
