@@ -34,49 +34,21 @@
 <img src="https://raw.githubusercontent.com/catppuccin/typst/main/assets/previews/mocha.webp"/>
 </details>
 
-## Installation
+## Documentation
 
-Eventually, this package will be made available through Typst's built-in package manager. For now, there are two methods you can follow to install this package:
+Two versions of the documentation are available!
 
-### Method 1: Using the install script
+- [Mocha](./manual/manual_mocha.pdf)
+- [Latte](./manual/manual_latte.pdf)
 
-This method requires that you have Python installed on your system and available in your PATH.
+Each document is styled using this package!
 
-1. Clone or download this repository into a directory on your system.
-2. Ensure you have [Just](https://github.com/casey/just) installed on your system.
-3. Open the directory containing the repository in a commandline terminal and run the following command:
-
-   ```sh
-   just install
-   ```
-
-   Or, to first build the package and then install it (this may not work on all systems), run:
-
-   ```sh
-   just tmThemes whiskers install
-   ```
-
-If you received no errors, the package should now be installed and available for use in your Typst documents.
-
-If you receive an error, you will either see a message stating that your platform is not supported for the automated install or something bad happened. In the latter case, please [open an issue](https://github.com/catppuccin/typst/issues/new?assignees=&labels=bug&template=bug.yaml) on this repository.
-
-### Method 2: Manual install
-
-1. Clone or download this repository to you computer.
-2. Move the contents of the downloaded repository into `{data-dir}/typst/packages/local/catppuccin/{version}` to make them available locally on your system. Here, `{data-dir}` is
-
-   - `$XDG_DATA_HOME` or `~/.local/share` on Linux
-   - `~/Library/Application Support` on macOS
-   - `%APPDATA%` on Windows
-
-   Further instruction can be found on Typst's [package](https://github.com/typst/packages?tab=readme-ov-file#local-packages) repository. As an example, using v0.1.0, you path may look like `~/.local/share/typst/packages/local/catppuccin/0.1.0`.
-
-## Usage
+## Installation & Usage
 
 In your project, import the package (ensure you have the correct version number) with
 
 ```typst
-#import "@local/catppuccin:0.1.0": catppuccin, themes
+#import "@preview/catppuccin:0.1.0": catppuccin, themes
 ```
 
 To format your document with a theme, use the following syntax towards the top of your document:
@@ -86,6 +58,22 @@ To format your document with a theme, use the following syntax towards the top o
 ```
 
 Replace `mocha` with the flavour of your choice! This can also be passed as a string literal `"mocha"`. You can further adjust the arguments to `catppuccin.with` to customise the theme look of your document.
+
+### Usage as a Template
+
+This package also offers a simple template to throw things together for you!
+
+You can set up your project using this template via the following command:
+
+```sh
+typst init @preview/catppuccin:0.1.0
+```
+
+If you use the included fonts, be sure to compile with
+
+```sh
+typst compile --font-path fonts main.typ
+```
 
 ## 💝 Thanks to
 

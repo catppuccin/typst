@@ -1,56 +1,76 @@
-#import "flavors/catppuccin-latte.typ": latte as _latte
-#import "flavors/catppuccin-frappe.typ": frappe as _frappe
-#import "flavors/catppuccin-macchiato.typ": macchiato as _macchiato
-#import "flavors/catppuccin-mocha.typ": mocha as _mocha
+#import "flavors/catppuccin-latte.typ": latte
+#import "flavors/catppuccin-frappe.typ": frappe
+#import "flavors/catppuccin-macchiato.typ": macchiato
+#import "flavors/catppuccin-mocha.typ": mocha
 
-/// The Latte color palette.
+/// The available flavors for Catppuccin. Given simply by the dictionary
+/// ```typ
+///  #let flavors = (
+///    latte: { ... },
+///    frappe: { ... },
+///    macchiato: { ... },
+///    mocha: { ... },
+///  )
+///```
+///
+/// -> dictionary
+#let flavors = (
+  latte: latte,
+  frappe: frappe,
+  macchiato: macchiato,
+  mocha: mocha,
+)
+
+/// Get the palette for the given flavor.
 ///
 /// ==== Example
 /// #example(
 /// ```typ
-///   #let theme = themes.latte
-///   #let palette = get-palette(theme)
-///   Selected theme: #palette.name #palette.emoji
-/// ```, ratio: 1.6)
+///   #let items = flavors.values().map(flavor => [
+///     #let rainbow = (
+///       "red", "yellow", "green",
+///       "blue", "mauve",
+///     ).map(c => flavor.colors.at(c).rgb)
 ///
-/// -> flavor
-#let latte = _latte
+///     #let fills = (
+///       gradient.linear(..rainbow),
+///       gradient.radial(..rainbow),
+///       gradient.conic(..rainbow),
+///     )
+///
+///     #stack(
+///       dir: ttb,
+///       spacing: 4pt,
+///       text(flavor.name + ":"),
+///       stack(
+///         dir: ltr,
+///         spacing: 3mm,
+///         ..fills.map(fill => square(fill: fill))
+///       )
+///     )
+///   ])
+///
+///   #grid(columns: 1, gutter: 1em, ..items)
+/// ```, ratio: 1.5)
+///
+/// - flavor (string): The flavor name as a string to get the flavor for. This function is provided as a helper for anyone requiring dynamic resolution of a flavor.
+/// -> dictionary
+#let get-flavor(flavor) = {
+  assert(type(flavor) == str, message: "Invalid type. Argument should be a string. Got a " + repr(type(flavor)))
+  assert(flavor in flavors.keys(), message: "Invalid flavor name: " + repr(flavor))
 
-/// The Frappé color palette.
-///
-/// ==== Example
-/// #example(
-/// ```typ
-///   #let theme = themes.frappe
-///   #let palette = get-palette(theme)
-///   Selected theme: #palette.name #palette.emoji
-/// ```, ratio: 1.6)
-///
-/// -> flavor
-#let frappe = _frappe
+  flavors.at(flavor)
+}
 
-/// The Macchiato color palette.
+/// Parse a flavor. If the flavor is a string, get the flavor from the dictionary. Otherwise, assert that the flavor is a valid flavor.
 ///
-/// ==== Example
-/// #example(
-/// ```typ
-///   #let theme = themes.macchiato
-///   #let palette = get-palette(theme)
-///   Selected theme: #palette.name #palette.emoji
-/// ```, ratio: 1.6)
-///
-/// -> flavor
-#let macchiato = _macchiato
-
-/// The Mocha color palette.
-///
-/// ==== Example
-/// #example(
-/// ```typ
-///   #let theme = themes.mocha
-///   #let palette = get-palette(theme)
-///   Selected theme: #palette.name #palette.emoji
-/// ```, ratio: 1.6)
-///
-/// -> flavor
-#let mocha = _mocha
+/// - flavor (string | dictionary): The flavor to parse.
+/// -> dictionary
+#let parse-flavor(flavor) = {
+  if type(flavor) == str {
+    get-flavor(flavor)
+  } else {
+    assert(flavor in flavors.values(), message: "Invalid flavor: " + repr(flavor))
+    flavor
+  }
+}

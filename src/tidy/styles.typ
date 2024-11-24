@@ -1,58 +1,60 @@
-#import "../catppuccin.typ": themes, get-palette
+#import "../flavors.typ": parse-flavor, flavors
 #import "../utils.typ": dict-at
 
 #import "@preview/tidy:0.3.0"
 #import "@preview/tidy:0.3.0": utilities
 
-/// A style that can be used to generate documentation using #link("https://typst.app/universe/package/tidy")[Tidy] for the Catppuccino theme. The returned dictionary is a tidy styles dictionary with some additional keys, most importantly `ctp-palette` whose value is the associated #show-type("flavor").
+/// A style that can be used to generate documentation using #link("https://typst.app/universe/package/tidy")[Tidy] for
+//the Catppuccino theme. The returned dictionary is a tidy styles dictionary with some additional keys, most importantly
+//`ctp-palette` whose value is the associated with the `colors` field of #show-type("flavor").
 ///
-/// - theme (string): The name of the theme to use.
+/// - flavor (string): The name of the flavor to use.
 /// -> dictionary
-#let get-tidy-colors(theme: themes.mocha) = {
-  let palette = get-palette(theme)
+#let get-tidy-colors(flavor: flavors.mocha) = {
+  let palette = parse-flavor(flavor).colors
 
-  let function-name-color = palette.colors.blue.rgb
+  let function-name-color = palette.blue.rgb
   let rainbow-map = (
-    (palette.colors.sky.rgb, 0%),
-    (palette.colors.green.rgb, 33%),
-    (palette.colors.yellow.rgb, 66%),
-    (palette.colors.red.rgb, 100%),
+    (palette.sky.rgb, 0%),
+    (palette.green.rgb, 33%),
+    (palette.yellow.rgb, 66%),
+    (palette.red.rgb, 100%),
   )
 
   let gradient-for-color-types = gradient.linear(angle: 7deg, ..rainbow-map)
-  let default-type-color = palette.colors.overlay2.rgb
+  let default-type-color = palette.overlay2.rgb
 
   let colors = (
     "ctp-palette": palette,
-    "flavor": palette.colors.pink.rgb,
+    "flavor": palette.pink.rgb,
     "default": default-type-color,
-    "content": palette.colors.teal.rgb,
-    "string": palette.colors.green.rgb,
-    "str": palette.colors.green.rgb,
-    "none": palette.colors.mauve.rgb,
-    "auto": palette.colors.mauve.rgb,
-    "boolean": palette.colors.yellow.rgb,
-    "integer": palette.colors.peach.rgb,
-    "int": palette.colors.peach.rgb,
-    "float": palette.colors.peach.rgb,
-    "ratio": palette.colors.peach.rgb,
-    "length": palette.colors.peach.rgb,
-    "angle": palette.colors.peach.rgb,
-    "relative length": palette.colors.peach.rgb,
-    "relative": palette.colors.peach.rgb,
-    "fraction": palette.colors.peach.rgb,
-    "symbol": palette.colors.red.rgb,
-    "array": palette.colors.yellow.rgb,
-    "dictionary": palette.colors.yellow.rgb,
-    "arguments": palette.colors.maroon.rgb,
-    "selector": palette.colors.red.rgb,
-    "module": palette.colors.yellow.rgb,
+    "content": palette.teal.rgb,
+    "string": palette.green.rgb,
+    "str": palette.green.rgb,
+    "none": palette.mauve.rgb,
+    "auto": palette.mauve.rgb,
+    "boolean": palette.yellow.rgb,
+    "integer": palette.peach.rgb,
+    "int": palette.peach.rgb,
+    "float": palette.peach.rgb,
+    "ratio": palette.peach.rgb,
+    "length": palette.peach.rgb,
+    "angle": palette.peach.rgb,
+    "relative length": palette.peach.rgb,
+    "relative": palette.peach.rgb,
+    "fraction": palette.peach.rgb,
+    "symbol": palette.red.rgb,
+    "array": palette.yellow.rgb,
+    "dictionary": palette.yellow.rgb,
+    "arguments": palette.maroon.rgb,
+    "selector": palette.red.rgb,
+    "module": palette.yellow.rgb,
     "stroke": default-type-color,
-    "version": palette.colors.blue.rgb,
-    "function": palette.colors.blue.rgb,
+    "version": palette.blue.rgb,
+    "function": palette.blue.rgb,
     "color": gradient-for-color-types,
     "gradient": gradient-for-color-types,
-    "signature-func-name": palette.colors.blue.rgb,
+    "signature-func-name": palette.blue.rgb,
   )
 
   colors
@@ -80,7 +82,7 @@
 #let show-type(type, style-args: (:)) = {
   h(2pt)
   let clr = style-args.colors.at(type, default: style-args.colors.at("default"))
-  let text-fill = dict-at(style-args.colors, "ctp-palette", "colors", "base", "rgb")
+  let text-fill = dict-at(style-args.colors, "ctp-palette", "base", "rgb")
   box(outset: 2pt, fill: clr, radius: 2pt, text(fill: text-fill, raw(type, lang: none)))
   h(2pt)
 }
@@ -137,7 +139,7 @@
 ) = block(
   inset: 10pt,
   radius: 3pt,
-  fill: style-args.colors.ctp-palette.colors.mantle.rgb,
+  fill: style-args.colors.ctp-palette.mantle.rgb,
   width: 100%,
   breakable: style-args.break-param-descriptions,
   [
@@ -155,7 +157,6 @@
   fn,
   style-args,
 ) = {
-
   if style-args.colors == auto {
     style-args.colors = colors
   }

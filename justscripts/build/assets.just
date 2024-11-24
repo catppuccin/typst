@@ -11,6 +11,10 @@ build-assets:
   mkdir -p {{PREVIEWS}}
   touch ./assets/.gitkeep
 
+  echo "\nBuilding repository assets..."
+  mkdir -p {{PREVIEWS}}
+  touch ./assets/.gitkeep
+
   idx=1
   for flavor in {{FLAVORS}}; do
     echo "  - ($idx/4) Building preview for $flavor..."

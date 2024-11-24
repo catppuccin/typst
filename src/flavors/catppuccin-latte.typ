@@ -1,3 +1,14 @@
+/// The Latte flavor and palette.
+///
+/// ==== Example
+/// #example(
+/// ```typ
+///   #let flavor = flavors.latte
+///   #let palette = get-palette(flavor)
+///   Selected flavor: #palette.name #palette.emoji
+/// ```, ratio: 1.6)
+///
+/// -> flavor
 #let latte = (
   name: "Latte",
   emoji: "🌻",
