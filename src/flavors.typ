@@ -61,3 +61,16 @@
 
   flavors.at(flavor)
 }
+
+/// Parse a flavor. If the flavor is a string, get the flavor from the dictionary. Otherwise, assert that the flavor is a valid flavor.
+///
+/// - flavor (string | dictionary): The flavor to parse.
+/// -> dictionary
+#let parse-flavor(flavor) = {
+  if type(flavor) == str {
+    get-flavor(flavor)
+  } else {
+    assert(flavor in flavors.values(), message: "Invalid flavor: " + repr(flavor))
+    flavor
+  }
+}
