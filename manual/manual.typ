@@ -1,12 +1,10 @@
-#import "../src/lib.typ": catppuccin, flavors, get-flavor
+#import "../src/lib.typ": catppuccin, flavors, get-flavor, version
 #import "../src/styling/code.typ": config-code-blocks
 #import "../src/tidy/styles.typ": get-tidy-colors, show-type as sh-type
 #import "../src/tidy/show-module.typ": show-module
 #import "template.typ": *
 #import "@preview/tidy:0.3.0"
 #import "@preview/oxifmt:0.2.1": strfmt
-
-#let version = toml("../typst.toml").package.version
 
 #let flavor = sys.inputs.at("flavor", default: flavors.mocha)
 #let palette = get-flavor(flavor)

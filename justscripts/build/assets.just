@@ -24,7 +24,7 @@ build-assets:
     echo "  - ($idx/4) Building preview for $flavor..."
     idx=$((idx + 1))
 
-    typst compile --root . --font-path ./fonts --format png \
+    typst compile --root . --font-path ./fonts --ppi 300 --format png \
       --input flavor="$flavor" ./examples/demo.typ {{join(PREVIEWS, "$flavor.png")}}
   done
 
