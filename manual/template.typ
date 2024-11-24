@@ -1,9 +1,7 @@
-#import "../src/lib.typ": catppuccin, themes, get-palette
-#import "@preview/codly:0.2.1": *
+#import "../src/lib.typ": catppuccin, flavors, get-flavor
+#import "../src/styling/code.typ": config-code-blocks
+#import "@preview/codly:1.0.0": *
 
-// The project function defines how your document looks.
-// It takes your content and some metadata and formats it.
-// Go ahead and customize it to your liking!
 #let project(
   title: "",
   subtitle: "",
@@ -12,10 +10,10 @@
   url: none,
   date: none,
   version: none,
-  flavor: themes.mocha,
+  flavor: flavors.mocha,
   body,
 ) = {
-  let palette = get-palette(flavor)
+  let palette = get-flavor(flavor)
 
   // Set the document's basic properties.
   set document(author: authors, title: title)
@@ -23,7 +21,8 @@
   // set text(font: "Linux Libertine", lang: "en")
   set text(font: "Nunito", hyphenate: false, lang: "en")
 
-  show: catppuccin.with(flavor, code-block: true, code-syntax: true)
+  show: catppuccin.with(flavor)
+  show: config-code-blocks.with(flavor, code-block: true, code-syntax: true)
 
   show heading.where(level: 1): set text(font: "Jellee")
   show heading.where(level: 2): set text(font: "Jellee")

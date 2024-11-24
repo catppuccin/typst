@@ -1,9 +1,9 @@
-#import "../src/lib.typ": catppuccin, themes, get-palette
+#import "../src/lib.typ": catppuccin, flavors, get-flavor
 #import "@preview/cetz:0.3.1": canvas
 #import "@preview/cetz-plot:0.1.0": plot
 
-#let theme = sys.inputs.at("flavor", default: themes.mocha)
-#let palette = get-palette(theme)
+#let flavor = sys.inputs.at("flavor", default: flavors.mocha)
+#let palette = get-flavor(flavor)
 
 #set document(
   title: "Catppuccin",
@@ -13,7 +13,7 @@
 )
 
 #set text(font: "Nunito", size: 0.9em)
-#show: catppuccin.with(theme, code-block: true)
+#show: catppuccin.with(flavor)
 
 #align(center, heading(text(size: 2em, font: "Jellee", "Catppuccin")))
 #align(
@@ -56,7 +56,7 @@ Typst makes it very easy to customise the look of your documents. Inspiration
 for this project came from Catppuccin for #LaTeX [#link(
   "https://github.com/catppuccin/latex",
 )[#text(fill: palette.colors.blue.rgb, "link")]]. This doument is currently
-using the flavor #text(fill: palette.colors.mauve.rgb, style: "italic", theme).
+using the flavor #text(fill: palette.colors.mauve.rgb, style: "italic", flavor).
 
 === Accents
 #align(
@@ -70,22 +70,22 @@ using the flavor #text(fill: palette.colors.mauve.rgb, style: "italic", theme).
   grid(columns: 6, align: left, gutter: 1em, ..color-swatches(bases)),
 )
 
-=== Code Blocks
-Unlike #LaTeX, Typst make code highlighting a breeze! The following is a code
-demo show how to use this package by using ```typ #show``` in Typst:
-
-#text(size: 8pt)[
-  ```typ
-  #import "catppuccin": catppuccin, themes, get-palette
-  #show: catppuccin.with(theme: themes.mocha, code-block: true)
-
-  #let palette = get-palette(theme)
-  #let mauve = palette.colors.mauve.rgb
-
-  = Catppuccin
-  🪶 Soothing pastel theme for #text(fill: mauve, Typst)
-  ```
-]
+// === Code Blocks
+// Unlike #LaTeX, Typst make code highlighting a breeze! The following is a code
+// demo show how to use this package by using ```typ #show``` in Typst:
+//
+// #text(size: 8pt)[
+//   ```typ
+//   #import "catppuccin": catppuccin, flavors, get-flavor
+//   #show: catppuccin.with(flavor: flavors.mocha, code-block: true)
+//
+//   #let palette = get-flavor(flavor)
+//   #let mauve = palette.colors.mauve.rgb
+//
+//   = Catppuccin
+//   🪶 Soothing pastel theme for #text(fill: mauve, Typst)
+//   ```
+// ]
 
 === Plotting (via CeTZ)
 

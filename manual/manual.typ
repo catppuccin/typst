@@ -1,4 +1,5 @@
-#import "../src/catppuccin.typ": themes, get-palette, config-code-blocks
+#import "../src/lib.typ": catppuccin, flavors, get-flavor
+#import "../src/styling/code.typ": config-code-blocks
 #import "../src/tidy/styles.typ": get-tidy-colors, show-type as sh-type
 #import "../src/tidy/show-module.typ": show-module
 #import "template.typ": *
@@ -7,11 +8,11 @@
 
 #let version = toml("../typst.toml").package.version
 
-#let theme = sys.inputs.at("flavor", default: themes.mocha)
-#let palette = get-palette(theme)
+#let flavor = sys.inputs.at("flavor", default: flavors.mocha)
+#let palette = get-flavor(flavor)
 
 #let show-type(type) = {
-  let style = (colors: get-tidy-colors(theme: theme))
+  let style = (colors: get-tidy-colors(flavor: flavor))
   sh-type(type, style-args: style)
 }
 
@@ -28,7 +29,7 @@
   date: datetime.today().display("[month repr:long] [day], [year]"),
   version: version,
   url: "https://github.com/catppuccin/typst",
-  flavor: theme,
+  flavor: flavor,
 )
 
 = Overview
@@ -47,22 +48,16 @@ Using this package is simple. See @usage for an example of how to use the packag
 #figure(
   caption: "Example usage of the Catppuccin package",
   ```typ
-  #import "catppuccin.typ": catppuccin, themes
+  #import "catppuccin.typ": catppuccin, flavors
 
-  #show: catppuccin.with(
-    flavor: themes.mocha,
-    code-block: true,
-    code-syntax: true,
-  )
+  #show: catppuccin.with(flavor: flavors.mocha)
 
   // The rest of your document
   ```,
 ) <usage>
 
-You can disable the theme by commenting out or deleting the show block. Just note that if you are manually accessing palettes via the ```typc get-palette(flavor)``` function, you will need to manually account for those changes. It is planned to make this easier in the future be it though a redesign or simple helper functions.
-
+You can disable the theme by commenting out or deleting the show block.
 #pagebreak()
-
 
 #let show-mod(
   namespace,
@@ -71,13 +66,13 @@ You can disable the theme by commenting out or deleting the show block. Just not
   let doc = tidy.parse-module(
     namespace.contents,
     name: namespace.name,
-    scope: namespace.scope + ("config-code-blocks": config-code-blocks),
-    preamble: strfmt("#show: config-code-blocks.with(\"{}\")\n", theme),
+    scope: namespace.scope //+ ("config-code-blocks": config-code-blocks),
+    // preamble: strfmt("#show: config-code-blocks.with(\"{}\")\n", flavor),
   )
 
   show-module(
     doc,
-    theme: theme,
+    flavor: flavor,
     show-module-name: show-module-name,
   )
 }
@@ -88,8 +83,8 @@ You can disable the theme by commenting out or deleting the show block. Just not
   make-namespace(
     name: "Catppuccin",
     scope: (
-      "themes": themes,
-      "get-palette": get-palette,
+      "flavors": flavors,
+      "get-flavor": get-flavor,
       "show-type": show-type,
     ),
     "catppuccin.typ",
@@ -105,7 +100,7 @@ In this package, we refer to the dictionary related to each flavor with the type
 == Flavor Schema
 <flavor-schema>
 
-Here we describe the schema for the #show-type("flavor") dictionary. Use ```typc get-palette()``` function to
+Here we describe the schema for the #show-type("flavor") dictionary. Use ```typc get-flavor()``` function to
 
 - *name* #show-type("string") --- The name of the flavor (e.g. Frappé)
 - *emoji* #show-type("string") --- The emoji associated with the flavor.
@@ -123,13 +118,13 @@ Here we describe the schema for the #show-type("flavor") dictionary. Use ```typc
   make-namespace(
     name: "Flavors",
     scope: (
-      "themes": themes,
-      "get-palette": get-palette,
+      "flavors": flavors,
+      "get-flavor": get-flavor,
     ),
     "flavors.typ",
   ),
   show-module-name: false,
 )
 
-#show-mod(make-namespace(name: "Tidy Styles", "tidy/styles.typ", scope: ("themes": themes, "show-type": show-type)))
+#show-mod(make-namespace(name: "Tidy Styles", "tidy/styles.typ", scope: ("flavors": flavors, "show-type": show-type)))
 #show-mod(make-namespace(name: "Version", "version.typ", scope: ("version": version)))
