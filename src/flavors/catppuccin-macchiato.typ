@@ -1,3 +1,14 @@
+/// The Macchiato flavor and palette.
+///
+/// ==== Example
+/// #example(
+/// ```typ
+///   #let flavor = flavors.macchiato
+///   #let palette = get-palette(flavor)
+///   Selected flavor: #palette.name #palette.emoji
+/// ```, ratio: 1.6)
+///
+/// -> flavor
 #let macchiato = (
   name: "Macchiato",
   emoji: "🌺",

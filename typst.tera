@@ -5,6 +5,17 @@ whiskers:
     - flavor
   filename: "src/flavors/catppuccin-{{flavor.identifier}}.typ"
 ---
+/// The {{flavor.name}} flavor and palette.
+///
+/// ==== Example
+/// #example(
+/// ```typ
+///   #let flavor = flavors.{{flavor.identifier}}
+///   #let palette = get-palette(flavor)
+///   Selected flavor: #palette.name #palette.emoji
+/// ```, ratio: 1.6)
+///
+/// -> flavor
 #let {{flavor.identifier}} = (
   name: "{{flavor.name}}",
   emoji: "{{flavor.emoji}}",
