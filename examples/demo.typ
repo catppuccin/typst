@@ -12,6 +12,8 @@
   date: datetime.today(),
 )
 
+#set page(height: auto)
+
 #set text(font: "Nunito", size: 0.9em)
 #show: catppuccin.with(flavor)
 
