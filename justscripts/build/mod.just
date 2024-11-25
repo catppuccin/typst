@@ -9,7 +9,6 @@ import "modules.just"
   echo "\nPerforming post-build tasks..."
 
   echo "Formatting files..."
-  yarn --silent prettier **/*.tmTheme -w --log-level warn
   typstyle -c 120 format-all
 
   echo "Optimizing .png files..."

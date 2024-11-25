@@ -9,12 +9,6 @@ license = "MIT"
 description = "🪶 Soothing pastel theme for Typst"
 keywords = ["catppuccin", "theme", "template", "styling", "pastel"]
 categories = ["fun", "components"]
-exclude = ["template/catppuccin_src.typ", "template/main.pdf"]
-
-[template]
-path = "template"
-entrypoint = "main.typ"
-thumbnail = "thumbnail.png"
 
 [tool.typst-test]
 vcs = "git"
