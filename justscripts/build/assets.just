@@ -4,20 +4,11 @@ PREVIEWS := "assets/previews/"
 [group("Build")]
 [doc("Build the repository assets.")]
 [no-cd]
-build-assets:
+assets:
   #!/usr/bin/env sh
 
   echo "\nBuilding repository assets..."
   mkdir -p {{PREVIEWS}}
-  touch ./assets/.gitkeep
-
-  echo "\nBuilding repository assets..."
-  mkdir -p {{PREVIEWS}}
-  touch ./assets/.gitkeep
-
-  echo "\nBuilding repository assets..."
-  mkdir -p {{PREVIEWS}}
-  touch ./assets/.gitkeep
 
   echo "\nBuilding repository assets..."
   mkdir -p {{PREVIEWS}}

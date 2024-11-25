@@ -5,7 +5,7 @@ logo_dark_sha256 := "03ce7005d2764ad9203839b1b4d19f6cdabc3d4dc6de4aa7040c16bd05d
 [group("Build")]
 [doc("Builds the manual using the provided flavor(s).")]
 [no-cd]
-build-manual +flavors="mocha": download-logos
+manual +flavors="mocha": download-logos
   #!/usr/bin/env sh
 
   echo "\nBuilding the package manual..."

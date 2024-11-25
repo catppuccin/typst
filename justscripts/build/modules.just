@@ -1,7 +1,7 @@
 [group("Build")]
 [doc("Builds the package Typst files provided by this package.")]
 [no-cd]
-build-lib:
+lib:
   #!/usr/bin/env sh
 
   echo "\nBuilding Catppuccin pallets for Typst..."
