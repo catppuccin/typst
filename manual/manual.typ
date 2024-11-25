@@ -64,8 +64,8 @@ You can disable the theme by commenting out or deleting the show block.
   let doc = tidy.parse-module(
     namespace.contents,
     name: namespace.name,
-    scope: namespace.scope + ("config-code-blocks": config-code-blocks),
-    preamble: strfmt("#show: config-code-blocks.with(\"{}\")\n", flavor),
+    scope: namespace.scope //+ ("config-code-blocks": config-code-blocks),
+    // preamble: strfmt("#show: config-code-blocks.with(\"{}\")\n", flavor),
   )
 
   show-module(

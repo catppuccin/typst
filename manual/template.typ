@@ -1,5 +1,4 @@
 #import "../src/lib.typ": catppuccin, flavors, get-flavor
-#import "../src/styling/code.typ": config-code-blocks
 
 #let project(
   title: "",
@@ -20,7 +19,6 @@
   set text(font: "Nunito", hyphenate: false, lang: "en")
 
   show: catppuccin.with(flavor)
-  show: config-code-blocks.with(flavor, code-syntax: true)
 
   show heading.where(level: 1): set text(font: "Jellee")
   show heading.where(level: 2): set text(font: "Jellee")

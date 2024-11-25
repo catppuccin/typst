@@ -11,13 +11,13 @@ whiskers:
 /// #example(
 /// ```typ
 ///   #let flavor = flavors.{{flavor.identifier}}
-///   #let palette = get-palette(flavor)
-///   Selected flavor: #palette.name #palette.emoji
+///   Selected flavor: #flavor.name #flavor.emoji
 /// ```, ratio: 1.6)
 ///
 /// -> flavor
 #let {{flavor.identifier}} = (
   name: "{{flavor.name}}",
+  identifier: "{{flavor.identifier}}",
   emoji: "{{flavor.emoji}}",
   order: {{flavor.order}},
   dark: {{flavor.dark}},

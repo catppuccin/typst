@@ -7,6 +7,7 @@ lib:
   echo "\nBuilding Catppuccin pallets for Typst..."
   whiskers typst.tera
 
+  cd src || exit
   mkdir -p tmThemes
 
   echo "Downloading Catppuccin tmThemes..."

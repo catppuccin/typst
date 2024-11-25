@@ -1,4 +1,4 @@
-#import "../flavors.typ": get-flavor, flavors
+#import "../flavors.typ": get-flavor, parse-flavor, flavors
 #import "../valkyrie/typst-schema.typ": *
 #import "@preview/valkyrie:0.2.1" as z
 
@@ -30,34 +30,16 @@
 
 /// Configures the appearance of code blocks and code boxes.
 ///
-/// Note that code-syntax requires manually installing the theme corresponding to the flavor
-/// into the directory `/tmThemes`, relative to the project root. This is due to a limitation
-/// in the current implementation of Typst and how it handles relative paths, preventing libraries
-/// from accessing files outside of the project root directory.
-///
-/// ==== Example
-/// ```typ
-///   #import "@preview/catppuccin": flavors, config-code-blocks
-///   #show: config-code-blocks.with(flavors.mocha)
-/// ```
-///
-/// - flavor (string, dictionary): The flavor to set.
-/// - code-block (boolean): Whether to apply the configuration to code blocks.
-/// - code-syntax (boolean): Whether to apply the configuration to code syntax highlighting.
+/// - flavor (string, flavor): The flavor to set.
+/// - code-block (boolean): Whether to styalise code blocks.
+/// - code-syntax (boolean): Whether to the Catppuccin flavor to code syntax highlighting.
 /// - block-config (dictionary): Additional configuration for code blocks.
 /// - inline-config (dictionary): Additional configuration for code boxes.
 /// - body (content): The content to apply the configuration to.
 /// -> content
 #let config-code-blocks(flavor, code-block: true, code-syntax: true, block-config: (:), inline-config: (:), body) = [
-  #let palette = if type(flavor) == str {
-    get-flavor(flavor)
-  } else {
-    assert(type(flavor) == dictionary, message: "Invalid flavor: " + repr(flavor))
-    assert(flavor in flavors.values(), message: "Invalid flavor: " + repr(flavor))
-    flavor
-  }
-
-  #let tmTheme = "/tmThemes/" + flavor + ".tmTheme"
+  #let palette = parse-flavor(flavor)
+  #let tmTheme = "../tmThemes/" + palette.identifier + ".tmTheme"
   #set raw(theme: tmTheme) if code-syntax
 
   #show raw.where(block: false): it => [

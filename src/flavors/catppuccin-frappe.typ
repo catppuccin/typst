@@ -4,13 +4,13 @@
 /// #example(
 /// ```typ
 ///   #let flavor = flavors.frappe
-///   #let palette = get-palette(flavor)
-///   Selected flavor: #palette.name #palette.emoji
+///   Selected flavor: #flavor.name #flavor.emoji
 /// ```, ratio: 1.6)
 ///
 /// -> flavor
 #let frappe = (
   name: "Frappé",
+  identifier: "frappe",
   emoji: "🪴",
   order: 1,
   dark: true,

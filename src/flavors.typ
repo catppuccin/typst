@@ -53,7 +53,8 @@
 ///   #grid(columns: 1, gutter: 1em, ..items)
 /// ```, ratio: 1.5)
 ///
-/// - flavor (string): The flavor name as a string to get the flavor for. This function is provided as a helper for anyone requiring dynamic resolution of a flavor.
+/// - flavor (string): The flavor name as a string to get the flavor for.
+///                    This function is provided as a helper for anyone requiring dynamic resolution of a flavor.
 /// -> dictionary
 #let get-flavor(flavor) = {
   assert(type(flavor) == str, message: "Invalid type. Argument should be a string. Got a " + repr(type(flavor)))
@@ -62,7 +63,8 @@
   flavors.at(flavor)
 }
 
-/// Parse a flavor. If the flavor is a string, get the flavor from the dictionary. Otherwise, assert that the flavor is a valid flavor.
+/// Parse a flavor. If the flavor is a string, get the flavor from the dictionary.
+/// Otherwise, assert that the flavor is a valid flavor.
 ///
 /// - flavor (string, flavor): The flavor to parse.
 /// -> dictionary
@@ -70,6 +72,7 @@
   if type(flavor) == str {
     get-flavor(flavor)
   } else {
+    assert(type(flavor) == dictionary, message: "Invalid flavor: " + repr(flavor))
     assert(flavor in flavors.values(), message: "Invalid flavor: " + repr(flavor))
     flavor
   }

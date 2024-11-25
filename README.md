@@ -48,32 +48,16 @@ Each document is styled using this package!
 In your project, import the package (ensure you have the correct version number) with
 
 ```typst
-#import "@preview/catppuccin:0.1.0": catppuccin, themes
+#import "@preview/catppuccin:1.0.0": catppuccin, flavors
 ```
 
 To format your document with a theme, use the following syntax towards the top of your document:
 
 ```typst
-#show: catppuccin.with(themes.mocha, code_block: true, code_syntax: true)
+#show: catppuccin.with(flavors.mocha, code-block: true, code-syntax: true)
 ```
 
-Replace `mocha` with the flavour of your choice! This can also be passed as a string literal `"mocha"`. You can further adjust the arguments to `catppuccin.with` to customise the theme look of your document.
-
-### Usage as a Template
-
-This package also offers a simple template to throw things together for you!
-
-You can set up your project using this template via the following command:
-
-```sh
-typst init @preview/catppuccin:0.1.0
-```
-
-If you use the included fonts, be sure to compile with
-
-```sh
-typst compile --font-path fonts main.typ
-```
+Replace `mocha` with the flavour of your choice! This can also be passed as a string literal `"mocha"`.
 
 ## 💝 Thanks to
 

@@ -1,5 +1,4 @@
-#import "/src/lib.typ": catppuccin, flavors, parse-flavor
-#import "/src/styling/code.typ": config-code-blocks
+#import "/src/lib.typ": catppuccin, flavors, parse-flavor, config-code-blocks
 
 #set page(width: auto, height: auto)
 
