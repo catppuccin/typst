@@ -35,7 +35,7 @@
     flavor
   }
 
-  #let tmTheme = "/src/tmThemes/" + flavor + ".tmTheme"
+  #let tmTheme = "/tmThemes/" + flavor + ".tmTheme"
   #set raw(theme: tmTheme) if code-syntax
 
   #show raw.where(block: false): it => [
