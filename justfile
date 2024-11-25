@@ -42,8 +42,16 @@ dev-tools:
 
 [group("Testing")]
 test *filter:
+  typst-test update {{filter}}
   typst-test run {{filter}}
 
 [group("Testing")]
-update-test *filter:
-  typst-test update {{filter}}
+[confirm("This will update all test references. Continue? (y/N)")]
+update-test-refs:
+  #!/usr/bin/env sh
+  typst-test util clean
+  typst-test util export
+
+  for dir in tests/*/out; do
+      mv "$dir" "$(dirname "$dir")/ref"
+  done

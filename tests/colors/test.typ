@@ -1,4 +1,4 @@
-#import "/src/lib.typ": catppuccin, themes, get-palette
+#import "/src/lib.typ": catppuccin, flavors, get-flavor
 
 #set page(width: auto, height: auto)
 
@@ -24,11 +24,11 @@
   )
 }
 
-#for theme in themes.values() [
+#for flavor in flavors.keys() [
   #pagebreak(weak: true)
-  #show: catppuccin.with(theme)
+  #show: catppuccin.with(flavor)
 
-  #let palette = get-palette(theme)
+  #let palette = get-flavor(flavor)
   #color-swatches(palette)
 ]
 
