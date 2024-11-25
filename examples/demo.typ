@@ -1,4 +1,5 @@
-#import "../src/lib.typ": catppuccin, flavors, get-flavor
+#import "/src/lib.typ": catppuccin, flavors, get-flavor
+#import "/src/styling/code.typ": config-code-blocks
 #import "@preview/cetz:0.3.1": canvas
 #import "@preview/cetz-plot:0.1.0": plot
 
@@ -16,6 +17,15 @@
 
 #set text(font: "Nunito", size: 0.9em)
 #show: catppuccin.with(flavor)
+
+// Note that this line won't work until Typst allows us to use imports
+// that are relative to the package. You can manually fix this by copying
+// the folder in src/thThemes from the Catppuccin package to your project.
+// Just ensure that the relative import is the same for your document.
+// You will also need to either copy src/styling/code.typ to your project,
+// edit the Catppuccin package src/lib.typ to export the file, or manually
+// call `set raw(theme: <your-tm-theme>)` in your document.
+#show: config-code-blocks.with(flavor, code-block: true, code-syntax: true)
 
 #align(center, heading(text(size: 2em, font: "Jellee", "Catppuccin")))
 #align(

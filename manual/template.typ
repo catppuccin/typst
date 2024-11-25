@@ -1,6 +1,5 @@
 #import "../src/lib.typ": catppuccin, flavors, get-flavor
 #import "../src/styling/code.typ": config-code-blocks
-#import "@preview/codly:1.0.0": *
 
 #let project(
   title: "",
@@ -18,11 +17,10 @@
   // Set the document's basic properties.
   set document(author: authors, title: title)
   set page(numbering: "1", number-align: center)
-  // set text(font: "Linux Libertine", lang: "en")
   set text(font: "Nunito", hyphenate: false, lang: "en")
 
   show: catppuccin.with(flavor)
-  show: config-code-blocks.with(flavor, code-block: true, code-syntax: true)
+  show: config-code-blocks.with(flavor, code-syntax: true)
 
   show heading.where(level: 1): set text(font: "Jellee")
   show heading.where(level: 2): set text(font: "Jellee")
@@ -95,7 +93,6 @@
   v(1fr)
   pagebreak()
 
-  show: codly-init
   body
 }
 

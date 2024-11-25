@@ -64,8 +64,8 @@ You can disable the theme by commenting out or deleting the show block.
   let doc = tidy.parse-module(
     namespace.contents,
     name: namespace.name,
-    scope: namespace.scope //+ ("config-code-blocks": config-code-blocks),
-    // preamble: strfmt("#show: config-code-blocks.with(\"{}\")\n", flavor),
+    scope: namespace.scope + ("config-code-blocks": config-code-blocks),
+    preamble: strfmt("#show: config-code-blocks.with(\"{}\")\n", flavor),
   )
 
   show-module(
@@ -124,5 +124,20 @@ Here we describe the schema for the #show-type("flavor") dictionary. Use ```typc
   show-module-name: false,
 )
 
+= Styling
+
+Please note that this module is still in development and may be subject to change.
+
+Until Typst supports relative paths in libraries, there may not be much change here.
+The current implementation and style is not perfect, but if you don't want to style things
+manually, this is the best you can get. If you want to style things manually, you can use
+the library #link("https://github.com/Dherse/codly","codly") to style code blocks.
+In the future, we may eventually use this approach.
+
+#show-mod(
+  make-namespace(name: "Code Blocks", "styling/code.typ", scope: ("flavors": flavors, "show-type": show-type)),
+)
 #show-mod(make-namespace(name: "Tidy Styles", "tidy/styles.typ", scope: ("flavors": flavors, "show-type": show-type)))
+
+= Miscellaneous
 #show-mod(make-namespace(name: "Version", "version.typ", scope: ("version": version)))
