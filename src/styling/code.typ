@@ -52,6 +52,7 @@
   #let palette = if type(flavor) == str {
     get-flavor(flavor)
   } else {
+    assert(type(flavor) == dictionary, message: "Invalid flavor: " + repr(flavor))
     assert(flavor in flavors.values(), message: "Invalid flavor: " + repr(flavor))
     flavor
   }
