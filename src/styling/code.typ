@@ -1,4 +1,4 @@
-#import "../flavors.typ": get-flavor, flavors
+#import "../flavors.typ": get-or-validate-flavor, flavors
 #import "../valkyrie/typst-schema.typ": *
 #import "@preview/valkyrie:0.2.1" as z
 
@@ -38,7 +38,7 @@
 /// - body (content): The content to apply the configuration to.
 /// -> content
 #let config-code-blocks(flavor, code-block: true, code-syntax: true, block-config: (:), inline-config: (:), body) = [
-  #let palette = get-flavor(flavor)
+  #let palette = get-or-validate-flavor(flavor)
   #let tmTheme = "../tmThemes/" + palette.identifier + ".tmTheme"
   #set raw(theme: tmTheme) if code-syntax
 

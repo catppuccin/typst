@@ -1,4 +1,4 @@
-#import "../flavors.typ": get-flavor, flavors
+#import "../flavors.typ": get-or-validate-flavor, flavors
 #import "../utils.typ": dict-at
 
 #import "@preview/tidy:0.3.0"
@@ -8,10 +8,10 @@
 //the Catppuccino theme. The returned dictionary is a tidy styles dictionary with some additional keys, most importantly
 //`ctp-palette` whose value is the associated with the `colors` field of #show-type("flavor").
 ///
-/// - flavor (string): The name of the flavor to use.
+/// - flavor (string, flavor): The name of the flavor to use.
 /// -> dictionary
 #let get-tidy-colors(flavor: flavors.mocha) = {
-  let palette = get-flavor(flavor).colors
+  let palette = get-or-validate-flavor(flavor).colors
 
   let function-name-color = palette.blue.rgb
   let rainbow-map = (

@@ -1,4 +1,4 @@
-#import "flavors.typ": latte, frappe, macchiato, mocha, get-flavor, flavors, get-flavor
+#import "flavors.typ": latte, frappe, macchiato, mocha, color-names, color-schema, flavors, get-or-validate-flavor
 #import "styling/code.typ": config-code-blocks
 #import "valkyrie/typst-schema.typ": *
 #import "@preview/valkyrie:0.2.1" as z
@@ -28,7 +28,7 @@
   inline-config: (:),
   body,
 ) = [
-  #let flavor = get-flavor(flavor)
+  #let flavor = get-or-validate-flavor(flavor)
 
   #set page(fill: flavor.colors.base.rgb)
   #set text(fill: flavor.colors.text.rgb)

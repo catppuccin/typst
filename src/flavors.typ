@@ -2,6 +2,39 @@
 #import "flavors/catppuccin-frappe.typ": frappe
 #import "flavors/catppuccin-macchiato.typ": macchiato
 #import "flavors/catppuccin-mocha.typ": mocha
+#import "@preview/valkyrie:0.2.1" as z
+
+/// The available color names for Catppuccin. Given simply by the dictionary.
+///
+/// -> dictionary
+#let color-names = (
+  rosewater: "Rosewater",
+  flamingo: "Flamingo",
+  pink: "Pink",
+  mauve: "Mauve",
+  red: "Red",
+  maroon: "Maroon",
+  peach: "Peach",
+  yellow: "Yellow",
+  green: "Green",
+  teal: "Teal",
+  sky: "Sky",
+  sapphire: "Sapphire",
+  blue: "Blue",
+  lavender: "Lavender",
+  text: "Text",
+  subtext1: "Subtext 1",
+  subtext0: "Subtext 0",
+  overlay2: "Overlay 2",
+  overlay1: "Overlay 1",
+  overlay0: "Overlay 0",
+  surface2: "Surface 2",
+  surface1: "Surface 1",
+  surface0: "Surface 0",
+  base: "Base",
+  mantle: "Mantle",
+  crust: "Crust",
+)
 
 /// The available flavors for Catppuccin. Given simply by the dictionary
 /// ```typ
@@ -20,6 +53,29 @@
   macchiato: macchiato,
   mocha: mocha,
 )
+
+#let color-schema(color-name) = z.dictionary((
+  name: z.string(assertions: (
+    (
+      condition: (self, it) => it == color-name,
+      message: (self, it) => "Must be exactly " + str(color-name),
+    ),
+  )), // Remove when z.assert.eq supports string
+  order: z.integer(min: 0),
+  hex: z.string(),
+  rgb: z.color(),
+  accent: z.boolean(),
+))
+
+#let flavor-schema = z.dictionary((
+  name: z.string(),
+  identifier: z.string(assertions: (z.assert.one-of(flavors.values().map(x => x.identifier)),)),
+  emoji: z.string(),
+  order: z.integer(min: 0, max: 3),
+  dark: z.boolean(),
+  light: z.boolean(),
+  colors: z.dictionary(color-names.keys().fold((:), (acc, name) => acc + ((name): color-schema(color-names.at(name))))),
+))
 
 /// Get the palette for the given flavor.
 ///
@@ -57,19 +113,38 @@
 ///                    This function is provided as a helper for anyone requiring dynamic resolution of a flavor.
 /// -> dictionary
 #let get-flavor(flavor) = {
-  if type(flavor) == str {
-    assert(
-      flavor in flavors.keys(),
-      message: "Invalid flavor name: " + repr(flavor) + ". Available flavors: " + flavors.keys().join(
-        ", ",
-        last: ", and ",
-      ) + ".",
-    )
+  assert.eq(type(flavor), str, message: "Invalid type. Argument should be a string. Got a " + repr(type(flavor)) + ". ")
+  assert(
+    flavor in flavors.keys(),
+    message: "Invalid flavor name: " + repr(flavor) + ". Expected " + flavors.keys().join(", ", last: ", or ") + ".",
+  )
 
-    flavors.at(flavor)
+  flavors.at(flavor)
+}
+
+/// Validate that the given dictionary is a valid flavor.
+///
+/// - flavor (dictionary, flavor): The flavor to validate.
+/// -> flavor
+#let validate-flavor(flavor) = {
+  assert.eq(
+    type(flavor),
+    dictionary,
+    message: "Invalid type. Argument should be a dictionary. Got a " + repr(type(flavor)) + ". ",
+  )
+
+  z.parse(flavor, flavor-schema)
+}
+
+/// Get the flavor for the given flavor name or validate the given flavor.
+/// This function is provided as a helper for anyone requiring dynamic resolution of a flavor.
+///
+/// - flavor (string, dictionary): The flavor name as a string to get the flavor for.
+/// -> flavor
+#let get-or-validate-flavor(flavor) = {
+  if type(flavor) == str {
+    get-flavor(flavor)
   } else {
-    assert(type(flavor) == dictionary, message: "Invalid flavor: " + repr(flavor))
-    assert(flavor in flavors.values(), message: "Invalid flavor: " + repr(flavor))
-    flavor
+    validate-flavor(flavor)
   }
 }
