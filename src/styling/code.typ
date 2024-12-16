@@ -20,6 +20,7 @@
     },
     default: it => measure(it).width + 1cm,
   ),
+  align: z.alignment(default: center),
 ))
 
 #let code-box-config-schema = z.dictionary((
@@ -55,7 +56,7 @@
         config.insert("width", (config.at("width"))(it))
       }
 
-      #set align(center)
+      #set align(config.remove("align"))
       #block(..config, it)
     ]
   )
