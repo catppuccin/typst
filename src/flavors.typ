@@ -4,7 +4,15 @@
 #import "flavors/catppuccin-mocha.typ": mocha
 #import "@preview/valkyrie:0.2.1" as z
 
-/// The available color names for Catppuccin. Given simply by the dictionary.
+/// The available color names for Catppuccin. Given simply by the dictionary
+/// ```typ
+/// #let color-names = (
+///    rosewater: "Rosewater",
+///    flamingo: "Flamingo",
+///    pink: "Pink",
+///    // ...
+///  )
+/// ```
 ///
 /// -> dictionary
 #let color-names = (
