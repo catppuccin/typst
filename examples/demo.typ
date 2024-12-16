@@ -2,7 +2,7 @@
 #import "@preview/cetz:0.3.1": canvas
 #import "@preview/cetz-plot:0.1.0": plot
 
-#let flavor = sys.inputs.at("flavor", default: flavors.mocha)
+#let flavor = sys.inputs.at("flavor", default: flavors.mocha.identifier)
 #let palette = get-flavor(flavor)
 
 #set document(
