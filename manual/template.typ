@@ -87,7 +87,7 @@
   set par(justify: true)
 
   v(1fr)
-  pad(x: 10%, outline(depth: 3, indent: auto))
+  pad(x: 10%, outline(depth: 2, indent: auto))
   v(1fr)
   pagebreak()
 
