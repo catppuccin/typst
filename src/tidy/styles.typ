@@ -1,4 +1,4 @@
-#import "../flavors.typ": parse-flavor, flavors
+#import "../flavors.typ": get-flavor, flavors
 #import "../utils.typ": dict-at
 
 #import "@preview/tidy:0.3.0"
@@ -11,7 +11,7 @@
 /// - flavor (string): The name of the flavor to use.
 /// -> dictionary
 #let get-tidy-colors(flavor: flavors.mocha) = {
-  let palette = parse-flavor(flavor).colors
+  let palette = get-flavor(flavor).colors
 
   let function-name-color = palette.blue.rgb
   let rainbow-map = (
@@ -91,7 +91,7 @@
   pad(
     x: 10pt,
     {
-      set text(font: ("DejaVu Sans Mono"), size: 0.85em, weight: 340)
+      set text(font: "DejaVu Sans Mono", size: 0.85em, weight: 340)
       text(fn.name, fill: style-args.colors.at("signature-func-name"))
       "("
       let inline-args = fn.args.len() < 2

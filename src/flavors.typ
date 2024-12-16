@@ -57,20 +57,16 @@
 ///                    This function is provided as a helper for anyone requiring dynamic resolution of a flavor.
 /// -> dictionary
 #let get-flavor(flavor) = {
-  assert(type(flavor) == str, message: "Invalid type. Argument should be a string. Got a " + repr(type(flavor)))
-  assert(flavor in flavors.keys(), message: "Invalid flavor name: " + repr(flavor))
-
-  flavors.at(flavor)
-}
-
-/// Parse a flavor. If the flavor is a string, get the flavor from the dictionary.
-/// Otherwise, assert that the flavor is a valid flavor.
-///
-/// - flavor (string, flavor): The flavor to parse.
-/// -> dictionary
-#let parse-flavor(flavor) = {
   if type(flavor) == str {
-    get-flavor(flavor)
+    assert(
+      flavor in flavors.keys(),
+      message: "Invalid flavor name: " + repr(flavor) + ". Available flavors: " + flavors.keys().join(
+        ", ",
+        last: ", and ",
+      ) + ".",
+    )
+
+    flavors.at(flavor)
   } else {
     assert(type(flavor) == dictionary, message: "Invalid flavor: " + repr(flavor))
     assert(flavor in flavors.values(), message: "Invalid flavor: " + repr(flavor))
