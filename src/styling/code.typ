@@ -31,7 +31,7 @@
 /// Configures the appearance of code blocks and code boxes.
 ///
 /// - flavor (string, flavor): The flavor to set.
-/// - code-block (boolean): Whether to styalise code blocks.
+/// - code-block (boolean): Whether to stylise code blocks.
 /// - code-syntax (boolean): Whether to the Catppuccin flavor to code syntax highlighting.
 /// - block-config (dictionary): Additional configuration for code blocks.
 /// - inline-config (dictionary): Additional configuration for code boxes.
