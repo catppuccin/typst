@@ -101,6 +101,7 @@ In this package, we refer to the dictionary related to each flavor with the type
 Here we describe the schema for the #show-type("flavor") dictionary. Use ```typc get-flavor()``` function to
 
 - *name* #show-type("string") --- The name of the flavor (e.g. Frappé)
+- *identifier* #show-type("string") --- The identifier of the flavor (e.g. frappe)
 - *emoji* #show-type("string") --- The emoji associated with the flavor.
 - *order* #show-type("integer") --- The order of the flavor in the Catppuccin lineup.
 - *dark* #show-type("boolean") --- Whether the flavor is a dark theme.
