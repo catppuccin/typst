@@ -1,4 +1,4 @@
-#import "../src/lib.typ": catppuccin, flavors, get-flavor
+#import "/src/lib.typ": catppuccin, flavors, get-flavor
 
 #let project(
   title: "",
