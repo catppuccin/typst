@@ -8,11 +8,10 @@ whiskers:
 /// The {{flavor.name}} flavor and palette.
 ///
 /// ==== Example
-/// #example(
-/// ```typ
-///   #let flavor = flavors.{{flavor.identifier}}
-///   Selected flavor: #flavor.name #flavor.emoji
-/// ```, ratio: 1.6)
+/// ```example
+/// #let flavor = flavors.{{flavor.identifier}}
+/// Selected flavor: #flavor.name #flavor.emoji
+/// ```
 ///
 /// -> flavor
 #let {{flavor.identifier}} = (

@@ -1,11 +1,10 @@
 /// The Latte flavor and palette.
 ///
 /// ==== Example
-/// #example(
-/// ```typ
-///   #let flavor = flavors.latte
-///   Selected flavor: #flavor.name #flavor.emoji
-/// ```, ratio: 1.6)
+/// ```example
+/// #let flavor = flavors.latte
+/// Selected flavor: #flavor.name #flavor.emoji
+/// ```
 ///
 /// -> flavor
 #let latte = (

@@ -30,15 +30,21 @@
 ))
 
 /// Configures the appearance of code blocks and code boxes.
-///
-/// - flavor (string, flavor): The flavor to set.
-/// - code-block (boolean): Whether to stylise code blocks.
-/// - code-syntax (boolean): Whether to the Catppuccin flavor to code syntax highlighting.
-/// - block-config (dictionary): Additional configuration for code blocks.
-/// - inline-config (dictionary): Additional configuration for code boxes.
-/// - body (content): The content to apply the configuration to.
 /// -> content
-#let config-code-blocks(flavor, code-block: true, code-syntax: true, block-config: (:), inline-config: (:), body) = [
+#let config-code-blocks(
+  /// The flavor to set -> string | flavor
+  flavor,
+  /// Whether to stylise code blocks -> boolean
+  code-block: true,
+  /// Whether to the Catppuccin flavor to code syntax highlighting -> boolean
+  code-syntax: true,
+  /// Additional configuration for code blocks -> dictionary
+  block-config: (:),
+  /// Additional configuration for code boxes -> dictionary
+  inline-config: (:),
+  /// The content to apply the configuration to -> content
+  body,
+) = [
   #let palette = get-or-validate-flavor(flavor)
   #let tmTheme = "../tmThemes/" + palette.identifier + ".tmTheme"
   #set raw(theme: tmTheme) if code-syntax

@@ -63,12 +63,16 @@
 )
 
 #let color-schema(color-name) = z.dictionary((
-  name: z.string(assertions: (
-    (
-      condition: (self, it) => it == color-name,
-      message: (self, it) => "Must be exactly " + str(color-name),
+  name: z.string(
+    // Remove when `z.assert.eq` supports string.
+    // See: https://github.com/typst-community/valkyrie/issues/49
+    assertions: (
+      (
+        condition: (self, it) => it == color-name,
+        message: (self, it) => "Must be exactly " + str(color-name),
+      ),
     ),
-  )), // Remove when z.assert.eq supports string
+  ),
   order: z.integer(min: 0),
   hex: z.string(),
   rgb: z.color(),
@@ -88,39 +92,41 @@
 /// Get the palette for the given flavor.
 ///
 /// ==== Example
-/// #example(
-/// ```typ
-///   #let items = flavors.values().map(flavor => [
-///     #let rainbow = (
-///       "red", "yellow", "green",
-///       "blue", "mauve",
-///     ).map(c => flavor.colors.at(c).rgb)
+/// ```example
+/// #let items = flavors.values().map(flavor => [
+///   #let rainbow = (
+///     "red", "yellow", "green",
+///     "blue", "mauve",
+///   ).map(c => flavor.colors.at(c).rgb)
 ///
-///     #let fills = (
-///       gradient.linear(..rainbow),
-///       gradient.radial(..rainbow),
-///       gradient.conic(..rainbow),
+///   #let fills = (
+///     gradient.linear(..rainbow),
+///     gradient.radial(..rainbow),
+///     gradient.conic(..rainbow),
+///   )
+///
+///   #stack(
+///     dir: ttb,
+///     spacing: 4pt,
+///     text(flavor.name + ":"),
+///     stack(
+///       dir: ltr,
+///       spacing: 3mm,
+///       ..fills.map(fill => square(fill: fill))
 ///     )
+///   )
+/// ])
 ///
-///     #stack(
-///       dir: ttb,
-///       spacing: 4pt,
-///       text(flavor.name + ":"),
-///       stack(
-///         dir: ltr,
-///         spacing: 3mm,
-///         ..fills.map(fill => square(fill: fill))
-///       )
-///     )
-///   ])
+/// #grid(columns: 1, gutter: 1em, ..items)
+/// ```
 ///
-///   #grid(columns: 1, gutter: 1em, ..items)
-/// ```, ratio: 1.5)
-///
-/// - flavor (string): The flavor name as a string to get the flavor for.
-///                    This function is provided as a helper for anyone requiring dynamic resolution of a flavor.
 /// -> dictionary
-#let get-flavor(flavor) = {
+#let get-flavor(
+  /// The flavor name as a string to get the flavor for.
+  /// This function is provided as a helper for anyone requiring
+  /// dynamic resolution of a flavor. -> string
+  flavor,
+) = {
   assert.eq(type(flavor), str, message: "Invalid type. Argument should be a string. Got a " + repr(type(flavor)) + ". ")
   assert(
     flavor in flavors.keys(),
@@ -132,9 +138,11 @@
 
 /// Validate that the given dictionary is a valid flavor.
 ///
-/// - flavor (dictionary, flavor): The flavor to validate.
 /// -> flavor
-#let validate-flavor(flavor) = {
+#let validate-flavor(
+  /// The flavor to validate -> dictionary | flavor
+  flavor,
+) = {
   assert.eq(
     type(flavor),
     dictionary,
@@ -147,9 +155,11 @@
 /// Get the flavor for the given flavor name or validate the given flavor.
 /// This function is provided as a helper for anyone requiring dynamic resolution of a flavor.
 ///
-/// - flavor (string, dictionary): The flavor name as a string to get the flavor for.
 /// -> flavor
-#let get-or-validate-flavor(flavor) = {
+#let get-or-validate-flavor(
+  /// The flavor name as a string to get the flavor for -> string | dictionary
+  flavor,
+) = {
   if type(flavor) == str {
     get-flavor(flavor)
   } else {

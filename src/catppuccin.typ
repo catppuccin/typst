@@ -5,7 +5,7 @@
 
 /// Configure your document to use a Catppuccin flavor.
 ///
-/// ==== Example:
+/// ==== Example
 /// ```typ
 ///   #import "@preview/catppuccin": catppuccin, flavors
 ///
@@ -13,19 +13,19 @@
 /// ```
 /// This should be used at the top of your document.
 ///
-/// - flavor (string, flavor): The flavor to set.
-/// - code-block (boolean): Whether to styalise code blocks.
-/// - code-syntax (boolean): Whether to the Catppuccin flavor to code syntax highlighting.
-/// - block-config (dictionary): Additional configuration for code blocks.
-/// - inline-config (dictionary): Additional configuration for code boxes.
-/// - body (content): The content to apply the flavor to.
 /// -> content
 #let catppuccin(
+  /// The flavor to set -> string | flavor
   flavor,
+  /// Whether to stylise code blocks -> boolean
   code-block: true,
+  /// Whether to the Catppuccin flavor to code syntax highlighting -> boolean
   code-syntax: true,
+  /// Additional configuration for code blocks -> dictionary
   block-config: (:),
+  /// Additional configuration for code boxes -> dictionary
   inline-config: (:),
+  /// The content to apply the flavor to -> content
   body,
 ) = [
   #let flavor = get-or-validate-flavor(flavor)

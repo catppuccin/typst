@@ -1,11 +1,10 @@
 /// The Frappé flavor and palette.
 ///
 /// ==== Example
-/// #example(
-/// ```typ
-///   #let flavor = flavors.frappe
-///   Selected flavor: #flavor.name #flavor.emoji
-/// ```, ratio: 1.6)
+/// ```example
+/// #let flavor = flavors.frappe
+/// Selected flavor: #flavor.name #flavor.emoji
+/// ```
 ///
 /// -> flavor
 #let frappe = (

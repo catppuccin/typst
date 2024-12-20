@@ -122,17 +122,18 @@
 }
 
 #let make-namespace(name: none, scope: (:), ..modules) = {
-  let contents = ""
+  assert.ne(name, none, message: "Namespace name is required")
+  assert.ne(modules, (), message: "At least one module is required")
+
+  let contents = ()
 
   for module in modules.pos() {
     let mod = read("../src/" + module)
-    assert.ne(mod, none, message: "Module not found: " + module)
-    contents += mod + "\n"
+    assert.ne(mod, none, message: "Module not found: " + repr(module))
+    contents.push(mod.trim())
   }
 
-  assert.ne(modules, "", message: "Err: " + repr(modules))
-
-  assert.ne(name, none, message: "Namespace name is required")
+  let contents = contents.join("\n")
   return (
     name: name,
     scope: scope,
