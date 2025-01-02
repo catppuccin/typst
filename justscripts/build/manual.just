@@ -1,6 +1,6 @@
 logo_commit := "08946855002032919592a7c8d49204a7a59c30f9"
-logo_light_sha256 := "6913f28d404575178b764dad6fc5f017b746e2e60c74a3ccac970ef26789ee62"
-logo_dark_sha256 := "03ce7005d2764ad9203839b1b4d19f6cdabc3d4dc6de4aa7040c16bd05d5b6aa"
+logo_light_sha256 := "b1247906464a6b275951a42b4cdbde95eebc8b80ad8d14e0e26dc4dd4b2bd13c"
+logo_dark_sha256 := "482b090635767258cd9aa03624b453ed402d4123cd64616df36a34fdf6bbb39b"
 
 [group("Build")]
 [doc("Builds the manual using the provided flavor(s).")]
