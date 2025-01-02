@@ -17,14 +17,17 @@
   } else {
     it
   },
-  post-transform: (ctx, it) => it.pairs().fold(
-    (:),
-    (acc, (k, v)) => (
-      acc + if v != none {
-        ((k): v)
-      }
+  post-transform: (ctx, it) => it
+    .pairs()
+    .fold(
+      (:),
+      (acc, (k, v)) => (
+        acc
+          + if v != none {
+            ((k): v)
+          }
+      ),
     ),
-  ),
 )
 
 #let inset-schema(optional: false, default: (:)) = z.either(

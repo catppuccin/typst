@@ -110,9 +110,10 @@
           types = ": " + info.types.map(x => show-type(x, style-args: style-args)).join(" ")
         }
         if (
-          style-args.enable-cross-references and not (
-            info.at("description", default: "") == "" and style-args.omit-empty-param-descriptions
-          )
+          style-args.enable-cross-references
+            and not (
+              info.at("description", default: "") == "" and style-args.omit-empty-param-descriptions
+            )
         ) {
           name = link(label(style-args.label-prefix + fn.name + "." + name.trim(".")), name)
         }

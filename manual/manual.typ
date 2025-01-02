@@ -117,11 +117,13 @@ Here we describe the schema for the #show-type("flavor") dictionary. Use ```typc
     "flavors.typ",
   ),
   style-alt: (
-    show-example: example.show-example.with(layout: (code, preview) => grid(
-      columns: 2,
-      column-gutter: 1cm,
-      code, preview,
-    )),
+    show-example: example.show-example.with(
+      layout: (code, preview) => grid(
+        columns: 2,
+        column-gutter: 1cm,
+        code, preview,
+      ),
+    ),
   ),
 )
 
