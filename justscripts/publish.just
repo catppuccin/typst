@@ -36,6 +36,3 @@ prepare-package:
   cd $pdir
   git add .
   git commit -m "added catppuccin version $version"
-
-
-
