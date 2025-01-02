@@ -32,6 +32,8 @@ prepare-package:
   cp -r manual "$pdir"
   cp -r src "$pdir"
   cp typst.toml "$pdir"
+  cp README.md "$pdir"
+  cp LICENSE "$pdir"
 
   cd $pdir
   git add .
