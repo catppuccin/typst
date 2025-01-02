@@ -18,7 +18,7 @@
   /// The flavor to set -> string | flavor
   flavor,
   /// Whether to stylise code blocks -> boolean
-  code-block: true,
+  code-block: false,
   /// Whether to the Catppuccin flavor to code syntax highlighting -> boolean
   code-syntax: true,
   /// Additional configuration for code blocks -> dictionary

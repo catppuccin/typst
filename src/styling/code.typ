@@ -4,30 +4,18 @@
 
 // TODO: This module might be significantly easier if we use codly for code block styling.
 
-#let code-block-config-schema = z.dictionary((
-  inset: inset-schema(default: 7pt),
-  outset: outset-schema(default: (y: 3pt)),
-  radius: radius-schema(default: 3pt),
-  breakable: z.boolean(default: false),
-  width: z.either(
-    rel-or-length(),
-    z.function(),
-    sides-schema,
-    post-transform: (self, it) => if type(it) == dictionary and it == (:) {
-      0pt
-    } else {
-      it
-    },
-    default: it => measure(it).width + 1cm,
-  ),
-  align: z.alignment(default: center),
-))
+#let default-code-block-config = (
+  inset: 7pt,
+  outset: 3pt,
+  radius: 3pt,
+  breakable: false,
+  width: it => measure(it).width + 1cm,
+)
 
-#let code-box-config-schema = z.dictionary((
-  inset: inset-schema(default: (x: 2pt, y: 0pt)),
-  outset: outset-schema(default: (y: 2pt)),
-  radius: radius-schema(default: 3pt),
-))
+#let default-code-box-config = (
+  inset: (left: 3pt),
+  radius: 3pt,
+)
 
 /// Configures the appearance of code blocks and code boxes.
 /// -> content
@@ -50,19 +38,18 @@
   #set raw(theme: tmTheme) if code-syntax
 
   #show raw.where(block: false): it => [
-    #let config = z.parse(inline-config, code-box-config-schema)
+    #let config = default-code-box-config + inline-config
     #box(..config, it)
   ]
 
   #show raw.where(block: true): it => (
     context [
-      #let config = z.parse(block-config, code-block-config-schema) + (fill: palette.colors.crust.rgb)
+      #let config = default-code-block-config + (fill: palette.colors.crust.rgb) + block-config
 
       #if type(config.at("width")) == function {
         config.insert("width", (config.at("width"))(it))
       }
 
-      #set align(config.remove("align"))
       #block(..config, it)
     ]
   )
