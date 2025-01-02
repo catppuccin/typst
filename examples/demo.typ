@@ -1,8 +1,8 @@
-#import "../src/lib.typ": catppuccin, flavors, get-flavor
+#import "/src/lib.typ": catppuccin, flavors, get-flavor
 #import "@preview/cetz:0.3.1": canvas
 #import "@preview/cetz-plot:0.1.0": plot
 
-#let flavor = sys.inputs.at("flavor", default: flavors.mocha)
+#let flavor = sys.inputs.at("flavor", default: flavors.mocha.identifier)
 #let palette = get-flavor(flavor)
 
 #set document(
@@ -98,8 +98,10 @@ flavor's palette!
   palette.colors.red.rgb,
   palette.colors.green.rgb,
   palette.colors.blue.rgb,
-).map(c =>
-(stroke: palette.colors.crust.rgb, fill: c.transparentize(25%)))
+).map(c => (
+  stroke: palette.colors.crust.rgb,
+  fill: c.transparentize(25%),
+))
 
 #canvas(length: 8mm, {
   plot.plot(
@@ -132,7 +134,11 @@ flavor's palette!
 
 #let scope = (palette: palette, canvas: canvas, plot: plot)
 #let plot = eval(scope: scope, "[" + plot-str + "]")
-#grid(
-  columns: 2,
-  text(size: 7.5pt, raw(lang: "typ", plot-str)), [#v(1fr) #plot #v(1fr)],
+#align(
+  center,
+  grid(
+    columns: 2,
+    column-gutter: 2em,
+    text(size: 7.5pt, raw(lang: "typ", block: true, plot-str)), [#v(1fr) #plot #v(1fr)],
+  ),
 )

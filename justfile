@@ -17,29 +17,6 @@ fetch_scripts:
   #!/usr/bin/env sh
   cp -r ./typst-package-template/scripts .
 
-[group("Installation")]
-[doc("Installs the package to the system under @local/@preview.")]
-[no-cd]
-install namespace="@local": fetch_scripts
-  #!/usr/bin/env sh
-  if [[ {{namespace}} == "@local" ]] || [[ {{namespace}} == "@preview" ]]; then
-    mkdir -p gallery # required for the following script
-    ./scripts/package {{namespace}}
-  else
-    echo "Invalid namespace. Please use either @local or @preview."
-  fi
-
-[group("Installation")]
-[doc("Uninstalls the package from the system under @local/@preview.")]
-[no-cd]
-uninstall namespace="@local": fetch_scripts
-  #!/usr/bin/env sh
-  if [[ {{namespace}} == "@local" ]] || [[ {{namespace}} == "@preview" ]]; then
-    ./scripts/uninstall {{namespace}}
-  else
-    echo "Invalid namespace. Please use either @local or @preview."
-  fi
-
 [group("Development")]
 [unix]
 [doc("Installs development tools and dependencies.")]
@@ -53,9 +30,7 @@ dev-tools:
 
   brew update
   brew upgrade
-  brew install typstyle typos-cli oxipng catppuccin/tap/catwalk catppuccin/tap/whiskers yarn
-  yarn install
-  yarn upgrade
+  brew install typstyle typos-cli oxipng catppuccin/tap/catwalk catppuccin/tap/whiskers
 
   if [[ ! -x "$(command -v cargo)" ]]; then
     echo "Cargo is not installed. Cannot install typst-test."
@@ -67,56 +42,16 @@ dev-tools:
 
 [group("Testing")]
 test *filter:
+  typst-test update {{filter}}
   typst-test run {{filter}}
 
 [group("Testing")]
-update-test *filter:
-  typst-test update {{filter}}
-
-[group("Development")]
-[confirm("Have you bumped the version in typst.toml? (y/N)")]
-new-publishing-branch:
+[confirm("This will update all test references. Continue? (y/N)")]
+update-test-refs:
   #!/usr/bin/env sh
-  version="$(grep -m 1 version typst.toml | grep -e '[0-9]\.[0-9]\.[0-9]' -o)"
+  typst-test util clean
+  typst-test util export
 
-  echo "Stashing any changes..."
-  git stash push -m "Stashing changes before creating a new publishing package."
-
-  if [[ -d packages ]]; then
-    echo "Removing existing packages directory..."
-    rm -rf packages
-  fi
-
-  git checkout --orphan "catppuccin-publish-v${version}"
-  git reset --hard
-  git pull https://github.com/typst/packages.git main
-
-  cd packages/preview
-
-  if [[ ! -d "catppuccin" ]]; then
-    mkdir catppuccin
-  fi
-
-  cd catppuccin
-
-  if [[ -d "$version" ]]; then
-    echo "Version $version already exists. Aborting."
-    exit 1
-  fi
-
-  git clone https://github.com/catppuccin/typst.git main
-
-  mv main "$version"
-  cd "$version"
-
-  git clean -Xdf
-  rm -rf assets common examples justscripts tests gallery
-  rm -f *.lock *.js *.json *.tera typos.toml justfile
-  find . -name ".*" -depth 1 | xargs rm -rf
-
-  mv fonts template/fonts
-  mv template/thumbnail.png .
-
-  @echo Directory is ready to be verified and published.
-  @echo Directory at: "$(pwd)"
-
+  for dir in tests/*/out; do
+      mv "$dir" "$(dirname "$dir")/ref"
+  done

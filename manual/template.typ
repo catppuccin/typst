@@ -1,6 +1,4 @@
-#import "../src/lib.typ": catppuccin, flavors, get-flavor
-#import "../src/styling/code.typ": config-code-blocks
-#import "@preview/codly:1.0.0": *
+#import "/src/lib.typ": catppuccin, flavors, get-flavor
 
 #let project(
   title: "",
@@ -18,18 +16,18 @@
   // Set the document's basic properties.
   set document(author: authors, title: title)
   set page(numbering: "1", number-align: center)
-  // set text(font: "Linux Libertine", lang: "en")
   set text(font: "Nunito", hyphenate: false, lang: "en")
 
   show: catppuccin.with(flavor)
-  show: config-code-blocks.with(flavor, code-block: true, code-syntax: true)
 
   show heading.where(level: 1): set text(font: "Jellee")
   show heading.where(level: 2): set text(font: "Jellee")
   show heading.where(level: 1): it => block(smallcaps(it), below: 1em)
-  set heading(numbering: (..args) => if args.pos().len() <= 3 {
-    numbering("1.1.", ..args)
-  })
+  set heading(
+    numbering: (..args) => if args.pos().len() <= 3 {
+      numbering("1.1.", ..args)
+    },
+  )
 
   show figure.caption: set text(size: 0.8em, fill: palette.colors.subtext0.rgb)
 
@@ -91,11 +89,10 @@
   set par(justify: true)
 
   v(1fr)
-  pad(x: 10%, outline(depth: 3, indent: auto))
+  pad(x: 10%, outline(depth: 2, indent: auto))
   v(1fr)
   pagebreak()
 
-  show: codly-init
   body
 }
 
@@ -127,17 +124,18 @@
 }
 
 #let make-namespace(name: none, scope: (:), ..modules) = {
-  let contents = ""
+  assert.ne(name, none, message: "Namespace name is required")
+  assert.ne(modules, (), message: "At least one module is required")
+
+  let contents = ()
 
   for module in modules.pos() {
     let mod = read("../src/" + module)
-    assert.ne(mod, none, message: "Module not found: " + module)
-    contents += mod + "\n"
+    assert.ne(mod, none, message: "Module not found: " + repr(module))
+    contents.push(mod.trim())
   }
 
-  assert.ne(modules, "", message: "Err: " + repr(modules))
-
-  assert.ne(name, none, message: "Namespace name is required")
+  let contents = contents.join("\n")
   return (
     name: name,
     scope: scope,

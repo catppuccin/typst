@@ -1,16 +1,15 @@
 /// The Frappé flavor and palette.
 ///
 /// ==== Example
-/// #example(
-/// ```typ
-///   #let flavor = flavors.frappe
-///   #let palette = get-palette(flavor)
-///   Selected flavor: #palette.name #palette.emoji
-/// ```, ratio: 1.6)
+/// ```example
+/// #let flavor = flavors.frappe
+/// Selected flavor: #flavor.name #flavor.emoji
+/// ```
 ///
 /// -> flavor
 #let frappe = (
   name: "Frappé",
+  identifier: "frappe",
   emoji: "🪴",
   order: 1,
   dark: true,

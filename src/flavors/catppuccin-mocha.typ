@@ -1,16 +1,15 @@
 /// The Mocha flavor and palette.
 ///
 /// ==== Example
-/// #example(
-/// ```typ
-///   #let flavor = flavors.mocha
-///   #let palette = get-palette(flavor)
-///   Selected flavor: #palette.name #palette.emoji
-/// ```, ratio: 1.6)
+/// ```example
+/// #let flavor = flavors.mocha
+/// Selected flavor: #flavor.name #flavor.emoji
+/// ```
 ///
 /// -> flavor
 #let mocha = (
   name: "Mocha",
+  identifier: "mocha",
   emoji: "🌿",
   order: 3,
   dark: true,

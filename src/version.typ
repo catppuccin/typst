@@ -1,9 +1,10 @@
+
 /// The package version of Catppuccin.
 ///
 /// ==== Example:
 /// #example(
 /// ```typ
-///   This package's version is #version.
+/// This package's version is #version.
 /// ```)
 ///
 /// -> version

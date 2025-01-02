@@ -10,7 +10,9 @@
   let result = items
     .slice(0, -1)
     .fold(
-      dict, (acc, key) => acc.at(key, default: ()))
+      dict,
+      (acc, key) => acc.at(key, default: ()),
+    )
     .at(items.last(), default: default)
 
   assert.ne(result, (:), message: "color not found in palette and no default was provided")

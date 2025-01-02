@@ -1,39 +1,40 @@
-#import "/src/lib.typ": catppuccin, themes, get-palette
+#import "/src/lib.typ": catppuccin, flavors, get-flavor, config-code-blocks
 
 #set page(width: auto, height: auto)
 
 #let perms = ()
-#for theme in themes.values() {
+#for flavor in flavors.keys() {
   for code-block in (true, false) {
     for syntax in (true, false) {
-      perms.push((theme: theme, code-block: code-block, syntax: syntax))
+      perms.push((flavor: flavor, code-block: code-block, syntax: syntax))
     }
   }
 }
 
 #for p in perms [
   #pagebreak(weak: true)
-  #show: catppuccin.with(p.theme, code-block: p.code-block, code-syntax: p.syntax)
+  #show: catppuccin.with(p.flavor)
+  #show: config-code-blocks.with(p.flavor, code-block: p.code-block, code-syntax: p.syntax)
 
-  = #get-palette(p.theme).name
+  = #get-flavor(p.flavor).name
   - Code block: #p.code-block
   - Code syntax: #p.syntax
 
   ```typ
-  #import "/src/lib.typ": catppuccin, themes, get-palette
+  #import "/src/lib.typ": catppuccin, flavors, get-flavor
 
   #let perms = ()
-  #for theme in themes.values() {
+  #for flavor in flavors.values() {
     for code-block in (true, false) {
       for syntax in (true, false) {
-        perms.push((theme: theme, code-block: code-block, syntax: syntax))
+        perms.push((flavor: flavor, code-block: code-block, syntax: syntax))
       }
     }
   }
 
   #for p in perms [
-    #show: catppuccin.with(p.theme, code-block: p.code-block, code-syntax: p.syntax)
-    = #get-palette(p.theme).name
+    #show: catppuccin.with(p.flavor, code-block: p.code-block, code-syntax: p.syntax)
+    = #get-flavor(p.flavor).name
     == Code block: #p.code-block
     == Code syntax: #p.syntax
   ]
