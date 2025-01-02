@@ -134,8 +134,11 @@ flavor's palette!
 
 #let scope = (palette: palette, canvas: canvas, plot: plot)
 #let plot = eval(scope: scope, "[" + plot-str + "]")
-#grid(
-  columns: 2,
-  column-gutter: 2em,
-  text(size: 7.5pt, raw(lang: "typ", block: true, plot-str)), [#v(1fr) #plot #v(1fr)],
+#align(
+  center,
+  grid(
+    columns: 2,
+    column-gutter: 2em,
+    text(size: 7.5pt, raw(lang: "typ", block: true, plot-str)), [#v(1fr) #plot #v(1fr)],
+  ),
 )
