@@ -70,4 +70,4 @@ jobs:
           tag: ci-semi-stable
 
       - name: Run test suite
-        run: typst-test run
+        run: typst-test run --root .
