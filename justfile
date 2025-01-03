@@ -53,5 +53,7 @@ update-test-refs:
   typst-test util export
 
   for dir in tests/*/out; do
-      mv "$dir" "$(dirname "$dir")/ref"
+      refpath="$(dirname "$dir")/ref"
+      mkdir -p "$refpath"
+      mv "$dir"/* "$refpath"
   done
