@@ -1,6 +1,5 @@
-#import "/src/lib.typ": catppuccin, flavors, get-flavor, config-code-blocks
-
 #set page(width: auto, height: auto)
+#import "/src/lib.typ": catppuccin, flavors, get-flavor, config-code-blocks
 
 #let perms = ()
 #for flavor in flavors.keys() {
