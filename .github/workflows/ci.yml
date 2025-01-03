@@ -63,11 +63,11 @@ jobs:
           version: 1.0
 
       - name: 🧪 Install typst-test
-        uses: baptiste0928/cargo-install@v2.2.0
+        uses: baptiste0928/cargo-install@v3
         with:
           crate: typst-test
           git: https://github.com/tingerrr/typst-test.git
           tag: ci-semi-stable
 
       - name: Run test suite
-        run: typst-test run --root .
+        run: typst-test run
