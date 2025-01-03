@@ -9,7 +9,6 @@
   outset: 3pt,
   radius: 3pt,
   breakable: false,
-  width: it => measure(it).width + 2cm,
 )
 
 #let default-code-box-config = (
@@ -45,11 +44,6 @@
   #show raw.where(block: true): it => (
     context [
       #let config = default-code-block-config + (fill: palette.colors.crust.rgb) + block-config
-
-      #if type(config.at("width")) == function {
-        config.insert("width", (config.at("width"))(it))
-      }
-
       #block(..config, it)
     ]
   )
