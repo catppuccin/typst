@@ -13,8 +13,7 @@
 
 #for p in perms [
   #pagebreak(weak: true)
-  #show: catppuccin.with(p.flavor)
-  #show: config-code-blocks.with(p.flavor, code-block: p.code-block, code-syntax: p.syntax)
+  #show: catppuccin.with(p.flavor, code-block: p.code-block, code-syntax: p.syntax)
 
   = #get-flavor(p.flavor).name
   - Code block: #p.code-block
