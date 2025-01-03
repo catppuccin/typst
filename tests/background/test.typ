@@ -14,7 +14,7 @@
   show: catppuccin.with(p.flavor, code-block: p.code-block, code-syntax: p.syntax)
   pagebreak(weak: true)
 
-  [
+  block([
     = #p.flavor.name
     - Code block: #p.code-block
     - Code syntax: #p.syntax
@@ -38,5 +38,5 @@
       == Code syntax: #p.syntax
     ]
     ```
-  ]
+  ])
 }

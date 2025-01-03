@@ -23,10 +23,8 @@
   )
 }
 
-#for flavor in flavors.values() [
-  #show: catppuccin.with(flavor)
-  #pagebreak(weak: true)
-
-  #color-swatches(flavor)
-]
-
+#for flavor in flavors.values() {
+  pagebreak(weak: true)
+  show: catppuccin.with(flavor)
+  color-swatches(flavor)
+}
