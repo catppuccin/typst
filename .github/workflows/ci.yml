@@ -71,14 +71,3 @@ jobs:
 
       - name: Run test suite
         run: typst-test run
-
-      - name: Archive artifacts
-        uses: actions/upload-artifact@v4
-        if: always()
-        with:
-          name: artifacts
-          path: |
-            tests/**/diff/*.png
-            tests/**/out/*.png
-            tests/**/ref/*.png
-          retention-days: 5
