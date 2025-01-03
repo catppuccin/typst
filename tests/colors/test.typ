@@ -18,7 +18,7 @@
   grid(
     columns: 4,
     column-gutter: 1cm,
-    row-gutter: 1em,
+    row-gutter: 3.5mm,
     ..swatches,
   )
 }
