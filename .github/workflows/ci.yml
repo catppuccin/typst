@@ -32,15 +32,14 @@ jobs:
       - name: 🧹 Check style
         run: "find . -name '*.typ' | xargs typstyle --check -c 120"
 
-  build:
+  tests:
     runs-on: ubuntu-latest
 
     strategy:
       matrix:
         # Test for the following Typst versions
-        # 0.6.0 (first version with package management),
-        # 0.11.0 (latest supported)
-        typst-version: [v0.11.0, v0.12.0, latest]
+        # 0.12.0 (minimum supported version)
+        typst-version: [v0.12.0, latest]
 
     steps:
       - uses: actions/checkout@v4
@@ -54,3 +53,32 @@ jobs:
 
       - name: 🛠️ Compile test document
         run: "typst compile examples/demo.typ --root ."
+
+      # The remaining actions are based from typst-test's book
+      # https://tingerrr.github.io/typst-test/guides/ci.html
+      - name: Probe runner package cache
+        uses: awalsh128/cache-apt-pkgs-action@latest
+        with:
+          packages: cargo
+          version: 1.0
+
+      - name: 🧪 Install typst-test
+        uses: baptiste0928/cargo-install@v3
+        with:
+          crate: typst-test
+          git: https://github.com/tingerrr/typst-test.git
+          tag: ci-semi-stable
+
+      - name: Run test suite
+        run: typst-test run
+
+      - name: Archive artifacts
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: artifacts
+          path: |
+            tests/**/diff/*.png
+            tests/**/out/*.png
+            tests/**/ref/*.png
+          retention-days: 5
