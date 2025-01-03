@@ -75,7 +75,7 @@ jobs:
           cache-dependency-path: requirements.typ
 
       - name: 🧪 Run test suite
-        run: typst-test run --ignore-system-fonts
+        run: "typst-test run -- --ignore-system-fonts"
 
       - name: 📂 Archive artifacts
         uses: actions/upload-artifact@v4
