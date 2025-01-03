@@ -5,11 +5,11 @@
 // TODO: This module might be significantly easier if we use codly for code block styling.
 
 #let default-code-block-config = (
-  inset: 7pt,
+  inset: (x: 3em, y: 1.5em),
   outset: 3pt,
   radius: 3pt,
   breakable: false,
-  width: it => measure(it).width + 1cm,
+  width: it => measure(it).width + 2cm,
 )
 
 #let default-code-box-config = (
