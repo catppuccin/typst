@@ -41,12 +41,16 @@
     #box(..config, it)
   ]
 
-  #show raw.where(block: true): it => (
+  #show raw.where(block: true): it => {
+    if not code-block {
+      return it
+    }
+
     context [
       #let config = default-code-block-config + (fill: palette.colors.crust.rgb) + block-config
       #block(..config, it)
     ]
-  )
+  }
 
   #body
 ]
