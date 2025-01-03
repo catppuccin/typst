@@ -18,16 +18,15 @@
   grid(
     columns: 4,
     column-gutter: 1cm,
-    row-gutter: 3.5mm,
+    row-gutter: 1em,
     ..swatches,
   )
 }
 
-#for flavor in flavors.keys() [
-  #pagebreak(weak: true)
+#for flavor in flavors.values() [
   #show: catppuccin.with(flavor)
+  #pagebreak(weak: true)
 
-  #let palette = get-flavor(flavor)
-  #color-swatches(palette)
+  #color-swatches(flavor)
 ]
 
