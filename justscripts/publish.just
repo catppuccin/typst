@@ -28,7 +28,6 @@ prepare-package:
   mkdir -p "$pdir"
 
   cp -r assets "$pdir"
-  cp -r fonts "$pdir"
   cp -r manual "$pdir"
   cp -r src "$pdir"
   cp typst.toml "$pdir"
