@@ -43,15 +43,15 @@ dev-tools:
 
 [group("Testing")]
 test *filter:
-  typst-test update {{filter}}
-  typst-test run {{filter}}
+  typst-test update {{filter}} --ignore-system-fonts
+  typst-test run {{filter}} --ignore-system-fonts
 
 [group("Testing")]
 [confirm("This will update all test references. Continue? (y/N)")]
 update-test-refs:
   #!/usr/bin/env sh
   typst-test util clean
-  typst-test util export
+  typst-test util export --ignore-system-fonts
 
   for dir in tests/*/out; do
       refpath="$(dirname "$dir")/ref"

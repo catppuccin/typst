@@ -1,4 +1,4 @@
-name: Tests CI
+name: CI
 
 on:
   push:
@@ -19,7 +19,7 @@ jobs:
       - name: 🍺 Set up Homebrew
         id: set-up-homebrew
         uses: Homebrew/actions/setup-homebrew@master
-
+        
       - name: 🍺 Install typos-cli
         run: "brew install typos-cli"
 
@@ -32,15 +32,8 @@ jobs:
       - name: 🧹 Check style
         run: "find . -name '*.typ' | xargs typstyle --check -c 120"
 
-  build:
+  build-example:
     runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        # Test for the following Typst versions
-        # 0.6.0 (first version with package management),
-        # 0.11.0 (latest supported)
-        typst-version: [v0.12.0, latest]
 
     steps:
       - uses: actions/checkout@v4
@@ -49,9 +42,48 @@ jobs:
         uses: typst-community/setup-typst@v4
         id: setup-typst
         with:
-          typst-version: ${{ matrix.typst-version }}
+          typst-version: v0.12.0
           cache-dependency-path: examples/requirements.typ
 
       - name: 🛠️ Compile test document
-        if: ${{ matrix.typst-version == 'v0.11.0' }}
         run: "typst compile examples/demo.typ --root ."
+
+  tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        
+      - name: ♻️ Probe runner package cache
+        uses: awalsh128/cache-apt-pkgs-action@latest
+        with:
+          packages: cargo
+          version: 1.0
+          
+      - name: 🧪 Install typst-test
+        uses: baptiste0928/cargo-install@v3
+        with:
+          crate: typst-test
+          git: https://github.com/tingerrr/typst-test.git
+          tag: ci-semi-stable
+
+      - name: ⚙️ Setup Typst
+        uses: typst-community/setup-typst@v3
+        id: setup-typst
+        with:
+          typst-version: v0.12.0
+          cache-dependency-path: requirements.typ
+
+      - name: 🧪 Run test suite
+        run: "typst-test --ignore-system-fonts run"
+
+      - name: 📂 Archive artifacts
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: artifacts
+          path: |
+            tests/**/diff/*.png
+            tests/**/out/*.png
+            tests/**/ref/*.png
+          retention-days: 5
