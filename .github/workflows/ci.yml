@@ -53,5 +53,5 @@ jobs:
           cache-dependency-path: examples/requirements.typ
 
       - name: 🛠️ Compile test document
-        if: ${{ matrix.typst-version == 'v0.11.0' }}
+        # if: ${{ matrix.typst-version == 'v0.11.0' }}
         run: "typst compile examples/demo.typ --root ."
