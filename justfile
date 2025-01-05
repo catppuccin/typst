@@ -1,4 +1,5 @@
 mod build "./justscripts/build"
+import "./justscripts/publish.just"
 
 default:
   @just --list --justfile {{justfile()}}
