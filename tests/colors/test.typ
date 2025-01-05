@@ -1,6 +1,5 @@
-#import "/src/lib.typ": catppuccin, flavors, get-flavor
-
 #set page(width: auto, height: auto)
+#import "/src/lib.typ": catppuccin, flavors, get-flavor
 
 #let color-swatches(palette) = {
   let swatches = ()
@@ -19,16 +18,13 @@
   grid(
     columns: 4,
     column-gutter: 1cm,
-    row-gutter: 1em,
+    row-gutter: 3.5mm,
     ..swatches,
   )
 }
 
-#for flavor in flavors.keys() [
-  #pagebreak(weak: true)
-  #show: catppuccin.with(flavor)
-
-  #let palette = get-flavor(flavor)
-  #color-swatches(palette)
-]
-
+#for flavor in flavors.values() {
+  pagebreak(weak: true)
+  show: catppuccin.with(flavor)
+  color-swatches(flavor)
+}
