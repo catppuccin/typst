@@ -46,7 +46,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: ⚙️ Setup Typst
-        uses: typst-community/setup-typst@v3
+        uses: typst-community/setup-typst@v4
         id: setup-typst
         with:
           typst-version: ${{ matrix.typst-version }}
