@@ -1,6 +1,6 @@
 #import "../flavors.typ": flavors, get-or-validate-flavor
 #import "styles.typ"
-#import "@preview/tidy:0.4.0"
+#import "@preview/tidy:0.4.1"
 
 /// A wrapper function around `tidy.show-module`.
 /// -> content

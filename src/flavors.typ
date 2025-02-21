@@ -2,7 +2,7 @@
 #import "flavors/catppuccin-frappe.typ": frappe
 #import "flavors/catppuccin-macchiato.typ": macchiato
 #import "flavors/catppuccin-mocha.typ": mocha
-#import "@preview/valkyrie:0.2.1" as z
+#import "@preview/valkyrie:0.2.2" as z
 
 /// The available color names for Catppuccin. Given simply by the dictionary
 /// ```typ

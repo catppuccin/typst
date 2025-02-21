@@ -1,6 +1,6 @@
 #import "../flavors.typ": get-or-validate-flavor, flavors
 #import "../valkyrie/typst-schema.typ": *
-#import "@preview/valkyrie:0.2.1" as z
+#import "@preview/valkyrie:0.2.2" as z
 
 // TODO: This module might be significantly easier if we use codly for code block styling.
 
