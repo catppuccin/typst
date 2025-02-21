@@ -1,9 +1,9 @@
 #import "../flavors.typ": get-or-validate-flavor, flavors
 #import "../utils.typ": dict-at
-#import "@preview/tidy:0.4.0": utilities
+#import "@preview/tidy:0.4.1": utilities
 #import utilities: *
 
-#import "@preview/tidy:0.4.0" as tidy: styles, show-example as example
+#import "@preview/tidy:0.4.1" as tidy: styles, show-example as example
 
 /// A style that can be used to generate documentation using #link("https://typst.app/universe/package/tidy")[Tidy]
 /// for the Catppuccino theme. The returned dictionary is a tidy styles dictionary with some additional keys,
