@@ -1,4 +1,4 @@
-#import "@preview/valkyrie:0.2.1" as z
+#import "@preview/valkyrie:0.2.2" as z
 
 #let rel-or-length(..args) = z.either(z.relative(), z.length(), ..args)
 

@@ -1,7 +1,7 @@
 #import "flavors.typ": latte, frappe, macchiato, mocha, color-names, color-schema, flavors, get-or-validate-flavor
 #import "styling/code.typ": config-code-blocks
 #import "valkyrie/typst-schema.typ": *
-#import "@preview/valkyrie:0.2.1" as z
+#import "@preview/valkyrie:0.2.2" as z
 
 /// Configure your document to use a Catppuccin flavor.
 ///
