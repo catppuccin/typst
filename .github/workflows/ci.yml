@@ -30,7 +30,7 @@ jobs:
         run: "typos"
 
       - name: 🧹 Check style
-        run: "find . -name '*.typ' | xargs typstyle --check -c 120"
+        run: "find . -name '*.typ' | xargs typstyle --check -c 80"
 
   build-example:
     runs-on: ubuntu-latest
