@@ -1,0 +1,26 @@
+name: Update Typst Packages
+
+on:
+  # Run daily at midnight
+  schedule:
+    - cron: "0 0 * * *"
+  push:
+    branches:
+    - main
+    paths:
+      - "**/*.typ"
+  workflow_dispatch:
+jobs:
+  update_typst_packages:
+    name: Update Typst Packages
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: taiki-e/install-action@cargo-binstall
+      - run: cargo binstall typst-upgrade
+      - run: >
+          find . -type f -name "main.typ" -exec dirname {} \; | sort -u | while read dir; do
+           typst-upgrade "$dir"
+          done
+
