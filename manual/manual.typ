@@ -3,7 +3,7 @@
 #import "/src/tidy/show-module.typ": show-module
 #import "template.typ": *
 
-#import "@preview/tidy:0.4.1" as tidy: render-examples, show-example as example
+#import "@preview/tidy:0.4.3" as tidy: render-examples, show-example as example
 #import "@preview/oxifmt:0.2.1": strfmt
 
 #let flavor = sys.inputs.at("flavor", default: flavors.mocha)
