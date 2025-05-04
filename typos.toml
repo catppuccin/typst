@@ -2,6 +2,9 @@
 check-filename = true
 check-file = true
 
+[default.extend-words]
+typ = "typ"
+
 [type.png]
 extend-glob = ["*.png"]
 check-file = false
