@@ -1,4 +1,4 @@
-#import "../flavors.typ": get-or-validate-flavor, flavors
+#import "../flavors.typ": flavors, get-or-validate-flavor
 #import "../valkyrie/typst-schema.typ": *
 #import "@preview/valkyrie:0.2.2" as z
 
@@ -47,7 +47,11 @@
     }
 
     context [
-      #let config = default-code-block-config + (fill: palette.colors.crust.rgb) + block-config
+      #let config = (
+        default-code-block-config
+          + (fill: palette.colors.crust.rgb)
+          + block-config
+      )
       #block(..config, it)
     ]
   }

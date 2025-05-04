@@ -1,5 +1,5 @@
 #import "/src/lib.typ": catppuccin, flavors, get-flavor
-#import "@preview/cetz:0.3.2": canvas
+#import "@preview/cetz:0.3.4": canvas
 #import "@preview/cetz-plot:0.1.1": plot
 
 #let flavor = sys.inputs.at("flavor", default: flavors.mocha.identifier)
@@ -18,10 +18,10 @@
 #show: catppuccin.with(flavor)
 
 #align(center, heading(text(size: 2em, font: "Jellee", "Catppuccin")))
-#align(
-  center,
-  text(palette.emoji + " Soothing pastel theme for Typst", size: 1.4em),
-)
+#align(center, text(
+  palette.emoji + " Soothing pastel theme for Typst",
+  size: 1.4em,
+))
 
 #let accents = palette.colors.pairs().filter(pair => pair.at(1).accent)
 #let bases = palette.colors.pairs().filter(pair => not pair.at(1).accent)
@@ -55,22 +55,18 @@
 
 
 Typst makes it very easy to customise the look of your documents. Inspiration
-for this project came from Catppuccin for #LaTeX [#link(
-  "https://github.com/catppuccin/latex",
-)[#text(fill: palette.colors.blue.rgb, "link")]]. This doument is currently
+for this project came from Catppuccin for #LaTeX [#link("https://github.com/catppuccin/latex")[#text(fill: palette.colors.blue.rgb, "link")]]. This doument is currently
 using the flavor #text(fill: palette.colors.mauve.rgb, style: "italic", flavor).
 
 === Accents
-#align(
-  center,
-  grid(columns: 7, align: left, gutter: 1em, ..color-swatches(accents)),
-)
+#align(center, grid(columns: 7, align: left, gutter: 1em, ..color-swatches(
+    accents,
+  )))
 
 === Base Colors
-#align(
-  center,
-  grid(columns: 6, align: left, gutter: 1em, ..color-swatches(bases)),
-)
+#align(center, grid(columns: 6, align: left, gutter: 1em, ..color-swatches(
+    bases,
+  )))
 
 // === Code Blocks
 // Unlike #LaTeX, Typst make code highlighting a breeze! The following is a code
@@ -134,11 +130,9 @@ flavor's palette!
 
 #let scope = (palette: palette, canvas: canvas, plot: plot)
 #let plot = eval(scope: scope, "[" + plot-str + "]")
-#align(
-  center,
-  grid(
-    columns: 2,
-    column-gutter: 2em,
-    text(size: 7.5pt, raw(lang: "typ", block: true, plot-str)), [#v(1fr) #plot #v(1fr)],
-  ),
-)
+#align(center, grid(
+  columns: 2,
+  column-gutter: 2em,
+  text(size: 7.5pt, raw(lang: "typ", block: true, plot-str)),
+  [#v(1fr) #plot #v(1fr)],
+))

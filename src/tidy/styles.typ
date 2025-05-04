@@ -1,9 +1,9 @@
-#import "../flavors.typ": get-or-validate-flavor, flavors
+#import "../flavors.typ": flavors, get-or-validate-flavor
 #import "../utils.typ": dict-at
 #import "@preview/tidy:0.4.1": utilities
 #import utilities: *
 
-#import "@preview/tidy:0.4.1" as tidy: styles, show-example as example
+#import "@preview/tidy:0.4.1" as tidy: show-example as example, styles
 
 /// A style that can be used to generate documentation using #link("https://typst.app/universe/package/tidy")[Tidy]
 /// for the Catppuccino theme. The returned dictionary is a tidy styles dictionary with some additional keys,
@@ -66,7 +66,10 @@
 #let show-outline(module-doc, style-args: (:)) = {
   let prefix = module-doc.label-prefix
   let gen-entry(name) = {
-    if "enable-cross-references" in style-args and style-args.enable-cross-references {
+    if (
+      "enable-cross-references" in style-args
+        and style-args.enable-cross-references
+    ) {
       link(label(prefix + name), name)
     } else {
       name
@@ -86,47 +89,57 @@
   h(2pt)
   let clr = style-args.colors.at(type, default: style-args.colors.at("default"))
   let text-fill = dict-at(style-args.colors, "ctp-palette", "base", "rgb")
-  box(outset: 2pt, fill: clr, radius: 2pt, text(fill: text-fill, raw(type, lang: none)))
+  box(outset: 2pt, fill: clr, radius: 2pt, text(fill: text-fill, raw(
+    type,
+    lang: none,
+  )))
   h(2pt)
 }
 
 #let show-parameter-list(fn, style-args: (:)) = {
-  pad(
-    x: 10pt,
-    {
-      set text(font: "DejaVu Sans Mono", size: 0.85em, weight: 340)
-      text(fn.name, fill: style-args.colors.at("signature-func-name"))
-      "("
-      let inline-args = fn.args.len() < 2
-      if not inline-args { "\n  " }
-      let items = ()
-      let args = fn.args
-      for (name, info) in fn.args {
-        if style-args.omit-private-parameters and name.starts-with("_") {
-          continue
-        }
-        let types
-        if "types" in info {
-          types = ": " + info.types.map(x => show-type(x, style-args: style-args)).join(" ")
-        }
-        if (
-          style-args.enable-cross-references
-            and not (
-              info.at("description", default: "") == "" and style-args.omit-empty-param-descriptions
-            )
-        ) {
-          name = link(label(style-args.label-prefix + fn.name + "." + name.trim(".")), name)
-        }
-        items.push(name + types)
+  pad(x: 10pt, {
+    set text(font: "DejaVu Sans Mono", size: 0.85em, weight: 340)
+    text(fn.name, fill: style-args.colors.at("signature-func-name"))
+    "("
+    let inline-args = fn.args.len() < 2
+    if not inline-args { "\n  " }
+    let items = ()
+    let args = fn.args
+    for (name, info) in fn.args {
+      if style-args.omit-private-parameters and name.starts-with("_") {
+        continue
       }
-      items.join(if inline-args { ", " } else { ",\n  " })
-      if not inline-args { "\n" } + ")"
-      if "return-types" in fn and fn.return-types != none {
-        " -> "
-        fn.return-types.map(x => show-type(x, style-args: style-args)).join(" ")
+      let types
+      if "types" in info {
+        types = (
+          ": "
+            + info
+              .types
+              .map(x => show-type(x, style-args: style-args))
+              .join(" ")
+        )
       }
-    },
-  )
+      if (
+        style-args.enable-cross-references
+          and not (
+            info.at("description", default: "") == ""
+              and style-args.omit-empty-param-descriptions
+          )
+      ) {
+        name = link(
+          label(style-args.label-prefix + fn.name + "." + name.trim(".")),
+          name,
+        )
+      }
+      items.push(name + types)
+    }
+    items.join(if inline-args { ", " } else { ",\n  " })
+    if not inline-args { "\n" } + ")"
+    if "return-types" in fn and fn.return-types != none {
+      " -> "
+      fn.return-types.map(x => show-type(x, style-args: style-args)).join(" ")
+    }
+  })
 }
 
 // Create a parameter description block, containing name, type, description and optionally the default value.
@@ -145,12 +158,20 @@
   breakable: style-args.break-param-descriptions,
   [
     #box(heading(level: style-args.first-heading-level + 3, name))
-    #if function-name != none and style-args.enable-cross-references { label(function-name + "." + name.trim(".")) }
+    #if function-name != none and style-args.enable-cross-references {
+      label(function-name + "." + name.trim("."))
+    }
     #h(1.2em)
-    #types.map(x => (style-args.style.show-type)(x, style-args: style-args)).join([ #text("or", size: .6em) ])
+    #(
+      types
+        .map(x => (style-args.style.show-type)(x, style-args: style-args))
+        .join([ #text("or", size: .6em) ])
+    )
 
     #content
-    #if show-default [ #parbreak() #style-args.local-names.default: #raw(lang: "typc", default) ]
+    #if show-default [
+      #parbreak() #style-args.local-names.default: #raw(lang: "typc", default)
+    ]
   ],
 )
 
@@ -169,13 +190,13 @@
 
   eval-docstring(fn.description, style-args)
 
-  block(
-    breakable: style-args.break-param-descriptions,
-    {
-      heading(style-args.local-names.parameters, level: style-args.first-heading-level + 2)
-      (style-args.style.show-parameter-list)(fn, style-args: style-args)
-    },
-  )
+  block(breakable: style-args.break-param-descriptions, {
+    heading(
+      style-args.local-names.parameters,
+      level: style-args.first-heading-level + 2,
+    )
+    (style-args.style.show-parameter-list)(fn, style-args: style-args)
+  })
 
   for (name, info) in fn.args {
     if style-args.omit-private-parameters and name.starts-with("_") {
@@ -183,7 +204,9 @@
     }
     let types = info.at("types", default: ())
     let description = info.at("description", default: "")
-    if description == "" and style-args.omit-empty-param-descriptions { continue }
+    if description == "" and style-args.omit-empty-param-descriptions {
+      continue
+    }
     (style-args.style.show-parameter-block)(
       name,
       types,
@@ -202,7 +225,9 @@
   style-args,
 ) = {
   if style-args.colors == auto { style-args.colors = colors }
-  let type = if "type" not in var { none } else { show-type(var.type, style-args: style-args) }
+  let type = if "type" not in var { none } else {
+    show-type(var.type, style-args: style-args)
+  }
 
   stack(
     dir: ltr,
@@ -267,7 +292,9 @@
       preview-width = size.width - code-width - col-spacing
     }
 
-    let available-preview-width = preview-width - 2 * (preview-outer-padding + preview-inner-padding)
+    let available-preview-width = (
+      preview-width - 2 * (preview-outer-padding + preview-inner-padding)
+    )
 
     let preview-size
     let scale-preview = scale-preview
@@ -278,12 +305,19 @@
         preview-size.width != 0pt,
         message: "The code example has a relative width. Please set `scale-preview` to a fixed ratio, e.g., `100%`",
       )
-      scale-preview = calc.min(1, available-preview-width / preview-size.width) * 100%
+      scale-preview = (
+        calc.min(1, available-preview-width / preview-size.width) * 100%
+      )
     } else {
-      preview-size = measure(block(preview, width: available-preview-width / (scale-preview / 100%)))
+      preview-size = measure(block(
+        preview,
+        width: available-preview-width / (scale-preview / 100%),
+      ))
     }
 
-    set par(hanging-indent: 0pt) // this messes up some stuff in case someone sets it
+    set par(
+      hanging-indent: 0pt,
+    ) // this messes up some stuff in case someone sets it
 
     // We first measure this thing (code + preview) to find out which of the two has
     // the larger height. Then we can just set the height for both boxes.
@@ -293,42 +327,39 @@
       stack(
         dir: dir,
         spacing: col-spacing,
-        code-block(
-          width: code-width,
-          height: height,
-          inset: 5pt,
-          {
-            set text(size: .9em)
-            set raw(block: true)
-            code
-          },
-        ),
+        code-block(width: code-width, height: height, inset: 5pt, {
+          set text(size: .9em)
+          set raw(block: true)
+          code
+        }),
         preview-block(
           height: height,
           width: preview-width,
           inset: preview-outer-padding,
           box(
             width: 100%,
-            height: if height == auto { auto } else { height - 2 * preview-outer-padding },
+            height: if height == auto { auto } else {
+              height - 2 * preview-outer-padding
+            },
             // fill: white,
             inset: preview-inner-padding,
             box(
               inset: 0pt,
               width: preview-size.width * (scale-preview / 100%),
               height: preview-size.height * (scale-preview / 100%),
-              place(
-                scale(
-                  scale-preview,
-                  origin: top + left,
-                  block(preview, height: preview-size.height, width: preview-size.width),
-                ),
-              ),
+              place(scale(scale-preview, origin: top + left, block(
+                preview,
+                height: preview-size.height,
+                width: preview-size.width,
+              ))),
             ),
           ),
         ),
       ),
     )
-    let height = if dir.axis() == "vertical" { auto } else { measure(arrangement(width: size.width)).height }
+    let height = if dir.axis() == "vertical" { auto } else {
+      measure(arrangement(width: size.width)).height
+    }
     arrangement(height: height)
   })
 }
@@ -336,14 +367,11 @@
 #let show-example(
   ..args,
 ) = {
-  example.show-example(
-    ..args,
-    layout: default-layout-example.with(
-      code-block: (..args) => block(..args),
-      preview-block: (..args) => block(..args),
-      col-spacing: 5mm,
-    ),
-  )
+  example.show-example(..args, layout: default-layout-example.with(
+    code-block: (..args) => block(..args),
+    preview-block: (..args) => block(..args),
+    col-spacing: 5mm,
+  ))
 }
 
 /// Create a style dictionary to be used with Tidy.

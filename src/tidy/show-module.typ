@@ -22,10 +22,5 @@
     style.insert(key, value)
   }
 
-  tidy.show-module(
-    docs,
-    colors: style.colors,
-    style: style,
-    ..args,
-  )
+  tidy.show-module(docs, colors: style.colors, style: style, ..args)
 }
