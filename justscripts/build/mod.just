@@ -9,7 +9,7 @@ import "modules.just"
   echo "\nPerforming post-build tasks..."
 
   echo "Formatting files..."
-  typstyle -c 120 format-all
+  typstyle -c 80 format-all
 
   echo "Optimizing .png files..."
   find . -type f -iname "*.png" -not -path "./tests/*" | xargs oxipng -q -o max --strip safe
