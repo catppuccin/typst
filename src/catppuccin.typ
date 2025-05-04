@@ -1,4 +1,13 @@
-#import "flavors.typ": latte, frappe, macchiato, mocha, color-names, color-schema, flavors, get-or-validate-flavor
+#import "flavors.typ": (
+  color-names,
+  color-schema,
+  flavors,
+  frappe,
+  get-or-validate-flavor,
+  latte,
+  macchiato,
+  mocha,
+)
 #import "styling/code.typ": config-code-blocks
 #import "valkyrie/typst-schema.typ": *
 #import "@preview/valkyrie:0.2.2" as z

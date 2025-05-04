@@ -9,7 +9,9 @@
 #let flavor = sys.inputs.at("flavor", default: flavors.mocha)
 #let palette = get-flavor(flavor)
 
-#let show-type(type) = styles.show-type(type, style-args: ctp-tidy-style(flavor: flavor))
+#let show-type(type) = styles.show-type(type, style-args: ctp-tidy-style(
+  flavor: flavor,
+))
 
 #show: project.with(
   title: "Catppuccin for Typst",
@@ -74,17 +76,15 @@ You can disable the theme by commenting out or deleting the show block.
 
 = Modules
 
-#show-mod(
-  make-namespace(
-    name: "Catppuccin",
-    scope: (
-      "flavors": flavors,
-      "get-flavor": get-flavor,
-      "show-type": show-type,
-    ),
-    "catppuccin.typ",
+#show-mod(make-namespace(
+  name: "Catppuccin",
+  scope: (
+    "flavors": flavors,
+    "get-flavor": get-flavor,
+    "show-type": show-type,
   ),
-)
+  "catppuccin.typ",
+))
 
 = Flavor Schema <flavor-schema>
 
@@ -117,13 +117,11 @@ Here we describe the schema for the #show-type("flavor") dictionary. Use ```typc
     "flavors.typ",
   ),
   style-alt: (
-    show-example: example.show-example.with(
-      layout: (code, preview) => grid(
-        columns: 2,
-        column-gutter: 1cm,
-        code, preview,
-      ),
-    ),
+    show-example: example.show-example.with(layout: (code, preview) => grid(
+      columns: 2,
+      column-gutter: 1cm,
+      code, preview,
+    )),
   ),
 )
 
@@ -150,19 +148,25 @@ Please note that this module is still in development and may be subject to chang
 Until Typst supports relative paths in libraries, there may not be much change here.
 The current implementation and style is not perfect, but if you don't want to style things
 manually, this is the best you can get. If you want to style things manually, you can use
-the library #link("https://github.com/Dherse/codly","codly") to style code blocks.
+the library #link("https://github.com/Dherse/codly", "codly") to style code blocks.
 In the future, we may eventually use this approach.
 
-#show-mod(make-namespace(name: "Code Blocks", "styling/code.typ", scope: ("flavors": flavors, "show-type": show-type)))
+#show-mod(make-namespace(name: "Code Blocks", "styling/code.typ", scope: (
+  "flavors": flavors,
+  "show-type": show-type,
+)))
 
-#show-mod(
-  make-namespace(
-    name: "Tidy Styles",
-    "tidy/show-module.typ",
-    "tidy/styles.typ",
-    scope: ("flavors": flavors, "show-type": show-type),
+#show-mod(make-namespace(
+  name: "Tidy Styles",
+  "tidy/show-module.typ",
+  "tidy/styles.typ",
+  scope: (
+    "flavors": flavors,
+    "show-type": show-type,
   ),
-)
+))
 
 = Miscellaneous
-#show-mod(make-namespace(name: "Version", "version.typ", scope: ("version": version)))
+#show-mod(make-namespace(name: "Version", "version.typ", scope: (
+  "version": version,
+)))

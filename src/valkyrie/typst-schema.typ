@@ -19,15 +19,12 @@
   },
   post-transform: (ctx, it) => it
     .pairs()
-    .fold(
-      (:),
-      (acc, (k, v)) => (
-        acc
-          + if v != none {
-            ((k): v)
-          }
-      ),
-    ),
+    .fold((:), (acc, (k, v)) => (
+      acc
+        + if v != none {
+          ((k): v)
+        }
+    )),
 )
 
 #let inset-schema(optional: false, default: (:)) = z.either(
@@ -37,6 +34,12 @@
   optional: optional,
 )
 
-#let outset-schema(optional: false, default: (:)) = inset-schema(optional: optional, default: default)
+#let outset-schema(optional: false, default: (:)) = inset-schema(
+  optional: optional,
+  default: default,
+)
 
-#let radius-schema(optional: false, default: (:)) = inset-schema(optional: optional, default: default)
+#let radius-schema(optional: false, default: (:)) = inset-schema(
+  optional: optional,
+  default: default,
+)
