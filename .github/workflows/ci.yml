@@ -19,7 +19,7 @@ jobs:
       - name: 🍺 Set up Homebrew
         id: set-up-homebrew
         uses: Homebrew/actions/setup-homebrew@master
-        
+
       - name: 🍺 Install typos-cli
         run: "brew install typos-cli"
 
@@ -42,7 +42,7 @@ jobs:
         uses: typst-community/setup-typst@v4
         id: setup-typst
         with:
-          typst-version: v0.12.0
+          typst-version: v0.13.0
           cache-dependency-path: examples/requirements.typ
 
       - name: 🛠️ Compile test document
@@ -53,13 +53,13 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-        
+
       - name: ♻️ Probe runner package cache
         uses: awalsh128/cache-apt-pkgs-action@latest
         with:
           packages: cargo
           version: 1.0
-          
+
       - name: 🧪 Install typst-test
         uses: baptiste0928/cargo-install@v3
         with:
@@ -71,7 +71,7 @@ jobs:
         uses: typst-community/setup-typst@v3
         id: setup-typst
         with:
-          typst-version: v0.12.0
+          typst-version: v0.13.0
           cache-dependency-path: requirements.typ
 
       - name: 🧪 Run test suite
