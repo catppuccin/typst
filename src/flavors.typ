@@ -175,7 +175,7 @@
 ///
 /// -> flavor
 #let get-or-validate-flavor(
-  /// The flavor name as a string to get the flavor for -> string | dictionary
+  /// The flavor name as a string to get the flavor for -> string | dictionary | flavor
   flavor,
 ) = {
   if type(flavor) == str {

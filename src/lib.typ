@@ -10,5 +10,4 @@
   macchiato,
   mocha,
 )
-#import "styling/code.typ": config-code-blocks
 #import "tidy/show-module.typ": show-module
