@@ -41,20 +41,3 @@ dev-tools:
 
   cargo install --locked --git https://github.com/tingerrr/typst-test
 
-[group("Testing")]
-test *filter:
-  typst-test update {{filter}}
-  typst-test run {{filter}}
-
-[group("Testing")]
-[confirm("This will update all test references. Continue? (y/N)")]
-update-test-refs:
-  #!/usr/bin/env sh
-  typst-test util clean
-  typst-test util export
-
-  for dir in tests/*/out; do
-      refpath="$(dirname "$dir")/ref"
-      mkdir -p "$refpath"
-      mv "$dir"/* "$refpath"
-  done

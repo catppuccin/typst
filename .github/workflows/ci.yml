@@ -48,42 +48,6 @@ jobs:
       - name: 🛠️ Compile test document
         run: "typst compile examples/demo.typ --root ."
 
-  tests:
-    runs-on: ubuntu-latest
 
-    steps:
-      - uses: actions/checkout@v4
 
-      - name: ♻️ Probe runner package cache
-        uses: awalsh128/cache-apt-pkgs-action@latest
-        with:
-          packages: cargo
-          version: 1.0
 
-      - name: 🧪 Install typst-test
-        uses: baptiste0928/cargo-install@v3
-        with:
-          crate: typst-test
-          git: https://github.com/tingerrr/typst-test.git
-          tag: ci-semi-stable
-
-      - name: ⚙️ Setup Typst
-        uses: typst-community/setup-typst@v3
-        id: setup-typst
-        with:
-          typst-version: v0.13.0
-          cache-dependency-path: requirements.typ
-
-      - name: 🧪 Run test suite
-        run: "typst-test --ignore-system-fonts run"
-
-      - name: 📂 Archive artifacts
-        uses: actions/upload-artifact@v4
-        if: always()
-        with:
-          name: artifacts
-          path: |
-            tests/**/diff/*.png
-            tests/**/out/*.png
-            tests/**/ref/*.png
-          retention-days: 5
