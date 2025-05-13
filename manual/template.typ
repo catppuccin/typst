@@ -132,7 +132,7 @@
     contents.push(mod.trim())
   }
 
-  let contents = contents.join("\n")
+  let contents = contents.join("")
   return (
     name: name,
     scope: scope,
