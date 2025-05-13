@@ -6,33 +6,13 @@ on:
   pull_request:
     branches: ["main"]
 
-  # Allows one to run this workflow manually from the Actions tab
   workflow_dispatch:
 
+env:
+  CARGO_TERM_COLOR: always
+
 jobs:
-  style:
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: 🍺 Set up Homebrew
-        id: set-up-homebrew
-        uses: Homebrew/actions/setup-homebrew@master
-
-      - name: 🍺 Install typos-cli
-        run: "brew install typos-cli"
-
-      - name: 🍺 Install typstyle
-        run: "brew install typstyle"
-
-      - name: 🧹 Check for typos
-        run: "typos"
-
-      - name: 🧹 Check style
-        run: "find . -name '*.typ' | xargs typstyle --check -c 80"
-
-  build-example:
+  build:
     runs-on: ubuntu-latest
 
     steps:
@@ -45,9 +25,20 @@ jobs:
           typst-version: v0.13.0
           cache-dependency-path: examples/requirements.typ
 
+      - name: ⚙️ Install typstyle
+        run: "cargo install typstyle --locked"
+
+      - name: 🧹 Check style
+        run: "find . -name '*.typ' | xargs typstyle --check -c 80"
+
       - name: 🛠️ Compile test document
         run: "typst compile examples/demo.typ --root ."
 
-
-
-
+      - name: 🛠️ Compile manual
+        run: |
+          wget -qO logo.png "https://raw.githubusercontent.com/catppuccin/catppuccin/08946855002032919592a7c8d49204a7a59c30f9/assets/logos/exports/1544x1544_circle.png"
+          typst compile --root . \
+            --font-path ./fonts \
+            --input flavor="mocha" \
+            --input logo="logo.png" \
+            manual/manual.typ
