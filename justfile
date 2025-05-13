@@ -4,6 +4,15 @@ import "./justscripts/publish.just"
 default:
   @just --list --justfile {{justfile()}}
 
+@update *opts:
+  #!/usr/bin/env sh
+  set -euo pipefail
+
+  typst-upgrade {{ opts }} requirements.toml
+  typst-upgrade {{ opts }} src
+  typst-upgrade {{ opts }} manual
+  typst-upgrade {{ opts }} examples
+
 [group("Build")]
 [doc("Removes the compiled modules, assets, temporary files, and any manuals.")]
 [no-cd]
@@ -40,4 +49,5 @@ dev-tools:
   fi
 
   cargo install --locked --git https://github.com/tingerrr/typst-test
+  cargo install typst-upgrade
 
