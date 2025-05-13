@@ -26,13 +26,13 @@ jobs:
           cache-dependency-path: examples/requirements.typ
 
       - name: ⚙️ Install typstyle
-        run: "cargo install typstyle --locked"
+        run: cargo install typstyle --locked
 
       - name: 🧹 Check style
-        run: "find . -name '*.typ' | xargs typstyle --check -c 80"
+        run: find . -name "*.typ" | xargs typstyle --check -c 80
 
       - name: 🛠️ Compile test document
-        run: "typst compile examples/demo.typ --root ."
+        run: typst compile examples/demo.typ --root .
 
       - name: 🛠️ Compile manual
         run: |
@@ -41,4 +41,5 @@ jobs:
             --font-path ./fonts \
             --input flavor="mocha" \
             --input logo="logo.png" \
+            --font-path=~/.fontist \
             manual/manual.typ
