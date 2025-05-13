@@ -25,6 +25,8 @@ default:
 [no-cd]
 fetch_scripts:
   #!/usr/bin/env sh
+  set -euo pipefail
+
   cp -r ./typst-package-template/scripts .
 
 [group("Development")]
@@ -33,6 +35,8 @@ fetch_scripts:
 [confirm("Homebrew and Cargo are about to install some dependencies. Continue? (y/N)")]
 dev-tools:
   #!/usr/bin/env sh
+  set -euo pipefail
+
   if [[ ! -x "$(command -v brew)" ]]; then
     echo "Homebrew is not installed. Please install Homebrew first."
     exit 1

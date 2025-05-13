@@ -6,6 +6,7 @@ PREVIEWS := "assets/previews/"
 [no-cd]
 assets:
   #!/usr/bin/env sh
+  set -euo pipefail
 
   echo "\nBuilding repository assets..."
   mkdir -p {{PREVIEWS}}

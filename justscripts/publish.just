@@ -3,6 +3,7 @@ GIT_URL := "https://github.com/typst/packages.git"
 [no-cd]
 prepare-package:
   #!/usr/bin/env sh
+  set -euxo pipefail
 
   if [[ ! -d "package" ]]; then
     echo "Cloning the package repo..."

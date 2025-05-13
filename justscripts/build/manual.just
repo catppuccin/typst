@@ -7,6 +7,7 @@ logo_dark_sha256 := "482b090635767258cd9aa03624b453ed402d4123cd64616df36a34fdf6b
 [no-cd]
 manual +flavors="mocha": download-logos
   #!/usr/bin/env sh
+  set -euo pipefail
 
   echo "\nBuilding the package manual..."
 
@@ -29,8 +30,10 @@ manual +flavors="mocha": download-logos
     fi
 
     echo "Building manual for $flavor..."
-    typst compile --root . --font-path ./fonts \
-      --input flavor="$flavor" --input logo="$logo" \
+    typst compile --root . \
+      --font-path ./fonts \
+      --input flavor="$flavor" \
+      --input logo="$logo" \
       manual/manual.typ "manual/manual_$flavor.pdf"
   done
 
@@ -38,6 +41,7 @@ manual +flavors="mocha": download-logos
 [no-cd]
 download-logos:
   #!/usr/bin/env sh
+  set -euo pipefail
 
   echo "\nChecking for Catppuccin logos in the manual subdirectory '.temp'..."
 
