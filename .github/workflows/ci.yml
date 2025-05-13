@@ -40,6 +40,6 @@ jobs:
           typst compile --root . \
             --font-path ./fonts \
             --input flavor="mocha" \
-            --input logo="logo.png" \
+            --input logo="/logo.png" \
             --font-path=~/.fontist \
             manual/manual.typ
