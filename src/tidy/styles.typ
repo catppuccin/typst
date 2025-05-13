@@ -1,9 +1,9 @@
 #import "../flavors.typ": flavors, get-or-validate-flavor
 #import "../utils.typ": dict-at
-#import "@preview/tidy:0.4.1": utilities
+#import "@preview/tidy:0.4.3": utilities
 #import utilities: *
 
-#import "@preview/tidy:0.4.1" as tidy: show-example as example, styles
+#import "@preview/tidy:0.4.3" as tidy: show-example as example, styles
 
 /// A style that can be used to generate documentation using #link("https://typst.app/universe/package/tidy")[Tidy]
 /// for the Catppuccino theme. The returned dictionary is a tidy styles dictionary with some additional keys,
@@ -80,7 +80,7 @@
   }
 
   if module-doc.variables.len() > 0 {
-    text([Variables:], weight: "bold")
+    text(get-local-name("variables", style-args: style-args), weight: "bold")
     list(..module-doc.variables.map(var => gen-entry(var.name)))
   }
 }
@@ -170,7 +170,8 @@
 
     #content
     #if show-default [
-      #parbreak() #style-args.local-names.default: #raw(lang: "typc", default)
+      #parbreak()
+      #get-local-name("default", style-args: style-args): #raw(lang: "typc", default)
     ]
   ],
 )
@@ -192,7 +193,7 @@
 
   block(breakable: style-args.break-param-descriptions, {
     heading(
-      style-args.local-names.parameters,
+      get-local-name("parameters", style-args: style-args),
       level: style-args.first-heading-level + 2,
     )
     (style-args.style.show-parameter-list)(fn, style-args: style-args)
