@@ -23,11 +23,9 @@
   show heading.where(level: 1): set text(font: "Jellee")
   show heading.where(level: 2): set text(font: "Jellee")
   show heading.where(level: 1): it => block(smallcaps(it), below: 1em)
-  set heading(
-    numbering: (..args) => if args.pos().len() <= 3 {
-      numbering("1.1.", ..args)
-    },
-  )
+  set heading(numbering: (..args) => if args.pos().len() <= 3 {
+    numbering("1.1.", ..args)
+  })
 
   show figure.caption: set text(size: 0.8em, fill: palette.colors.subtext0.rgb)
 
@@ -62,15 +60,11 @@
   ]
 
   // Author information.
-  pad(
-    top: 0.5em,
-    x: 2em,
-    grid(
-      columns: (1fr,) * calc.min(3, authors.len()),
-      gutter: 1em,
-      ..authors.map(author => align(center, strong(author))),
-    ),
-  )
+  pad(top: 0.5em, x: 2em, grid(
+    columns: (1fr,) * calc.min(3, authors.len()),
+    gutter: 1em,
+    ..authors.map(author => align(center, strong(author))),
+  ))
 
   v(1fr, weak: true)
 
@@ -80,14 +74,10 @@
     top: 1em,
     bottom: 1.1em,
     align(center)[
-      #heading(
-        outlined: false,
-        numbering: none,
-        text(
-          0.85em,
-          smallcaps[Abstract],
-        ),
-      )
+      #heading(outlined: false, numbering: none, text(
+        0.85em,
+        smallcaps[Abstract],
+      ))
       #abstract
     ],
   )
