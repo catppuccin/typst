@@ -34,7 +34,7 @@ prepare-package:
 
   mkdir -p "$pdir"
 
-  cp -r assets "$pdir"
+  cp -r assets/previews "$pdir"
   cp -r manual "$pdir"
   cp -r src "$pdir"
   cp typst.toml "$pdir"
