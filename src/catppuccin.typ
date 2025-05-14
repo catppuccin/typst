@@ -9,7 +9,7 @@
   mocha,
 )
 
-/// Configures the appearance of code blocks and code boxes.
+/// Configures the appearance of code syntax to match the Catppuccin theme.
 /// -> content
 #let config-code-blocks(
   /// The flavor to set -> string | flavor
@@ -37,6 +37,8 @@
 #let catppuccin(
   /// The flavor to set -> string | flavor
   flavor,
+  /// Whether to use Catppuccin's theme for code blocks -> bool
+  style-code: true,
   body,
 ) = {
   let flavor = get-or-validate-flavor(flavor)
@@ -44,7 +46,11 @@
   set page(fill: flavor.colors.base.rgb)
   set text(fill: flavor.colors.text.rgb)
 
-  show: config-code-blocks.with(flavor)
+  if not style-code {
+    body
+    return
+  }
 
+  show: config-code-blocks.with(flavor)
   body
 }
