@@ -18,8 +18,8 @@ default:
 [no-cd]
 @clean:
   echo "Cleaning up all built files..."
-  rm -rf src/tmThemes assets manual/{.temp,*.pdf} \
-    tests/**/{out,diff} template/main.typ template/*.webp
+  rm -rf src/tmThemes assets/previews manual/{.temp,*.pdf} \
+     template/main.typ template/*.webp
 
 [private]
 [no-cd]

@@ -1,5 +1,5 @@
 FLAVORS := "latte frappe macchiato mocha"
-PREVIEWS := "./assets"
+PREVIEWS := "assets/previews"
 
 [group("Build")]
 [doc("Build the repository assets.")]
