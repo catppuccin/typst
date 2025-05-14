@@ -37,8 +37,8 @@
 #let catppuccin(
   /// The flavor to set -> string | flavor
   flavor,
-  /// Whether to use Catppuccin's theme for code blocks -> bool
-  style-code: true,
+  /// Whether or not to use Catppuccin's theme for code syntaxing -> bool
+  code-syntax: true,
   body,
 ) = {
   let flavor = get-or-validate-flavor(flavor)
@@ -46,7 +46,7 @@
   set page(fill: flavor.colors.base.rgb)
   set text(fill: flavor.colors.text.rgb)
 
-  if not style-code {
+  if not code-syntax {
     body
     return
   }
