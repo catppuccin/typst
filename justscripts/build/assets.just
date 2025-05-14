@@ -1,11 +1,12 @@
 FLAVORS := "latte frappe macchiato mocha"
-PREVIEWS := "assets/previews/"
+PREVIEWS := "assets/previews"
 
 [group("Build")]
 [doc("Build the repository assets.")]
 [no-cd]
 assets:
   #!/usr/bin/env sh
+  set -euo pipefail
 
   echo "\nBuilding repository assets..."
   mkdir -p {{PREVIEWS}}

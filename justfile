@@ -1,20 +1,32 @@
 mod build "./justscripts/build"
+import "./justscripts/publish.just"
 
 default:
   @just --list --justfile {{justfile()}}
+
+@update *opts:
+  #!/usr/bin/env sh
+  set -euo pipefail
+
+  typst-upgrade {{ opts }} requirements.toml
+  typst-upgrade {{ opts }} src
+  typst-upgrade {{ opts }} manual
+  typst-upgrade {{ opts }} examples
 
 [group("Build")]
 [doc("Removes the compiled modules, assets, temporary files, and any manuals.")]
 [no-cd]
 @clean:
   echo "Cleaning up all built files..."
-  rm -rf src/tmThemes assets manual/{.temp,*.pdf} \
-    tests/**/{out,diff} template/main.typ template/*.webp
+  rm -rf src/tmThemes assets/previews manual/{.temp,*.pdf} \
+     template/main.typ template/*.webp
 
 [private]
 [no-cd]
 fetch_scripts:
   #!/usr/bin/env sh
+  set -euo pipefail
+
   cp -r ./typst-package-template/scripts .
 
 [group("Development")]
@@ -23,6 +35,8 @@ fetch_scripts:
 [confirm("Homebrew and Cargo are about to install some dependencies. Continue? (y/N)")]
 dev-tools:
   #!/usr/bin/env sh
+  set -euo pipefail
+
   if [[ ! -x "$(command -v brew)" ]]; then
     echo "Homebrew is not installed. Please install Homebrew first."
     exit 1
@@ -39,21 +53,5 @@ dev-tools:
   fi
 
   cargo install --locked --git https://github.com/tingerrr/typst-test
+  cargo install typst-upgrade
 
-[group("Testing")]
-test *filter:
-  typst-test update {{filter}}
-  typst-test run {{filter}}
-
-[group("Testing")]
-[confirm("This will update all test references. Continue? (y/N)")]
-update-test-refs:
-  #!/usr/bin/env sh
-  typst-test util clean
-  typst-test util export
-
-  for dir in tests/*/out; do
-      refpath="$(dirname "$dir")/ref"
-      mkdir -p "$refpath"
-      mv "$dir"/* "$refpath"
-  done

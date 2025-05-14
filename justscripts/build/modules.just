@@ -3,6 +3,7 @@
 [no-cd]
 lib:
   #!/usr/bin/env sh
+  set -euo pipefail
 
   echo "\nBuilding Catppuccin pallets for Typst..."
   whiskers typst.tera

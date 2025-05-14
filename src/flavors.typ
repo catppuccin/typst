@@ -81,12 +81,18 @@
 
 #let flavor-schema = z.dictionary((
   name: z.string(),
-  identifier: z.string(assertions: (z.assert.one-of(flavors.values().map(x => x.identifier)),)),
+  identifier: z.string(assertions: (
+    z.assert.one-of(flavors.values().map(x => x.identifier)),
+  )),
   emoji: z.string(),
   order: z.integer(min: 0, max: 3),
   dark: z.boolean(),
   light: z.boolean(),
-  colors: z.dictionary(color-names.keys().fold((:), (acc, name) => acc + ((name): color-schema(color-names.at(name))))),
+  colors: z.dictionary(color-names
+    .keys()
+    .fold((:), (acc, name) => (
+      acc + ((name): color-schema(color-names.at(name)))
+    ))),
 ))
 
 /// Get the palette for the given flavor.
@@ -127,10 +133,20 @@
   /// dynamic resolution of a flavor. -> string
   flavor,
 ) = {
-  assert.eq(type(flavor), str, message: "Invalid type. Argument should be a string. Got a " + repr(type(flavor)) + ". ")
+  assert.eq(
+    type(flavor),
+    str,
+    message: "Invalid type. Argument should be a string. Got a "
+      + repr(type(flavor))
+      + ". ",
+  )
   assert(
     flavor in flavors.keys(),
-    message: "Invalid flavor name: " + repr(flavor) + ". Expected " + flavors.keys().join(", ", last: ", or ") + ".",
+    message: "Invalid flavor name: "
+      + repr(flavor)
+      + ". Expected "
+      + flavors.keys().join(", ", last: ", or ")
+      + ".",
   )
 
   flavors.at(flavor)
@@ -146,7 +162,9 @@
   assert.eq(
     type(flavor),
     dictionary,
-    message: "Invalid type. Argument should be a dictionary. Got a " + repr(type(flavor)) + ". ",
+    message: "Invalid type. Argument should be a dictionary. Got a "
+      + repr(type(flavor))
+      + ". ",
   )
 
   z.parse(flavor, flavor-schema)
@@ -157,7 +175,7 @@
 ///
 /// -> flavor
 #let get-or-validate-flavor(
-  /// The flavor name as a string to get the flavor for -> string | dictionary
+  /// The flavor name as a string to get the flavor for -> string | dictionary | flavor
   flavor,
 ) = {
   if type(flavor) == str {

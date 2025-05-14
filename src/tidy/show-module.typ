@@ -1,6 +1,6 @@
 #import "../flavors.typ": flavors, get-or-validate-flavor
 #import "styles.typ"
-#import "@preview/tidy:0.4.1"
+#import "@preview/tidy:0.4.3"
 
 /// A wrapper function around `tidy.show-module`.
 /// -> content
@@ -22,10 +22,5 @@
     style.insert(key, value)
   }
 
-  tidy.show-module(
-    docs,
-    colors: style.colors,
-    style: style,
-    ..args,
-  )
+  tidy.show-module(docs, colors: style.colors, style: style, ..args)
 }
