@@ -36,13 +36,9 @@ jobs:
 
       - name: 🛠️ Compile manual
         run: |
-          # Download the Catppuccin Logo for build.
-          # See `./justscripts/build/manual.just` for why this is needed.
-          # We only need to test one version of the manual here.
-          wget -qO logo.png "https://raw.githubusercontent.com/catppuccin/catppuccin/08946855002032919592a7c8d49204a7a59c30f9/assets/logos/exports/1544x1544_circle.png"
           typst compile --root . \
             --font-path ./fonts \
             --input flavor="mocha" \
-            --input logo="/logo.png" \
+            --input logo="/assets/logos/logo_dark.png" \
             --font-path=~/.fontist \
             manual/manual.typ
