@@ -3,7 +3,7 @@ GIT_URL := "https://github.com/typst/packages.git"
 [no-cd]
 prepare-package:
   #!/usr/bin/env sh
-  set -euxo pipefail
+  set -euo pipefail
 
   # Get the version from the typst.toml file
   version=$(awk -F '"' '/^version/ { print $2 }' typst.toml)
