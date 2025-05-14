@@ -54,7 +54,7 @@ In your project, import the package (be sure to replace the version number with 
 To format your document with a theme, use the following syntax towards the top of your document:
 
 ```typst
-#show: catppuccin.with(flavors.mocha, code-block: true, code-syntax: true)
+#show: catppuccin.with(flavors.mocha)
 ```
 
 Replace `mocha` with the flavour of your choice! This can also be passed as a string literal `"mocha"`.
