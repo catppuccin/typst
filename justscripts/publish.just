@@ -41,6 +41,11 @@ prepare-package:
   cp README.md "$pdir"
   cp LICENSE "$pdir"
 
+  (
+    cd "$pdir/manual"
+    rm -f *.typ
+  )
+
   cd $pdir
   git add .
   git commit -m "added catppuccin version $version"
