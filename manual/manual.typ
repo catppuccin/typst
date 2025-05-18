@@ -108,7 +108,7 @@ In this package, we refer to the dictionary related to each flavor with the type
 alias #show-type("flavor").
 
 Here we describe the schema for the #show-type("flavor") dictionary. Use
-```typc get-flavor()``` function to
+```typc get-flavor()``` function to get the dictionary for a specific flavor.
 
 - *name* #show-type("string") --- The name of the flavor (e.g. Frappé)
 - *identifier* #show-type("string") --- The identifier of the flavor (e.g.
@@ -120,12 +120,12 @@ Here we describe the schema for the #show-type("flavor") dictionary. Use
 - *light* #show-type("boolean") --- Whether the flavor is a light theme.
 - *colors* #show-type("dictionary") --- A dictionary of colors used in the
   flavor. Keys are the color names as a #show-type("string") and values are
-dictionaries with the following keys:
-- *name* #show-type("string") --- The name of the color.
-- *order* #show-type("integer") --- The order of the color in the palette.
-- *hex* #show-type("string") --- The hex value of the color.
-- *rgb* #show-type("string") --- The RGB value of the color.
-- *accent* #show-type("boolean") --- Whether the color is an accent color.
+  dictionaries with the following keys:
+  - *name* #show-type("string") --- The name of the color.
+  - *order* #show-type("integer") --- The order of the color in the palette.
+  - *hex* #show-type("string") --- The hex value of the color.
+  - *rgb* #show-type("string") --- The RGB value of the color.
+  - *accent* #show-type("boolean") --- Whether the color is an accent color.
 
 #show-mod(
   make-namespace(
