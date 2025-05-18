@@ -1,7 +1,39 @@
-GIT_URL := "https://github.com/typst/packages.git"
+UPSTREAM_URL := "https://github.com/typst/packages.git"
+FORK_URL := "https://github.com/TimeTravelPenguin/packages.git"
 
+_default:
+  @just --list package
+
+[group("Packaging")]
+[doc("Prepares the package for release.")]
 [no-cd]
-prepare-package:
+new: init update
+
+[private]
+[no-cd]
+init:
+  #!/usr/bin/env sh
+  set -euxo pipefail
+
+  git clone {{FORK_URL}} package
+  cd package
+
+  # Add upstream
+  git remote add upstream {{UPSTREAM_URL}}
+
+  # Bootstrap local main
+  git fetch upstream --tags --prune
+  git checkout main
+  git reset --hard upstream/main
+
+  # Create feature branch
+  git switch -c "catppuccin-branch"
+  git reset --mixed origin/catppuccin-branch
+
+[group("Packaging")]
+[doc("Updates the package with the latest changes.")]
+[no-cd]
+update:
   #!/usr/bin/env sh
   set -euo pipefail
 
@@ -13,22 +45,6 @@ prepare-package:
   if ! git ls-remote --tags origin | grep -q "refs/tags/v$version"; then
     echo "The tag v$version does not exist in the origin repository. Please create using:"
     echo "  git tag -a \"v$version\" -m \"v$version\" && git push origin \"v$version\""
-    exit 1
-  fi
-
-  if [[ ! -d "package" ]]; then
-    echo "Cloning the package repo..."
-    git clone "{{GIT_URL}}" --depth=1 package
-  fi
-
-  (
-    cd package
-    git switch -C "catppuccin-branch"
-    git reset --hard "origin/main" # Reset branch in case it was modified
-  ) || exit 1
-
-  if [[ -d "$pdir" ]]; then
-    echo "The package directory for Catppuccin version $version already exists. Aborting."
     exit 1
   fi
 
@@ -46,6 +62,3 @@ prepare-package:
     rm -f *.typ
   )
 
-  cd $pdir
-  git add .
-  git commit -m "added catppuccin version $version"

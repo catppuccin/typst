@@ -1,4 +1,5 @@
 mod build "./justscripts/build"
+mod package "./justscripts/package"
 
 _default:
   @just --list --justfile {{justfile()}}
