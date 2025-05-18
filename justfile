@@ -3,6 +3,16 @@ mod build "./justscripts/build"
 _default:
   @just --list --justfile {{justfile()}}
 
+[private]
+[no-cd]
+fetch_scripts:
+  #!/usr/bin/env sh
+  set -euo pipefail
+
+  cp -r ./typst-package-template/scripts .
+
+[group("Development")]
+[doc("Updates typst dependencies in the project.")]
 @update *opts:
   #!/usr/bin/env sh
   set -euo pipefail
