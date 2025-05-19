@@ -1,6 +1,8 @@
 mod build "./justscripts/build"
 mod package "./justscripts/package"
 
+set dotenv-load
+
 _default:
   @just --list --justfile {{justfile()}}
 

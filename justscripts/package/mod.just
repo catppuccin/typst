@@ -1,5 +1,9 @@
+set dotenv-required
+
+# Ensure there is a .env file in the root of the repository containing
+# the variable ORIGIN_URL, which is a git URL to a fork of the upstream repository.
+
 UPSTREAM_URL := "https://github.com/typst/packages.git"
-FORK_URL := "https://github.com/TimeTravelPenguin/packages.git"
 
 _default:
   @just --list package
@@ -15,11 +19,11 @@ init:
   #!/usr/bin/env sh
   set -euxo pipefail
 
-  git clone {{FORK_URL}} package
+  git clone $ORIGIN_URL package || true
   cd package
 
   # Add upstream
-  git remote add upstream {{UPSTREAM_URL}}
+  git remote add upstream {{UPSTREAM_URL}} || true
 
   # Bootstrap local main
   git fetch upstream --tags --prune
