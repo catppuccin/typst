@@ -1,9 +1,21 @@
 mod build "./justscripts/build"
-import "./justscripts/publish.just"
+mod package "./justscripts/package"
 
-default:
+set dotenv-load
+
+_default:
   @just --list --justfile {{justfile()}}
 
+[private]
+[no-cd]
+fetch_scripts:
+  #!/usr/bin/env sh
+  set -euo pipefail
+
+  cp -r ./typst-package-template/scripts .
+
+[group("Development")]
+[doc("Updates typst dependencies in the project.")]
 @update *opts:
   #!/usr/bin/env sh
   set -euo pipefail
@@ -13,21 +25,6 @@ default:
   typst-upgrade {{ opts }} manual
   typst-upgrade {{ opts }} examples
 
-[group("Build")]
-[doc("Removes the compiled modules, assets, temporary files, and any manuals.")]
-[no-cd]
-@clean:
-  echo "Cleaning up all built files..."
-  rm -rf src/tmThemes assets/previews manual/{.temp,*.pdf} \
-     template/main.typ template/*.webp
-
-[private]
-[no-cd]
-fetch_scripts:
-  #!/usr/bin/env sh
-  set -euo pipefail
-
-  cp -r ./typst-package-template/scripts .
 
 [group("Development")]
 [unix]
