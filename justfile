@@ -6,6 +6,32 @@ set dotenv-load
 _default:
   @just --list --justfile {{justfile()}}
 
+# Use this to find all @import statements in the src directory containing a version number.
+# Use this to check minimum typst compiler versions to manually update ci.yaml workflow.
+[private]
+grep_includes: _open_includes_webpage
+
+[private]
+[macos]
+_open_includes_webpage:
+  #!/usr/bin/env sh
+  set -e pipefail
+
+  rg -I -N -o -r '$1' '^\s*#import\s+"@preview/([A-Za-z0-9_-]+):\d+(?:\.\d+)*"' ./src \
+  | sort -u \
+  | xargs -n1 -I{} open "https://typst.app/universe/package/{}"
+
+[private]
+[linux]
+_open_includes_webpage:
+  #!/usr/bin/env sh
+  set -euo pipefail
+
+  rg -I -N -o -r '$1' '^\s*#import\s+"@preview/([A-Za-z0-9_-]+):\d+(?:\.\d+)*"' ./src \
+  | sort -u \
+  | xargs -n1 -I{} xdg-open "https://typst.app/universe/package/{}"
+
+
 [private]
 [no-cd]
 fetch_scripts:
