@@ -1,10 +1,3 @@
-set dotenv-required
-
-# Ensure there is a .env file in the root of the repository containing
-# the variable ORIGIN_URL, which is a git URL to a fork of the upstream repository.
-
-UPSTREAM_URL := "https://github.com/typst/packages.git"
-
 _default:
   @just --list package
 
@@ -19,20 +12,17 @@ init:
   #!/usr/bin/env sh
   set -euxo pipefail
 
-  git clone $ORIGIN_URL package || true
-  cd package
-
-  # Add upstream
-  git remote add upstream {{UPSTREAM_URL}} || true
-
-  # Bootstrap local main
-  git fetch upstream --tags --prune
+  # see: https://github.com/typst/packages/blob/main/docs/tips.md#sparse-checkout-of-the-repository
+  git clone --depth 1 --no-checkout --filter="tree:0" git@github.com:typst/packages
+  cd packages
+  git sparse-checkout init
+  git sparse-checkout set packages/preview/catppuccin
   git checkout main
-  git reset --hard upstream/main
 
-  # Create feature branch
-  git switch -c "catppuccin-branch"
-  git reset --mixed origin/catppuccin-branch
+  # If maintainers change, update the URL below
+  git remote add fork "git@github.com:TimeTravelPenguin/packages.git"
+  git fetch fork
+  git rebase fork/main --onto origin/main
 
 [group("Packaging")]
 [doc("Updates the package with the latest changes.")]
@@ -43,7 +33,6 @@ update:
 
   # Get the version from the typst.toml file
   version=$(awk -F '"' '/^version/ { print $2 }' typst.toml)
-  pdir="package/packages/preview/catppuccin/$version"
 
   # Check if origin has a tag matching the version. If not, error.
   if ! git ls-remote --tags origin | grep -q "refs/tags/v$version"; then
@@ -52,6 +41,21 @@ update:
     exit 1
   fi
 
+  # Checkout fork branch if it exists, otherwise create a new branch
+  cd packages
+  fork_branch=$(git ls-remote --exit-code --heads fork "refs/heads/catppuccin-v$version")
+
+  if [ -n "$fork_branch" ]; then
+    echo "Branch fork/catppuccin-v$version exists. Checking out."
+    git checkout "catppuccin-v$version"
+    git pull --rebase origin main
+  else
+    echo "Branch fork/catppuccin-v$version does not exist. Creating new branch and checking out."
+    git checkout -b "catppuccin-v$version" origin/main
+  fi
+
+  cd ..
+  pdir="packages/packages/preview/catppuccin/$version"
   mkdir -p "$pdir"
 
   cp -r assets/previews "$pdir"
