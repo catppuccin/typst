@@ -1,6 +1,6 @@
 #import "/src/lib.typ": catppuccin, flavors, get-flavor
-#import "@preview/cetz:0.3.4": canvas
-#import "@preview/cetz-plot:0.1.1": plot
+#import "@preview/cetz:0.4.2": canvas
+#import "@preview/cetz-plot:0.1.2": plot
 
 #let flavor = sys.inputs.at("flavor", default: flavors.mocha.identifier)
 #let palette = get-flavor(flavor)

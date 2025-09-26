@@ -1,7 +1,7 @@
 [package]
 name = "catppuccin"
-version = "1.0.0"
-compiler = "0.12.0"
+version = "1.0.1"
+compiler = "0.11.0"
 entrypoint = "src/lib.typ"
 repository = "https://github.com/catppuccin/typst"
 authors = ["Catppuccin Org <releases@catppuccin.com>"]

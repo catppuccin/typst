@@ -1,12 +1,6 @@
 #import "flavors.typ": (
-  color-names,
-  color-schema,
-  flavors,
-  frappe,
-  get-or-validate-flavor,
-  latte,
-  macchiato,
-  mocha,
+  color-names, color-schema, flavors, frappe, get-or-validate-flavor, latte,
+  macchiato, mocha,
 )
 
 /// Configures the appearance of code syntax to match the Catppuccin theme.
