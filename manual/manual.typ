@@ -4,7 +4,7 @@
 #import "template.typ": *
 
 #import "@preview/tidy:0.4.3" as tidy: render-examples, show-example as example
-#import "@preview/oxifmt:0.2.1": strfmt
+#import "@preview/oxifmt:1.0.0": strfmt
 
 #let flavor = sys.inputs.at("flavor", default: flavors.mocha)
 #let palette = get-flavor(flavor)
