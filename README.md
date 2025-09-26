@@ -50,7 +50,7 @@ Each document is styled using this package!
 In your project, import the package (be sure to replace the version number with the correct one) with
 
 ```typst
-#import "@preview/catppuccin:1.0.0": catppuccin, flavors
+#import "@preview/catppuccin:1.0.1": catppuccin, flavors
 ```
 
 To format your document with a theme, use the following syntax towards the top of your document:
@@ -66,7 +66,7 @@ Replace `mocha` with the flavour of your choice! This can also be passed as a st
 For users who wish to further extend their documents, graphics, or packages, you can access each flavor's palette to directly use the colors in your own code.
 
 ```typst
-#import "@preview/catppuccin:1.0.0": flavors, get-flavor
+#import "@preview/catppuccin:1.0.1": flavors, get-flavor
 
 #let flavor = get-flavor("mocha")
 // or: #let flavor = flavors.mocha
