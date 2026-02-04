@@ -33,6 +33,7 @@ update:
 
   # Get the version from the typst.toml file
   version=$(awk -F '"' '/^version/ { print $2 }' typst.toml)
+  echo "Preparing package for version: $version"
 
   # Check if origin has a tag matching the version. If not, error.
   if ! git ls-remote --tags origin | grep -q "refs/tags/v$version"; then
@@ -43,9 +44,9 @@ update:
 
   # Checkout fork branch if it exists, otherwise create a new branch
   cd packages
-  fork_branch=$(git ls-remote --exit-code --heads fork "refs/heads/catppuccin-v$version")
+  fork_branch=$(git ls-remote --heads fork "refs/heads/catppuccin-v$version")
 
-  if [ -n "$fork_branch" ]; then
+  if [[ -n "$fork_branch" ]]; then
     echo "Branch fork/catppuccin-v$version exists. Checking out."
     git checkout "catppuccin-v$version"
     git pull --rebase origin main
@@ -70,3 +71,8 @@ update:
     rm -f *.typ
   )
 
+  # Push changes to fork
+  cd packages
+  git add "packages/preview/catppuccin/$version"
+  git commit -m "chore: update Catppuccin package to v$version"
+  git push -u fork "catppuccin-v$version"
