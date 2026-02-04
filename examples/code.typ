@@ -1,6 +1,6 @@
-#import "/src/lib.typ": config-code-blocks, flavors
+#import "/src/lib.typ": flavors, set-code-theme
 
-#show: config-code-blocks.with(flavors.latte)
+#show: set-code-theme.with(flavors.latte)
 
 Using catppuccin for syntax highlighting:
 

@@ -5,7 +5,7 @@
 
 /// Configures the appearance of code syntax to match the Catppuccin theme.
 /// -> content
-#let config-code-blocks(
+#let set-code-theme(
   /// The flavor to set -> string | flavor
   flavor,
   body,
@@ -45,6 +45,6 @@
     return
   }
 
-  show: config-code-blocks.with(flavor)
+  show: set-code-theme.with(flavor)
   body
 }
