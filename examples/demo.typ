@@ -55,8 +55,9 @@
 
 
 Typst makes it very easy to customise the look of your documents. Inspiration
-for this project came from Catppuccin for #LaTeX [#link("https://github.com/catppuccin/latex")[#text(fill: palette.colors.blue.rgb, "link")]]. This doument is currently
-using the flavor #text(fill: palette.colors.mauve.rgb, style: "italic", flavor).
+for this project came from Catppuccin for #LaTeX
+[#link("https://github.com/catppuccin/latex")[#text(fill: palette.colors.blue.rgb, "link")]].
+This document is currently using the flavor #text(fill: palette.colors.mauve.rgb, style: "italic", flavors.at(flavor).name).
 
 === Accents
 #align(center, grid(columns: 7, align: left, gutter: 1em, ..color-swatches(
